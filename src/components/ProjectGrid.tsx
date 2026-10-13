@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { motion, useAnimationControls, useReducedMotion } from "framer-motion";
 import type { Category, Project } from "@/lib/types";
 import { ProjectCard } from "./ProjectCard";
 
@@ -11,8 +12,33 @@ type Props = {
   filterKey: string;
 };
 
+/**
+ * Stable grid shell (no key remount). On filter change, a short opacity pulse
+ * only — content updates in place so React reconciles cards by id without
+ * tearing down the layout container.
+ */
 export function ProjectGrid({ projects, categoryMap, onOpen, filterKey }: Props) {
   const reduce = useReducedMotion();
+  const controls = useAnimationControls();
+  const prevKey = useRef(filterKey);
+  const ready = useRef(false);
+
+  useEffect(() => {
+    if (!ready.current) {
+      ready.current = true;
+      prevKey.current = filterKey;
+      return;
+    }
+    if (reduce || prevKey.current === filterKey) {
+      prevKey.current = filterKey;
+      return;
+    }
+    prevKey.current = filterKey;
+    void controls.start({
+      opacity: [0.45, 1],
+      transition: { duration: 0.14, ease: "easeOut" },
+    });
+  }, [filterKey, controls, reduce]);
 
   if (projects.length === 0) {
     return (
@@ -26,10 +52,8 @@ export function ProjectGrid({ projects, categoryMap, onOpen, filterKey }: Props)
 
   return (
     <motion.div
-      key={filterKey}
-      initial={reduce ? false : { opacity: 0.35 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.12, ease: "easeOut" }}
+      animate={controls}
+      initial={{ opacity: 1 }}
       className="mx-auto grid max-w-6xl grid-cols-1 gap-3 px-4 py-6 sm:grid-cols-2 sm:gap-3.5 sm:px-6 lg:grid-cols-3"
     >
       {projects.map((p) => (

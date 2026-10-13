@@ -11,19 +11,35 @@ type Props = {
   onClose: () => void;
 };
 
+/** Lock body scroll; pad only if hiding the scrollbar actually widened the layout. */
+function lockBodyScroll() {
+  const docEl = document.documentElement;
+  const before = docEl.clientWidth;
+  const prevOverflow = document.body.style.overflow;
+  const prevPadding = document.body.style.paddingRight;
+  document.body.style.overflow = "hidden";
+  const delta = docEl.clientWidth - before;
+  if (delta > 0) {
+    document.body.style.paddingRight = `${delta}px`;
+  }
+  return () => {
+    document.body.style.overflow = prevOverflow;
+    document.body.style.paddingRight = prevPadding;
+  };
+}
+
 export function ProjectDrawer({ project, category, onClose }: Props) {
   const reduce = useReducedMotion();
 
   useEffect(() => {
     if (!project) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    const unlock = lockBodyScroll();
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
     window.addEventListener("keydown", onKey);
     return () => {
-      document.body.style.overflow = prev;
+      unlock();
       window.removeEventListener("keydown", onKey);
     };
   }, [project, onClose]);
@@ -49,11 +65,15 @@ export function ProjectDrawer({ project, category, onClose }: Props) {
           />
 
           <motion.aside
-            className="relative flex h-full w-full max-w-lg flex-col border-l border-[var(--color-line)] bg-[var(--color-drawer)]"
+            className="relative flex h-full w-full max-w-lg flex-col border-l border-[var(--color-line)] bg-[var(--color-drawer)] will-change-transform"
             initial={reduce ? { opacity: 0 } : { x: "100%" }}
             animate={reduce ? { opacity: 1 } : { x: 0 }}
             exit={reduce ? { opacity: 0 } : { x: "100%" }}
-            transition={{ type: "spring", stiffness: 380, damping: 38 }}
+            transition={
+              reduce
+                ? { duration: 0 }
+                : { type: "tween", ease: [0.32, 0.72, 0, 1], duration: 0.28 }
+            }
           >
             <header className="flex items-start justify-between gap-3 border-b border-[var(--color-line)] px-5 py-4 sm:px-6">
               <div className="min-w-0">

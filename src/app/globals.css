@@ -46,6 +46,8 @@ html.dark {
 
 html {
   color-scheme: light;
+  /* Reserve scrollbar space so overflow lock / content height changes don't shift layout */
+  scrollbar-gutter: stable;
 }
 
 html.dark {

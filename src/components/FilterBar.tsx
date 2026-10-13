@@ -82,10 +82,10 @@ function Chip({
       type="button"
       title={title}
       onClick={onClick}
-      className={`inline-flex shrink-0 items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] ${
+      className={`inline-flex shrink-0 items-center gap-1.5 rounded-md border px-2.5 py-1.5 text-xs font-medium transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] ${
         active
-          ? "bg-[var(--color-chip-active)] text-[var(--color-paper)]"
-          : "border border-[var(--color-line)] text-[var(--color-ink)] hover:border-[var(--color-ink)]"
+          ? "border-transparent bg-[var(--color-chip-active)] text-[var(--color-paper)]"
+          : "border-[var(--color-line)] text-[var(--color-ink)] hover:border-[var(--color-ink)]"
       }`}
     >
       {label}
