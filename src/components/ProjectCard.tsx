@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import type { Category, Project } from "@/lib/types";
 import { formatStars } from "@/lib/data";
 
@@ -12,14 +11,7 @@ type Props = {
 
 export function ProjectCard({ project, category, onOpen }: Props) {
   return (
-    <motion.article
-      layout
-      initial={false}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 6 }}
-      transition={{ type: "spring", stiffness: 420, damping: 36 }}
-      className="group relative flex flex-col rounded-lg border border-[var(--color-line)] bg-[var(--color-card)] transition-[border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-[var(--color-accent)]"
-    >
+    <article className="group relative flex flex-col rounded-lg border border-[var(--color-line)] bg-[var(--color-card)] transition-[border-color,box-shadow] duration-200 hover:border-[var(--color-accent)] hover:shadow-[0_0_0_1px_var(--color-accent)]">
       <button
         type="button"
         onClick={() => onOpen(project)}
@@ -57,6 +49,6 @@ export function ProjectCard({ project, category, onOpen }: Props) {
           </span>
         </div>
       </button>
-    </motion.article>
+    </article>
   );
 }

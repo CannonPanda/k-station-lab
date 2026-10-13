@@ -151,7 +151,7 @@ export function StationApp({ projects, categories, updated }: Props) {
       </div>
 
       <main className="relative">
-        <ProjectGrid projects={visible} categoryMap={categoryMap} onOpen={onOpen} />
+        <ProjectGrid projects={visible} categoryMap={categoryMap} onOpen={onOpen} filterKey={filter} />
       </main>
 
       <footer className="relative border-t border-[var(--color-line)] py-10 text-center">
