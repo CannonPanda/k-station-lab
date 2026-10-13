@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-mist: #E8EEF4;
+  --color-paper: #F7F9FC;
+  --color-ink: #15202B;
+  --color-muted: #5B6B7C;
+  --color-accent: #4F46E5;
+  --color-accent-soft: #818CF8;
+  --color-star: #C9A227;
+  --color-line: color-mix(in srgb, var(--color-ink) 10%, transparent);
+  --color-card: #ffffff;
+  --color-drawer: #ffffff;
+  --color-chip: color-mix(in srgb, var(--color-mist) 70%, white);
+  --color-chip-active: var(--color-accent);
+  --color-overlay: color-mix(in srgb, var(--color-ink) 40%, transparent);
+
+  --font-sans: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+}
+
+html.dark {
+  --color-mist: #0F1720;
+  --color-paper: #15202B;
+  --color-ink: #E8EEF4;
+  --color-muted: #94A3B8;
+  --color-accent: #818CF8;
+  --color-accent-soft: #A5B4FC;
+  --color-star: #E0C35A;
+  --color-line: color-mix(in srgb, var(--color-ink) 12%, transparent);
+  --color-card: #1A2734;
+  --color-drawer: #1A2734;
+  --color-chip: #1E2A38;
+  --color-chip-active: #4F46E5;
+  --color-overlay: color-mix(in srgb, #000 55%, transparent);
+}
+
+html {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-mist);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Instrument-lab subtle grid backdrop */
+.lab-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--color-ink) 4%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--color-ink) 4%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: -1px -1px;
+}
+
+.lab-radar-ring {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, color-mix(in srgb, var(--color-accent) 18%, transparent), transparent 60%),
+    radial-gradient(ellipse 40% 30% at 90% 20%, color-mix(in srgb, var(--color-accent-soft) 12%, transparent), transparent 50%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* cmdk / drawer scrollbar */
+.lab-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.lab-scroll::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--color-muted) 40%, transparent);
+  border-radius: 999px;
+}
