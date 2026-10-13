@@ -51,7 +51,8 @@ export function StationApp({ projects, categories, updated }: Props) {
   }, []);
 
   return (
-    <div className="relative min-h-dvh">
+    <>
+      <div id="lab-scroll-root" className="relative min-h-dvh">
       <div className="paper-grid pointer-events-none absolute inset-x-0 top-0 h-[420px]" aria-hidden />
 
       {/* Sticky chrome */}
@@ -184,6 +185,8 @@ export function StationApp({ projects, categories, updated }: Props) {
         </p>
       </footer>
 
+      </div>
+
       <ProjectDrawer
         project={selected}
         category={selected ? categoryMap[selected.category] : undefined}
@@ -196,6 +199,6 @@ export function StationApp({ projects, categories, updated }: Props) {
         categoryMap={categoryMap}
         onSelect={onOpen}
       />
-    </div>
+    </>
   );
 }

@@ -46,8 +46,22 @@ html.dark {
 
 html {
   color-scheme: light;
-  /* Reserve scrollbar space so overflow lock / content height changes don't shift layout */
+  /*
+   * Always reserve vertical scrollbar space so drawer open/close never changes
+   * content width. Event-based scroll lock (see scrollLock.ts) does not toggle
+   * overflow — that would release the gutter and unstick sticky chrome.
+   */
+  overflow-y: scroll;
   scrollbar-gutter: stable;
+}
+
+html.lab-scroll-lock {
+  overscroll-behavior: none;
+}
+
+/* Drawer stacking context: keep slide/opacity compositing off the page grid */
+.lab-drawer-root {
+  isolation: isolate;
 }
 
 html.dark {

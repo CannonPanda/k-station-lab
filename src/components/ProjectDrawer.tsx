@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import type { Category, Project } from "@/lib/types";
 import { formatStars } from "@/lib/data";
+import { lockRootScroll } from "@/lib/scrollLock";
 
 type Props = {
   project: Project | null;
@@ -11,29 +12,12 @@ type Props = {
   onClose: () => void;
 };
 
-/** Lock body scroll; pad only if hiding the scrollbar actually widened the layout. */
-function lockBodyScroll() {
-  const docEl = document.documentElement;
-  const before = docEl.clientWidth;
-  const prevOverflow = document.body.style.overflow;
-  const prevPadding = document.body.style.paddingRight;
-  document.body.style.overflow = "hidden";
-  const delta = docEl.clientWidth - before;
-  if (delta > 0) {
-    document.body.style.paddingRight = `${delta}px`;
-  }
-  return () => {
-    document.body.style.overflow = prevOverflow;
-    document.body.style.paddingRight = prevPadding;
-  };
-}
-
 export function ProjectDrawer({ project, category, onClose }: Props) {
   const reduce = useReducedMotion();
 
   useEffect(() => {
     if (!project) return;
-    const unlock = lockBodyScroll();
+    const unlock = lockRootScroll();
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
@@ -48,7 +32,7 @@ export function ProjectDrawer({ project, category, onClose }: Props) {
     <AnimatePresence>
       {project && (
         <div
-          className="fixed inset-0 z-50 flex justify-end"
+          className="lab-drawer-root fixed inset-0 z-50 flex justify-end"
           role="dialog"
           aria-modal="true"
           aria-labelledby="drawer-title"
@@ -65,7 +49,7 @@ export function ProjectDrawer({ project, category, onClose }: Props) {
           />
 
           <motion.aside
-            className="relative flex h-full w-full max-w-lg flex-col border-l border-[var(--color-line)] bg-[var(--color-drawer)] will-change-transform"
+            className="lab-drawer-panel relative flex h-full w-full max-w-lg flex-col border-l border-[var(--color-line)] bg-[var(--color-drawer)]"
             initial={reduce ? { opacity: 0 } : { x: "100%" }}
             animate={reduce ? { opacity: 1 } : { x: 0 }}
             exit={reduce ? { opacity: 0 } : { x: "100%" }}
@@ -118,7 +102,10 @@ export function ProjectDrawer({ project, category, onClose }: Props) {
               </button>
             </header>
 
-            <div className="lab-scroll flex-1 overflow-y-auto px-5 py-5 sm:px-6">
+            <div
+              data-scroll-lock-allow
+              className="lab-scroll flex-1 overflow-y-auto overscroll-contain px-5 py-5 sm:px-6"
+            >
               <section className="mb-7">
                 <h3 className="mb-2 font-mono text-[10px] tracking-wider text-[var(--color-accent)]">
                   简介
