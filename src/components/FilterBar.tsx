@@ -4,7 +4,7 @@ import type { Category } from "@/lib/types";
 
 type Props = {
   categories: Category[];
-  active: string; // "all" | category id
+  active: string;
   onChange: (id: string) => void;
   counts: Record<string, number>;
   total: number;
@@ -22,11 +22,11 @@ export function FilterBar({
   onToggleCollapse,
 }: Props) {
   return (
-    <div className="sticky top-0 z-30 border-b border-[var(--color-line)] bg-[color-mix(in_srgb,var(--color-mist)_88%,transparent)] backdrop-blur-md">
-      <div className="mx-auto flex max-w-7xl items-center gap-2 px-4 py-3 sm:px-6">
+    <div className="border-b border-[var(--color-line)]">
+      <div className="mx-auto flex max-w-6xl items-center gap-2 px-4 py-3 sm:px-6">
         <button
           type="button"
-          className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-[var(--color-line)] bg-[var(--color-card)] px-3 py-1.5 text-xs font-medium text-[var(--color-muted)] sm:hidden"
+          className="inline-flex shrink-0 items-center gap-1.5 rounded-md border border-[var(--color-line)] bg-[var(--color-card)] px-2.5 py-1.5 text-xs font-medium text-[var(--color-muted)] sm:hidden"
           onClick={onToggleCollapse}
           aria-expanded={!collapsed}
         >
@@ -38,7 +38,7 @@ export function FilterBar({
         </button>
 
         <div
-          className={`lab-scroll flex min-w-0 flex-1 gap-2 overflow-x-auto pb-0.5 ${
+          className={`lab-scroll flex min-w-0 flex-1 gap-1.5 overflow-x-auto pb-0.5 ${
             collapsed ? "hidden sm:flex" : "flex flex-wrap sm:flex-nowrap"
           }`}
         >
@@ -82,16 +82,16 @@ function Chip({
       type="button"
       title={title}
       onClick={onClick}
-      className={`inline-flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] ${
+      className={`inline-flex shrink-0 items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] ${
         active
-          ? "bg-[var(--color-chip-active)] text-white shadow-sm shadow-[color-mix(in_srgb,var(--color-accent)_35%,transparent)]"
-          : "border border-[var(--color-line)] bg-[var(--color-chip)] text-[var(--color-ink)] hover:border-[var(--color-accent-soft)]"
+          ? "bg-[var(--color-chip-active)] text-[var(--color-paper)]"
+          : "border border-[var(--color-line)] text-[var(--color-ink)] hover:border-[var(--color-ink)]"
       }`}
     >
       {label}
       <span
         className={`font-mono text-[10px] tabular-nums ${
-          active ? "text-white/80" : "text-[var(--color-muted)]"
+          active ? "opacity-70" : "text-[var(--color-faint)]"
         }`}
       >
         {count}

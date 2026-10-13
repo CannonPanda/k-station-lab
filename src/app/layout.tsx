@@ -1,23 +1,30 @@
 import type { Metadata } from "next";
-import { Sora, IBM_Plex_Mono } from "next/font/google";
+import { Syne, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const sora = Sora({
+const syne = Syne({
   subsets: ["latin"],
-  variable: "--font-sora",
+  variable: "--font-syne",
+  display: "swap",
+  weight: ["500", "600", "700", "800"],
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
   display: "swap",
 });
 
-const plexMono = IBM_Plex_Mono({
+const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-plex-mono",
+  variable: "--font-jb",
   display: "swap",
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
-  title: "Ｋ站 Lab · 动态收集台",
-  description: "KE 的 GitHub 项目动态收集台 — 雷达台式筛选与检索",
+  title: "Ｋ站 · 星标收集",
+  description: "KE 的 GitHub 星标开源收集站 — 筛选、检索、详情",
   icons: {
     icon: { url: "/favicon.ico", type: "image/x-icon" },
   },
@@ -38,7 +45,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${sora.variable} ${plexMono.variable} antialiased`}>
+      <body className={`${syne.variable} ${inter.variable} ${jetbrains.variable} antialiased`}>
         {children}
       </body>
     </html>

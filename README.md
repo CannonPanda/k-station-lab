@@ -1,19 +1,25 @@
-# Ｋ站 Lab
+# Ｋ站（Lab）
 
-动态收集台 — KE 的 GitHub 项目雷达式浏览站。
+星标收成一站 — KE 的 GitHub 开源收集图鉴。
 
 - **Live:** https://cannonpanda.github.io/k-station-lab/
-- **经典 K站（同源数据，不同 UX）:** https://cannonpanda.github.io/k-station/
+- **经典站（同源数据）:** https://cannonpanda.github.io/k-station/
 
-## 与经典站的关系
+## 视觉方向
 
-| | 经典 K站 | Ｋ站 Lab |
+**墨与霓虹纸** — 近白纸面 `#FAFAF8`、深墨字 `#0A0A0A`、电紫强调 `#7C3AED`；发丝线边框、Syne 大标题、等宽日期与星标。暗色为真墨底 + 发光紫。
+
+灵感密度参考：OSS Gallery（卡片图鉴）、Magic UI（克制光效边）、cmdk（⌘K）、react-bits（动效画廊）。
+
+## 与经典站
+
+| | 经典站 | Lab |
 |---|---|---|
-| 技术 | Astro + Tailwind | Next.js App Router + Tailwind + Framer Motion |
-| 体验 | 奶油侧栏、静态分区 | 筛选网格、⌘K 命令面板、详情抽屉、明暗主题 |
-| 数据 | `src/data/projects.json` | 同一份 JSON 的副本 |
+| 技术 | Astro + Tailwind | Next.js App Router + Tailwind + Framer Motion + cmdk |
+| 视觉 | 奶油赤陶 | 墨与霓虹纸 |
+| 数据 | `projects.json` | 同一 schema 的副本 |
 
-两站独立仓库，互不覆盖。Lab 的数据从经典站复制；更新内容时两边各自维护。
+两站独立仓库，互不覆盖。
 
 ## 本地开发
 
@@ -23,7 +29,7 @@ npm run dev
 # http://localhost:3000/k-station-lab/
 ```
 
-注意：`basePath` 为 `/k-station-lab`，本地也需带该前缀。
+`basePath` 为 `/k-station-lab`，本地也需带该前缀。
 
 ## 构建 / GitHub Pages
 
@@ -31,21 +37,16 @@ npm run dev
 npm run build
 ```
 
-静态导出到 `docs/`（`output: 'export'`），Pages 设置：
-
-- Source: **Deploy from a branch**
-- Branch: `main` / `/docs`
-
-`.nojekyll` 已写入 `docs/`，避免 GitHub 忽略 `_next` 资源。
+静态导出到 `docs/`。Pages：branch `main` / folder `/docs`。`.nojekyll` 已写入。
 
 ## 功能
 
-- 分类筛选芯片（通览 + 非空分类）
+- 分类筛选芯片（通览 + 非空分类计数）
 - ⌘K / Ctrl+K 模糊搜索（名称 / 简介 / 用法 / 分类）
-- 右侧抽屉查看简介、用法、GitHub / 主页链接
-- 浅色默认 + 深色切换
-- 移动端：筛选折叠、抽屉全屏
+- 右侧抽屉：简介、用法、GitHub / 主页
+- 浅色默认 + 设计过的深色
+- 移动端筛选折叠、抽屉全屏
 
 ## License
 
-个人收集展示用途。项目本身版权归各自仓库所有者。
+个人收集展示。项目版权归各自仓库所有者。

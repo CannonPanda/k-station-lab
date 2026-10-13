@@ -61,10 +61,10 @@ export function CommandPalette({ open, onOpenChange, projects, categoryMap, onSe
             role="dialog"
             aria-modal="true"
             aria-label="搜索项目"
-            className="relative w-full max-w-xl overflow-hidden rounded-2xl border border-[var(--color-line)] bg-[var(--color-drawer)] shadow-2xl"
-            initial={reduce ? { opacity: 0 } : { opacity: 0, y: -12, scale: 0.98 }}
+            className="relative w-full max-w-xl overflow-hidden rounded-lg border border-[var(--color-line-strong)] bg-[var(--color-drawer)] shadow-[0_24px_64px_color-mix(in_srgb,var(--color-ink)_18%,transparent)]"
+            initial={reduce ? { opacity: 0 } : { opacity: 0, y: -10, scale: 0.98 }}
             animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
-            exit={reduce ? { opacity: 0 } : { opacity: 0, y: -8, scale: 0.98 }}
+            exit={reduce ? { opacity: 0 } : { opacity: 0, y: -6, scale: 0.98 }}
             transition={{ type: "spring", stiffness: 420, damping: 36 }}
           >
             <Command shouldFilter={false} label="搜索项目" className="flex flex-col">
@@ -74,14 +74,14 @@ export function CommandPalette({ open, onOpenChange, projects, categoryMap, onSe
                   value={query}
                   onValueChange={setQuery}
                   placeholder="搜索名称、简介、用法、分类…"
-                  className="h-12 w-full bg-transparent text-sm text-[var(--color-ink)] outline-none placeholder:text-[var(--color-muted)]"
+                  className="h-12 w-full bg-transparent text-sm text-[var(--color-ink)] outline-none placeholder:text-[var(--color-faint)]"
                   autoFocus
                 />
-                <kbd className="hidden rounded border border-[var(--color-line)] px-1.5 py-0.5 font-mono text-[10px] text-[var(--color-muted)] sm:inline">
+                <kbd className="hidden rounded border border-[var(--color-line)] px-1.5 py-0.5 font-mono text-[10px] text-[var(--color-faint)] sm:inline">
                   ESC
                 </kbd>
               </div>
-              <Command.List className="lab-scroll max-h-[min(50vh,360px)] overflow-y-auto p-2">
+              <Command.List className="lab-scroll max-h-[min(50vh,360px)] overflow-y-auto p-1.5">
                 <Command.Empty className="px-3 py-8 text-center text-sm text-[var(--color-muted)]">
                   没有匹配结果
                 </Command.Empty>
@@ -93,7 +93,7 @@ export function CommandPalette({ open, onOpenChange, projects, categoryMap, onSe
                       onSelect(p);
                       onOpenChange(false);
                     }}
-                    className="flex cursor-pointer items-start gap-3 rounded-xl px-3 py-2.5 aria-selected:bg-[color-mix(in_srgb,var(--color-accent)_12%,transparent)]"
+                    className="flex cursor-pointer items-start gap-3 rounded-md px-3 py-2.5 aria-selected:bg-[var(--color-accent-dim)]"
                   >
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2">
@@ -111,9 +111,11 @@ export function CommandPalette({ open, onOpenChange, projects, categoryMap, onSe
                   </Command.Item>
                 ))}
               </Command.List>
-              <div className="flex items-center justify-between border-t border-[var(--color-line)] px-4 py-2 font-mono text-[10px] text-[var(--color-muted)]">
+              <div className="flex items-center justify-between border-t border-[var(--color-line)] px-4 py-2 font-mono text-[10px] text-[var(--color-faint)]">
                 <span>Enter 打开详情</span>
-                <span>{ranked.length} / {projects.length}</span>
+                <span>
+                  {ranked.length} / {projects.length}
+                </span>
               </div>
             </Command>
           </motion.div>
@@ -125,7 +127,14 @@ export function CommandPalette({ open, onOpenChange, projects, categoryMap, onSe
 
 function SearchIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="shrink-0 text-[var(--color-muted)]" aria-hidden>
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      className="shrink-0 text-[var(--color-faint)]"
+      aria-hidden
+    >
       <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="1.75" />
       <path d="M20 20l-3.5-3.5" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
     </svg>

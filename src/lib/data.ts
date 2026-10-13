@@ -5,8 +5,8 @@ const data = raw as ProjectsData;
 
 export const siteMeta = {
   ...data.site,
-  name: "Ｋ站 Lab",
-  tagline: "动态收集台",
+  name: "Ｋ站",
+  tagline: "星标收集",
 };
 
 export const categories: Category[] = data.categories;
@@ -27,13 +27,6 @@ export function categoryById(id: string): Category | undefined {
 export function nonemptyCategories(): Category[] {
   const used = new Set(projects.map((p) => p.category));
   return categories.filter((c) => used.has(c.id));
-}
-
-/** Card span hint for masonry-ish rhythm: high-star or skill get wider. */
-export function cardSpan(project: Project): 1 | 2 {
-  if (project.stars >= 50000) return 2;
-  if (project.category === "skill" && project.stars >= 1000) return 2;
-  return 1;
 }
 
 export function fuzzyMatch(query: string, project: Project, catName?: string): boolean {
