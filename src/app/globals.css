@@ -72,7 +72,7 @@ body {
   mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 20%, transparent 75%);
 }
 
-/* Single motion accent: border beam along hero rule */
+/* Single motion accent: border beam along sticky header rule */
 @keyframes beam-run {
   0% { transform: translateX(-100%); }
   100% { transform: translateX(400%); }

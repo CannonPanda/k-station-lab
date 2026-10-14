@@ -76,7 +76,7 @@ export function StationApp({ projects, categories, updated }: Props) {
       <div className="paper-grid pointer-events-none absolute inset-x-0 top-0 h-[420px]" aria-hidden />
 
       {/* Sticky chrome */}
-      <header className="sticky top-0 z-40 border-b border-[var(--color-line)] bg-[color-mix(in_srgb,var(--color-paper)_92%,transparent)] backdrop-blur-md">
+      <header className="sticky top-0 z-40 bg-[color-mix(in_srgb,var(--color-paper)_92%,transparent)] backdrop-blur-md">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
           <a href="/k-station-lab/" className="flex min-w-0 items-center gap-2.5">
             <span
@@ -135,15 +135,14 @@ export function StationApp({ projects, categories, updated }: Props) {
             </a>
           </div>
         </div>
+        <div className="relative h-px w-full bg-[var(--color-line)]">
+          <div className="border-beam" aria-hidden />
+        </div>
       </header>
 
       {/* Status strip (hero brand copy removed) */}
       <section className="relative mx-auto max-w-6xl px-4 pb-2 pt-4 sm:px-6 sm:pt-6">
-        <div className="relative h-px w-full bg-[var(--color-line)]">
-          <div className="border-beam" aria-hidden />
-        </div>
-
-        <div className="mt-4 flex flex-wrap items-center justify-between gap-2">
+        <div className="flex flex-wrap items-center justify-between gap-2">
           <p className="text-sm text-[var(--color-muted)]">
             <span className="font-mono tabular-nums text-[var(--color-ink)]">{visible.length}</span>
             {" 个项目"}

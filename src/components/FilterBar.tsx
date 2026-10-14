@@ -32,7 +32,7 @@ export function FilterBar({
         : (categories.find((c) => c.id === active)?.name ?? "");
 
   return (
-    <div className="border-b border-[var(--color-line)]">
+    <div>
       <div className="mx-auto flex max-w-6xl items-center gap-2 px-4 py-3 sm:px-6">
         <button
           type="button"
