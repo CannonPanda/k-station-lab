@@ -7,6 +7,7 @@ import { ProjectGrid } from "./ProjectGrid";
 import { IntroModal } from "./IntroModal";
 import { CommandPalette } from "./CommandPalette";
 import { ThemeToggle } from "./ThemeToggle";
+import { prefetchIntroBatch } from "@/lib/introPrefetch";
 
 type Props = {
   projects: Project[];
@@ -49,6 +50,14 @@ export function StationApp({ projects, categories, updated }: Props) {
   useEffect(() => {
     if (/Mac|iPhone|iPad/.test(navigator.platform)) setModKey("⌘K");
   }, []);
+
+  // Warm intro HTML for above-the-fold cards so the modal iframe hits cache.
+  useEffect(() => {
+    prefetchIntroBatch(
+      visible.map((p) => p.id),
+      9,
+    );
+  }, [visible]);
 
   return (
     <>

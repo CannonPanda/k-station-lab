@@ -1,11 +1,10 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import type { Project } from "@/lib/types";
+import { introHref, prefetchIntro } from "@/lib/introPrefetch";
 import { lockRootScroll } from "@/lib/scrollLock";
-
-const BASE = "/k-station-lab";
 
 type Props = {
   project: Project | null;
@@ -14,6 +13,8 @@ type Props = {
 
 export function IntroModal({ project, onClose }: Props) {
   const reduce = useReducedMotion();
+  const [frameSrc, setFrameSrc] = useState("");
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     if (!project) return;
@@ -28,7 +29,21 @@ export function IntroModal({ project, onClose }: Props) {
     };
   }, [project, onClose]);
 
-  const src = project ? `${BASE}/intros/${project.id}.html` : "";
+  // Paint modal chrome first; assign iframe src on the next frame so open feels instant.
+  useEffect(() => {
+    if (!project) {
+      setFrameSrc("");
+      setLoaded(false);
+      return;
+    }
+    setLoaded(false);
+    prefetchIntro(project.id);
+    const href = introHref(project.id);
+    const id = window.requestAnimationFrame(() => {
+      setFrameSrc(href);
+    });
+    return () => window.cancelAnimationFrame(id);
+  }, [project]);
 
   return (
     <AnimatePresence>
@@ -46,19 +61,15 @@ export function IntroModal({ project, onClose }: Props) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: reduce ? 0 : 0.18 }}
+            transition={{ duration: reduce ? 0 : 0.12 }}
             onClick={onClose}
           />
           <motion.div
             className="relative flex h-[min(88dvh,900px)] w-full max-w-4xl flex-col overflow-hidden rounded-xl border border-[var(--color-line)] bg-[var(--color-drawer)] shadow-[0_24px_80px_color-mix(in_srgb,var(--color-ink)_35%,transparent)]"
-            initial={reduce ? { opacity: 0 } : { opacity: 0, y: 16, scale: 0.98 }}
-            animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
-            exit={reduce ? { opacity: 0 } : { opacity: 0, y: 12, scale: 0.98 }}
-            transition={
-              reduce
-                ? { duration: 0 }
-                : { type: "tween", ease: [0.32, 0.72, 0, 1], duration: 0.24 }
-            }
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: reduce ? 0 : 0.12 }}
           >
             <header className="flex items-center justify-between gap-3 border-b border-[var(--color-line)] px-4 py-3 sm:px-5">
               <div className="min-w-0">
@@ -74,7 +85,7 @@ export function IntroModal({ project, onClose }: Props) {
               </div>
               <div className="flex shrink-0 items-center gap-2">
                 <a
-                  href={src}
+                  href={introHref(project.id)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hidden rounded-md border border-[var(--color-line)] px-2.5 py-1.5 text-xs text-[var(--color-muted)] transition hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] sm:inline-flex"
@@ -98,12 +109,33 @@ export function IntroModal({ project, onClose }: Props) {
                 </button>
               </div>
             </header>
-            <div data-scroll-lock-allow className="min-h-0 flex-1 bg-[var(--color-surface)]">
-              <iframe
-                title={`${project.name} 介绍页`}
-                src={src}
-                className="h-full w-full border-0 bg-white"
-              />
+            <div
+              data-scroll-lock-allow
+              className="relative min-h-0 flex-1 bg-[var(--color-surface)]"
+            >
+              {!loaded && (
+                <div
+                  className="absolute inset-0 z-10 flex flex-col gap-3 bg-[var(--color-surface)] p-6"
+                  aria-hidden
+                >
+                  <div className="h-3 w-1/3 animate-pulse rounded bg-[var(--color-line)]" />
+                  <div className="h-3 w-2/3 animate-pulse rounded bg-[var(--color-line)]" />
+                  <div className="mt-2 h-24 animate-pulse rounded-lg bg-[var(--color-line)]" />
+                  <div className="h-24 animate-pulse rounded-lg bg-[var(--color-line)]" />
+                  <p className="mt-auto font-mono text-[10px] text-[var(--color-faint)]">
+                    加载介绍页…
+                  </p>
+                </div>
+              )}
+              {frameSrc ? (
+                <iframe
+                  key={frameSrc}
+                  title={`${project.name} 介绍页`}
+                  src={frameSrc}
+                  className="h-full w-full border-0 bg-white"
+                  onLoad={() => setLoaded(true)}
+                />
+              ) : null}
             </div>
           </motion.div>
         </div>

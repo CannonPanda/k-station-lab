@@ -3,6 +3,7 @@
 import { useCallback, useState, type MouseEvent } from "react";
 import type { Category, Project } from "@/lib/types";
 import { formatStars } from "@/lib/data";
+import { prefetchIntro } from "@/lib/introPrefetch";
 
 type Props = {
   project: Project;
@@ -41,7 +42,11 @@ export function ProjectCard({ project, category, onOpen }: Props) {
   );
 
   return (
-    <article className="group relative flex flex-col rounded-lg border border-[var(--color-line)] bg-[var(--color-card)] transition-[border-color,box-shadow] duration-200 hover:border-[var(--color-accent)] hover:shadow-[0_0_0_1px_var(--color-accent)]">
+    <article
+      className="group relative flex flex-col rounded-lg border border-[var(--color-line)] bg-[var(--color-card)] transition-[border-color,box-shadow] duration-200 hover:border-[var(--color-accent)] hover:shadow-[0_0_0_1px_var(--color-accent)]"
+      onPointerEnter={() => prefetchIntro(project.id)}
+      onFocusCapture={() => prefetchIntro(project.id)}
+    >
       <div className="flex flex-1 flex-col p-4 sm:p-5">
         <div className="mb-3 flex items-start justify-between gap-3">
           {/* 名称 + 复制：同一左簇 inline-flex，小 gap，垂直居中；勿 justify-between 拉开 */}
