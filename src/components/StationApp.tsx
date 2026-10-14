@@ -4,10 +4,9 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import type { Category, Project } from "@/lib/types";
 import { FilterBar } from "./FilterBar";
 import { ProjectGrid } from "./ProjectGrid";
-import { IntroModal } from "./IntroModal";
 import { CommandPalette } from "./CommandPalette";
 import { ThemeToggle } from "./ThemeToggle";
-import { prefetchIntroBatch } from "@/lib/introPrefetch";
+import { introHref, prefetchIntroBatch } from "@/lib/introPrefetch";
 
 type Props = {
   projects: Project[];
@@ -17,7 +16,6 @@ type Props = {
 
 export function StationApp({ projects, categories, updated }: Props) {
   const [filter, setFilter] = useState("all");
-  const [selected, setSelected] = useState<Project | null>(null);
   const [cmdOpen, setCmdOpen] = useState(false);
   const [filtersCollapsed, setFiltersCollapsed] = useState(true);
 
@@ -43,15 +41,16 @@ export function StationApp({ projects, categories, updated }: Props) {
     return [...list].sort((a, b) => b.stars - a.stars);
   }, [projects, filter]);
 
-  const onOpen = useCallback((p: Project) => setSelected(p), []);
-  const onClose = useCallback(() => setSelected(null), []);
+  const openIntro = useCallback((p: Project) => {
+    window.open(introHref(p.id), "_blank", "noopener");
+  }, []);
 
   const [modKey, setModKey] = useState("Ctrl+K");
   useEffect(() => {
     if (/Mac|iPhone|iPad/.test(navigator.platform)) setModKey("⌘K");
   }, []);
 
-  // Warm intro HTML for above-the-fold cards so the modal iframe hits cache.
+  // Warm intro HTML for above-the-fold cards so new-tab opens hit cache.
   useEffect(() => {
     prefetchIntroBatch(
       visible.map((p) => p.id),
@@ -170,7 +169,7 @@ export function StationApp({ projects, categories, updated }: Props) {
       </div>
 
       <main className="relative">
-        <ProjectGrid projects={visible} categoryMap={categoryMap} onOpen={onOpen} filterKey={filter} />
+        <ProjectGrid projects={visible} categoryMap={categoryMap} filterKey={filter} />
       </main>
 
       <footer className="relative border-t border-[var(--color-line)] py-10 text-center">
@@ -196,13 +195,12 @@ export function StationApp({ projects, categories, updated }: Props) {
 
       </div>
 
-      <IntroModal project={selected} onClose={onClose} />
       <CommandPalette
         open={cmdOpen}
         onOpenChange={setCmdOpen}
         projects={projects}
         categoryMap={categoryMap}
-        onSelect={onOpen}
+        onSelect={openIntro}
       />
     </>
   );

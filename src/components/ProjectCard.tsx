@@ -3,16 +3,16 @@
 import { useCallback, useState, type MouseEvent } from "react";
 import type { Category, Project } from "@/lib/types";
 import { formatStars } from "@/lib/data";
-import { prefetchIntro } from "@/lib/introPrefetch";
+import { introHref, prefetchIntro } from "@/lib/introPrefetch";
 
 type Props = {
   project: Project;
   category?: Category;
-  onOpen: (p: Project) => void;
 };
 
-export function ProjectCard({ project, category, onOpen }: Props) {
+export function ProjectCard({ project, category }: Props) {
   const [copied, setCopied] = useState(false);
+  const href = introHref(project.id);
 
   const onCopy = useCallback(
     async (e: MouseEvent<HTMLButtonElement>) => {
@@ -51,15 +51,16 @@ export function ProjectCard({ project, category, onOpen }: Props) {
         <div className="mb-3 flex items-start justify-between gap-3">
           {/* 名称 + 复制：同一左簇 inline-flex，小 gap，垂直居中；勿 justify-between 拉开 */}
           <div className="flex min-w-0 flex-1 items-center gap-1.5">
-            <button
-              type="button"
-              onClick={() => onOpen(project)}
+            <a
+              href={href}
+              target="_blank"
+              rel="noopener"
               className="min-w-0 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
             >
               <h2 className="font-display text-base font-semibold tracking-tight text-[var(--color-ink)] sm:text-[17px]">
                 {project.name}
               </h2>
-            </button>
+            </a>
             <button
               type="button"
               onClick={onCopy}
@@ -76,9 +77,10 @@ export function ProjectCard({ project, category, onOpen }: Props) {
           </span>
         </div>
 
-        <button
-          type="button"
-          onClick={() => onOpen(project)}
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener"
           className="flex flex-1 flex-col text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
         >
           {category && (
@@ -102,7 +104,7 @@ export function ProjectCard({ project, category, onOpen }: Props) {
               介绍
             </span>
           </div>
-        </button>
+        </a>
       </div>
     </article>
   );

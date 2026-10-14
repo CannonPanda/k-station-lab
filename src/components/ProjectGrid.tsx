@@ -8,7 +8,6 @@ import { ProjectCard } from "./ProjectCard";
 type Props = {
   projects: Project[];
   categoryMap: Record<string, Category>;
-  onOpen: (p: Project) => void;
   filterKey: string;
 };
 
@@ -17,7 +16,7 @@ type Props = {
  * only — content updates in place so React reconciles cards by id without
  * tearing down the layout container.
  */
-export function ProjectGrid({ projects, categoryMap, onOpen, filterKey }: Props) {
+export function ProjectGrid({ projects, categoryMap, filterKey }: Props) {
   const reduce = useReducedMotion();
   const controls = useAnimationControls();
   const prevKey = useRef(filterKey);
@@ -61,7 +60,6 @@ export function ProjectGrid({ projects, categoryMap, onOpen, filterKey }: Props)
           key={p.id}
           project={p}
           category={categoryMap[p.category]}
-          onOpen={onOpen}
         />
       ))}
     </motion.div>

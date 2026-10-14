@@ -112,7 +112,7 @@ export function CommandPalette({ open, onOpenChange, projects, categoryMap, onSe
                 ))}
               </Command.List>
               <div className="flex items-center justify-between border-t border-[var(--color-line)] px-4 py-2 font-mono text-[10px] text-[var(--color-faint)]">
-                <span>Enter 打开详情</span>
+                <span>Enter 打开介绍</span>
                 <span>
                   {ranked.length} / {projects.length}
                 </span>
