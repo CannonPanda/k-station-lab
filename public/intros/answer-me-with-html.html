@@ -9,42 +9,65 @@
 </head>
 <body>
 <main class="am-doc">
-<header class="am-head"><h1>answer-me-with-html</h1><p class="am-sub">K站项目介绍</p><div class="am-intro am-md"><div class="am-callout am-callout--info" role="note"><div class="am-callout-title">一句话定位</div><div class="am-callout-body am-md"><p><strong>answer-me-with-html</strong>（Skill / Agent 工作流）：Agent Skill：把复杂问题答成一页可读 HTML（图文、公式、离线单文件），而不是终端里的文字墙。</p>
+<header class="am-head"><h1>answer-me-with-html</h1><p class="am-sub">Skill / Agent · K站介绍</p><div class="am-intro am-md"><div class="am-callout am-callout--info" role="note"><div class="am-callout-title">一句话定位</div><div class="am-callout-body am-md"><p><strong>answer-me-with-html</strong>（Skill / Agent 工作流）：Agent Skill：把复杂问题答成一页可读 HTML（图文、公式、离线单文件），而不是终端里的文字墙。</p>
 </div></div></div></header>
 <div class="am-doc-layout">
-<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 它是什么</a><a href="#panel-B">B · 元信息</a><a href="#panel-C">C · 解决什么问题 / 适用场景</a><a href="#panel-D">D · 怎么用好</a><a href="#panel-E">E · 和同类怎么选 / 注意点</a><a href="#panel-F">F · 快速结论</a></nav><div class="am-doc-body">
+<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 元信息</a><a href="#panel-B">B · 一次调用怎么走</a><a href="#panel-C">C · 管线鸟瞰</a><a href="#panel-D">D · 和同站条目怎么选</a><a href="#panel-E">E · 用法要点</a></nav><div class="am-doc-body">
 <section class="am-panel" id="panel-A">
-<header class="am-panel-head"><span class="am-panel-id">A</span><h2>它是什么</h2></header>
-<div class="am-panel-body"><div class="am-md"><p>Agent Skill：把复杂问题答成一页可读 HTML（图文、公式、离线单文件），而不是终端里的文字墙。</p>
-<p>所属分类：<strong>Skill / Agent 工作流</strong>——教 AI 怎么做事的说明书与流水线。</p>
-</div></div>
-</section>
-<section class="am-panel" id="panel-B">
-<header class="am-panel-head"><span class="am-panel-id">B</span><h2>元信息</h2></header>
+<header class="am-panel-head"><span class="am-panel-id">A</span><h2>元信息</h2></header>
 <div class="am-panel-body"><dl class="am-kv" style="--kv-cols: 1"><div class="am-kv-cell"><dt>元信息</dt><dd>2026-10-02，★ 3,263</dd></div><div class="am-kv-cell"><dt>分类</dt><dd>Skill / Agent 工作流</dd></div><div class="am-kv-cell"><dt>仓库</dt><dd><a href="https://github.com/QingYunA/answer-me-with-html">QingYunA/answer-me-with-html</a></dd></div><div class="am-kv-cell"><dt>主页</dt><dd><a href="https://answer-me-with-html.com/">answer-me-with-html.com/</a></dd></div><div class="am-kv-cell"><dt>分类说明</dt><dd>教 AI 怎么做事的说明书与流水线</dd></div></dl></div>
 </section>
+<section class="am-panel" id="panel-B">
+<header class="am-panel-head"><span class="am-panel-id">B</span><h2>一次调用怎么走</h2></header>
+<div class="am-panel-body"><figure class="am-diagram am-seq"><svg viewBox="0 0 573 278" width="573" height="278" role="img" aria-label="时序图：你、Agent、am CLI" xmlns="http://www.w3.org/2000/svg"><defs><marker id="am1-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="am-arrow" d="M0,0 L10,5 L0,10 z"/></marker></defs><line class="am-lifeline" x1="54" y1="42" x2="54" y2="274"/><g data-key="你"><rect class="am-actor" x="12" y="8" width="84" height="34" rx="2"/><text x="54" y="25" text-anchor="middle" dominant-baseline="central" font-weight="600">你</text></g><line class="am-lifeline" x1="271.6" y1="42" x2="271.6" y2="274"/><g data-key="Agent"><rect class="am-actor" x="229.6" y="8" width="84" height="34" rx="2"/><text x="271.6" y="25" text-anchor="middle" dominant-baseline="central" font-weight="600">Agent</text></g><line class="am-lifeline" x1="518.9" y1="42" x2="518.9" y2="274"/><g data-key="am CLI"><rect class="am-actor" x="476.9" y="8" width="84" height="34" rx="2"/><text x="518.9" y="25" text-anchor="middle" dominant-baseline="central" font-weight="600">am CLI</text></g><g data-step="0"><text x="162.8" y="70" text-anchor="middle">提问（如讲清 TCP 握手）</text><path class="am-edge" d="M54,80 L269.6,80" marker-end="url(#am1-arrow)"/><text class="am-step" x="60" y="74" text-anchor="start">1</text></g><g data-step="1"><text x="311.6" y="108" dominant-baseline="central">写 3–8 面板 Markdown 草稿</text><path class="am-edge" d="M271.6,104 H301.6 V124 H273.6" marker-end="url(#am1-arrow)"/><text class="am-step" x="277.6" y="114" text-anchor="start">2</text></g><g data-step="2"><text x="395.2" y="158" text-anchor="middle">am render 草稿</text><path class="am-edge" d="M271.6,168 L516.9,168" marker-end="url(#am1-arrow)"/><text class="am-step" x="277.6" y="162" text-anchor="start">3</text></g><g data-step="3"><text x="395.2" y="198" text-anchor="middle">✓ 单文件 HTML 或 ✗ 行号+示例</text><path class="am-edge am-edge--dashed" d="M518.9,208 L273.6,208" marker-end="url(#am1-arrow)"/><text class="am-step" x="512.9" y="202" text-anchor="end">4</text></g><g data-step="4"><text x="162.8" y="238" text-anchor="middle">讲义页路径（图文/公式/离线）</text><path class="am-edge am-edge--dashed" d="M271.6,248 L56,248" marker-end="url(#am1-arrow)"/><text class="am-step" x="265.6" y="242" text-anchor="end">5</text></g></svg></figure></div>
+</section>
 <section class="am-panel" id="panel-C">
-<header class="am-panel-head"><span class="am-panel-id">C</span><h2>解决什么问题 / 适用场景</h2></header>
-<div class="am-panel-body"><div class="am-md"><p>复杂概念在终端里常变成文字墙：难扫读、难对照、难带走。备课、考点讲解、技术原理需要一页可离线打开的讲义。</p>
-<p>结合本站摘要，典型场景还包括：
-装成 skill 后直接提问（如「讲清 TCP 三次握手」）。需要讲义页时明确说用 answer-me-with-html；面板标题避免塞公式，正文可用 KaTeX/Temml。适合备课、考点讲解、技术概念可视化。</p>
-</div></div>
+<header class="am-panel-head"><span class="am-panel-id">C</span><h2>管线鸟瞰</h2></header>
+<div class="am-panel-body"><figure class="am-diagram am-flow"><svg viewBox="0 0 957 134" width="957" height="134" role="img" aria-label="流程图：复杂问题、Agent Skill、面板草稿、am 渲染、单文件 HTML、多主题/视频/回复标注" xmlns="http://www.w3.org/2000/svg"><defs><marker id="am2-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="am-arrow" d="M0,0 L10,5 L0,10 z"/></marker></defs><g></g><g><g data-step="0"><path class="am-edge" d="M106,67 L151.1,67 Q196.2,67 241.3,67 L286.4,67" marker-end="url(#am2-arrow)"/><g class="am-edge-label"><rect x="130" y="58" width="132.4" height="18" rx="3"/><text x="196.2" y="67" text-anchor="middle" dominant-baseline="central">answer-me-with-html</text></g></g><g data-step="1"><path class="am-edge" d="M381.7,67 L419.8,67 Q458,67 496.1,67 L534.2,67" marker-end="url(#am2-arrow)"/><g class="am-edge-label"><rect x="405.7" y="58" width="104.5" height="18" rx="3"/><text x="458" y="67" text-anchor="middle" dominant-baseline="central">flow/sequence/…</text></g></g><g data-step="2"><path class="am-edge" d="M614.2,67 L625.7,67 Q637.2,67 648.7,67 L660.2,67" marker-end="url(#am2-arrow)"/></g><g data-step="3"><path class="am-edge" d="M728.6,84.5 L744.1,93.5 Q759.6,102.5 783.8,102.5 L808.1,102.5" marker-end="url(#am2-arrow)"/></g><g data-step="4"><path class="am-edge am-edge--dashed" d="M728.6,49.5 L744.1,40.5 Q759.6,31.5 771.1,31.5 L782.6,31.5" marker-end="url(#am2-arrow)"/></g></g><g><g class="am-node am-node--round" data-key="复杂问题" data-step="0"><rect class="am-node-shape" x="14" y="49.5" width="92" height="35" rx="17.5"/><text x="60" y="67" text-anchor="middle" dominant-baseline="central">复杂问题</text></g><g class="am-node am-node--rect" data-key="Agent Skill" data-step="0"><rect class="am-node-shape" x="286.4" y="49.5" width="95.3" height="35" rx="3"/><text x="334" y="67" text-anchor="middle" dominant-baseline="central">Agent Skill</text></g><g class="am-node am-node--rect" data-key="面板草稿" data-step="1"><rect class="am-node-shape" x="534.2" y="49.5" width="80" height="35" rx="3"/><text x="574.2" y="67" text-anchor="middle" dominant-baseline="central">面板草稿</text></g><g class="am-node am-node--rect" data-key="am 渲染" data-step="2"><rect class="am-node-shape" x="660.2" y="49.5" width="76.4" height="35" rx="3"/><text x="698.4" y="67" text-anchor="middle" dominant-baseline="central">am 渲染</text></g><g class="am-node am-node--rect am-node--hi" data-key="单文件 HTML" data-step="3"><rect class="am-node-shape" x="808.1" y="85" width="108.6" height="35" rx="3"/><text x="862.4" y="102.5" text-anchor="middle" dominant-baseline="central">单文件 HTML</text></g><g class="am-node am-node--rect" data-key="多主题/视频/回复标注" data-step="4"><rect class="am-node-shape" x="782.6" y="14" width="159.6" height="35" rx="3"/><text x="862.4" y="31.5" text-anchor="middle" dominant-baseline="central">多主题/视频/回复标注</text></g></g></svg></figure></div>
 </section>
 <section class="am-panel" id="panel-D">
-<header class="am-panel-head"><span class="am-panel-id">D</span><h2>怎么用好</h2></header>
-<div class="am-panel-body"><div class="am-md"><p>装成 skill 后直接提问（如「讲清 TCP 三次握手」）。需要讲义页时明确说用 answer-me-with-html；面板标题避免塞公式，正文可用 KaTeX/Temml。适合备课、考点讲解、技术概念可视化。</p>
-<p>补充：
-面板标题避免塞公式；正文可用 KaTeX/Temml。K站 intros 现已改用 sam 渲染；需要多主题/视频时仍直接用本 skill。</p>
+<header class="am-panel-head"><span class="am-panel-id">D</span><h2>和同站条目怎么选</h2></header>
+<div class="am-panel-body"><div class="am-md"><div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>需求</th>
+<th>am（本 skill）</th>
+<th>sam</th>
+<th>前端 toolkit</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>全功能讲义</td>
+<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span></span></td>
+<td><span class="am-status am-status--warn"><span class="am-status-icon" aria-hidden="true">!</span>精简</span></td>
+<td><span class="am-status am-status--no"><span class="am-status-icon" aria-hidden="true">✗</span></span></td>
+</tr>
+<tr>
+<td>iframe 轻页</td>
+<td><span class="am-status am-status--warn"><span class="am-status-icon" aria-hidden="true">!</span>偏重</span></td>
+<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span></span></td>
+<td><span class="am-status am-status--no"><span class="am-status-icon" aria-hidden="true">✗</span></span></td>
+</tr>
+<tr>
+<td>多主题/视频</td>
+<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span></span></td>
+<td><span class="am-status am-status--no"><span class="am-status-icon" aria-hidden="true">✗</span></span></td>
+<td><span class="am-status am-status--no"><span class="am-status-icon" aria-hidden="true">✗</span></span></td>
+</tr>
+<tr>
+<td>前端去模板</td>
+<td><span class="am-status am-status--no"><span class="am-status-icon" aria-hidden="true">✗</span></span></td>
+<td><span class="am-status am-status--no"><span class="am-status-icon" aria-hidden="true">✗</span></span></td>
+<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span></span></td>
+</tr>
+</tbody></table></div>
 </div></div>
 </section>
 <section class="am-panel" id="panel-E">
-<header class="am-panel-head"><span class="am-panel-id">E</span><h2>和同类怎么选 / 注意点</h2></header>
-<div class="am-panel-body"><div class="am-md"><p>同站 Skill 里，anthropics/skills 是官方合集（含 frontend-design）；Claude-Code-Frontend-Design-Toolkit 与 claude-code-ui-agents 偏前端美学与 UI agent 提示。answer-me-with-html 专做「答成一页 HTML」：图文、公式、单文件离线。需要讲义页时点名本 skill；做 UI 改版则看另外几个。同站精简版 sam 适合 iframe 轻页。</p>
-</div></div>
-</section>
-<section class="am-panel" id="panel-F">
-<header class="am-panel-head"><span class="am-panel-id">F</span><h2>快速结论</h2></header>
-<div class="am-panel-body"><div class="am-callout am-callout--ok" role="note"><div class="am-callout-title">记住这句</div><div class="am-callout-body am-md"><p>要「一页讲清」且要全功能时用本 skill；要轻量 iframe/讲义优先 sam；要「前端更美」用同站 frontend-design 相关 skill。</p>
+<header class="am-panel-head"><span class="am-panel-id">E</span><h2>用法要点</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>面板标题避免塞公式；正文可用 KaTeX/Temml。K站 intros 现已改用 sam 渲染；需要多主题/视频时仍直接用本 skill。</p>
+</div>
+<div class="am-callout am-callout--ok" role="note"><div class="am-callout-title">记住这句</div><div class="am-callout-body am-md"><p>要「一页讲清」且要全功能时用本 skill；要轻量 iframe/讲义优先 sam；要「前端更美」用同站 frontend-design 相关 skill。</p>
 </div></div>
 <div class="am-md"><h3>入口</h3>
 <ul>

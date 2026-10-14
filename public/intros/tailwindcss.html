@@ -9,42 +9,88 @@
 </head>
 <body>
 <main class="am-doc">
-<header class="am-head"><h1>Tailwind CSS</h1><p class="am-sub">K站项目介绍</p><div class="am-intro am-md"><div class="am-callout am-callout--info" role="note"><div class="am-callout-title">一句话定位</div><div class="am-callout-body am-md"><p><strong>Tailwind CSS</strong>（代码库 / 引擎）：Utility-first CSS 框架，用类名快速拼出精致 UI，几乎是现代酷站标配。</p>
+<header class="am-head"><h1>Tailwind CSS</h1><p class="am-sub">工具库 · K站介绍</p><div class="am-intro am-md"><div class="am-callout am-callout--info" role="note"><div class="am-callout-title">一句话定位</div><div class="am-callout-body am-md"><p><strong>Tailwind CSS</strong>（工具库）：Utility-first CSS 框架，用类名快速拼出精致 UI，几乎是现代酷站标配。</p>
 </div></div></div></header>
 <div class="am-doc-layout">
-<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 它是什么</a><a href="#panel-B">B · 元信息</a><a href="#panel-C">C · 解决什么问题 / 适用场景</a><a href="#panel-D">D · 怎么用好</a><a href="#panel-E">E · 和同类怎么选 / 注意点</a><a href="#panel-F">F · 快速结论</a></nav><div class="am-doc-body">
+<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 元信息</a><a href="#panel-B">B · 能力边界</a><a href="#panel-C">C · 同栈怎么分工</a><a href="#panel-D">D · 注意点与建议</a><a href="#panel-E">E · 简史</a><a href="#panel-F">F · 场景与用法</a></nav><div class="am-doc-body">
 <section class="am-panel" id="panel-A">
-<header class="am-panel-head"><span class="am-panel-id">A</span><h2>它是什么</h2></header>
-<div class="am-panel-body"><div class="am-md"><p>Utility-first CSS 框架，用类名快速拼出精致 UI，几乎是现代酷站标配。</p>
-<p>所属分类：<strong>代码库 / 引擎</strong>——给别人用的库、框架、工具。</p>
-</div></div>
-</section>
-<section class="am-panel" id="panel-B">
-<header class="am-panel-head"><span class="am-panel-id">B</span><h2>元信息</h2></header>
+<header class="am-panel-head"><span class="am-panel-id">A</span><h2>元信息</h2></header>
 <div class="am-panel-body"><dl class="am-kv" style="--kv-cols: 1"><div class="am-kv-cell"><dt>元信息</dt><dd>2017-10-06，★ 97,887</dd></div><div class="am-kv-cell"><dt>分类</dt><dd>代码库 / 引擎</dd></div><div class="am-kv-cell"><dt>仓库</dt><dd><a href="https://github.com/tailwindlabs/tailwindcss">tailwindlabs/tailwindcss</a></dd></div><div class="am-kv-cell"><dt>主页</dt><dd><a href="https://tailwindcss.com/">tailwindcss.com/</a></dd></div><div class="am-kv-cell"><dt>分类说明</dt><dd>给别人用的库、框架、工具</dd></div></dl></div>
 </section>
+<section class="am-panel" id="panel-B">
+<header class="am-panel-head"><span class="am-panel-id">B</span><h2>能力边界</h2></header>
+<div class="am-panel-body"><div class="am-limits"><div class="am-lim">
+<div class="am-lim-head"><span>Utility 拼 UI 速度<span class="am-lim-note">类名即样式</span></span><span class="am-lim-val">9 / max 10 分</span></div>
+<div class="am-lim-track"><div class="am-lim-fill" style="width: 60%"></div><div class="am-lim-mark" style="left: 66.67%"></div></div>
+<div class="am-lim-ticks" aria-hidden="true"><span style="left: 0%">0</span><span style="left: 16.67%">2.5</span><span style="left: 33.33%">5</span><span style="left: 50%">7.5</span><span style="left: 66.67%">10</span><span style="left: 83.33%">12.5</span><span style="left: 100%">15</span></div>
+</div><div class="am-lim">
+<div class="am-lim-head"><span>设计系统可维护性<span class="am-lim-note">靠 theme/@apply</span></span><span class="am-lim-val">7 / max 10 分</span></div>
+<div class="am-lim-track"><div class="am-lim-fill" style="width: 46.67%"></div><div class="am-lim-mark" style="left: 66.67%"></div></div>
+<div class="am-lim-ticks" aria-hidden="true"><span style="left: 0%">0</span><span style="left: 16.67%">2.5</span><span style="left: 33.33%">5</span><span style="left: 50%">7.5</span><span style="left: 66.67%">10</span><span style="left: 83.33%">12.5</span><span style="left: 100%">15</span></div>
+</div><div class="am-lim">
+<div class="am-lim-head"><span>传统 CSS 迁移成本<span class="am-lim-note">心智要换</span></span><span class="am-lim-val">6 / max 10 分</span></div>
+<div class="am-lim-track"><div class="am-lim-fill" style="width: 40%"></div><div class="am-lim-mark" style="left: 66.67%"></div></div>
+<div class="am-lim-ticks" aria-hidden="true"><span style="left: 0%">0</span><span style="left: 16.67%">2.5</span><span style="left: 33.33%">5</span><span style="left: 50%">7.5</span><span style="left: 66.67%">10</span><span style="left: 83.33%">12.5</span><span style="left: 100%">15</span></div>
+</div><div class="am-lim">
+<div class="am-lim-head"><span>无障碍组件完备度<span class="am-lim-note">需 shadcn 等补</span></span><span class="am-lim-val">3 / max 10 分</span></div>
+<div class="am-lim-track"><div class="am-lim-fill" style="width: 20%"></div><div class="am-lim-mark" style="left: 66.67%"></div></div>
+<div class="am-lim-ticks" aria-hidden="true"><span style="left: 0%">0</span><span style="left: 16.67%">2.5</span><span style="left: 33.33%">5</span><span style="left: 50%">7.5</span><span style="left: 66.67%">10</span><span style="left: 83.33%">12.5</span><span style="left: 100%">15</span></div>
+</div></div></div>
+</section>
 <section class="am-panel" id="panel-C">
-<header class="am-panel-head"><span class="am-panel-id">C</span><h2>解决什么问题 / 适用场景</h2></header>
-<div class="am-panel-body"><div class="am-md"><p>传统 CSS 难快速拼精致 UI；设计系统与响应式要可维护的 utility 层。</p>
-<p>结合本站摘要，典型场景还包括：
-与 Astro/Vite/Next 任意组合。做酷站时善用自定义 theme（色板、阴影、动画）、@apply 抽组件类，再叠加 backdrop-blur、gradient、grid/bento 布局。v4 用 CSS-first 配置更轻。</p>
+<header class="am-panel-head"><span class="am-panel-id">C</span><h2>同栈怎么分工</h2></header>
+<div class="am-panel-body"><div class="am-md"><div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>角色</th>
+<th>Tailwind</th>
+<th>shadcn/ui</th>
+<th>Magic UI</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>样式原子</td>
+<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>底座</span></td>
+<td><span class="am-status am-status--no"><span class="am-status-icon" aria-hidden="true">✗</span>消费它</span></td>
+<td><span class="am-status am-status--no"><span class="am-status-icon" aria-hidden="true">✗</span>消费它</span></td>
+</tr>
+<tr>
+<td>无障碍组件</td>
+<td><span class="am-status am-status--no"><span class="am-status-icon" aria-hidden="true">✗</span>无</span></td>
+<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>Button/Dialog…</span></td>
+<td><span class="am-status am-status--no"><span class="am-status-icon" aria-hidden="true">✗</span>偏特效</span></td>
+</tr>
+<tr>
+<td>落地页特效</td>
+<td><span class="am-status am-status--warn"><span class="am-status-icon" aria-hidden="true">!</span>自写</span></td>
+<td><span class="am-status am-status--warn"><span class="am-status-icon" aria-hidden="true">!</span>基础</span></td>
+<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>预制光效</span></td>
+</tr>
+<tr>
+<td>源码归属</td>
+<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>框架</span></td>
+<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>复制进仓</span></td>
+<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>复制进仓</span></td>
+</tr>
+</tbody></table></div>
 </div></div>
 </section>
 <section class="am-panel" id="panel-D">
-<header class="am-panel-head"><span class="am-panel-id">D</span><h2>怎么用好</h2></header>
-<div class="am-panel-body"><div class="am-md"><p>与 Astro/Vite/Next 任意组合。做酷站时善用自定义 theme（色板、阴影、动画）、@apply 抽组件类，再叠加 backdrop-blur、gradient、grid/bento 布局。v4 用 CSS-first 配置更轻。</p>
-<p>补充：
-与 Astro/Vite/Next 任意组合。自定义 theme（色板、阴影、动画），必要时 @apply 抽组件类。善用 backdrop-blur、gradient、grid/bento。v4 可用 CSS-first 配置。</p>
+<header class="am-panel-head"><span class="am-panel-id">D</span><h2>注意点与建议</h2></header>
+<div class="am-panel-body"><div class="am-callout am-callout--warn" role="note"><div class="am-callout-title">别指望它单独给组件</div><div class="am-callout-body am-md"><p>Tailwind 是样式语言，不是组件库。表单/对话框请接 shadcn；「一眼很酷」接 Magic UI。</p>
 </div></div>
+<div class="am-callout am-callout--ok" role="note"><div class="am-callout-title">酷站底座</div><div class="am-callout-body am-md"><p>自定义 theme（色板、阴影、动画）+ backdrop-blur / gradient / bento；v4 可用 CSS-first 配置。</p>
+</div></div></div>
 </section>
 <section class="am-panel" id="panel-E">
-<header class="am-panel-head"><span class="am-panel-id">E</span><h2>和同类怎么选 / 注意点</h2></header>
-<div class="am-panel-body"><div class="am-md"><p>同站 UI 栈：shadcn/ui 在 Tailwind + Radix 上提供可复制组件；Magic UI 提供动画特效组件。Tailwind 是底层样式语言，几乎是现代酷站标配。先 Tailwind，再按需加 shadcn/Magic UI。</p>
-</div></div>
+<header class="am-panel-head"><span class="am-panel-id">E</span><h2>简史</h2></header>
+<div class="am-panel-body"><div class="am-tl-wrap"><ol class="am-timeline am-timeline--h" style="--n: 4"><li class="am-tl-item"><span class="am-tl-when">2017-10</span><span class="am-tl-dot"></span><span class="am-tl-title">初版</span><span class="am-tl-text">utility-first 抬头</span></li><li class="am-tl-item"><span class="am-tl-when">2020</span><span class="am-tl-dot"></span><span class="am-tl-title">JIT</span><span class="am-tl-text">构建体积与 DX 质变</span></li><li class="am-tl-item"><span class="am-tl-when">2024</span><span class="am-tl-dot"></span><span class="am-tl-title">v4 方向</span><span class="am-tl-text">CSS-first 配置</span></li><li class="am-tl-item am-tl-item--hi"><span class="am-tl-when">今</span><span class="am-tl-dot"></span><span class="am-tl-title">酷站标配</span><span class="am-tl-text">几乎与 Astro/Next 同出场</span></li></ol></div></div>
 </section>
 <section class="am-panel" id="panel-F">
-<header class="am-panel-head"><span class="am-panel-id">F</span><h2>快速结论</h2></header>
-<div class="am-panel-body"><div class="am-callout am-callout--ok" role="note"><div class="am-callout-title">记住这句</div><div class="am-callout-body am-md"><p>样式底座用 Tailwind；要现成无障碍组件加 shadcn；要一眼很酷的动效加 Magic UI。</p>
+<header class="am-panel-head"><span class="am-panel-id">F</span><h2>场景与用法</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>与 Astro/Vite/Next 任意组合。做酷站时善用自定义 theme（色板、阴影、动画）、@apply 抽组件类，再叠加 backdrop-blur、gradient、grid/bento 布局。v4 用 CSS-first 配置更轻。</p>
+</div>
+<div class="am-callout am-callout--ok" role="note"><div class="am-callout-title">记住这句</div><div class="am-callout-body am-md"><p>样式底座用 Tailwind；要现成无障碍组件加 shadcn；要一眼很酷的动效加 Magic UI。</p>
 </div></div>
 <div class="am-md"><h3>入口</h3>
 <ul>

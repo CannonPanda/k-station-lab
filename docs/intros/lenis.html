@@ -9,42 +9,78 @@
 </head>
 <body>
 <main class="am-doc">
-<header class="am-head"><h1>Lenis</h1><p class="am-sub">K站项目介绍</p><div class="am-intro am-md"><div class="am-callout am-callout--info" role="note"><div class="am-callout-title">一句话定位</div><div class="am-callout-body am-md"><p><strong>Lenis</strong>（代码库 / 引擎）：丝滑平滑滚动库，让整页滚动质感接近高端作品集站点。</p>
+<header class="am-head"><h1>Lenis</h1><p class="am-sub">工具库 · K站介绍</p><div class="am-intro am-md"><div class="am-callout am-callout--info" role="note"><div class="am-callout-title">一句话定位</div><div class="am-callout-body am-md"><p><strong>Lenis</strong>（工具库）：丝滑平滑滚动库，让整页滚动质感接近高端作品集站点。</p>
 </div></div></div></header>
 <div class="am-doc-layout">
-<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 它是什么</a><a href="#panel-B">B · 元信息</a><a href="#panel-C">C · 解决什么问题 / 适用场景</a><a href="#panel-D">D · 怎么用好</a><a href="#panel-E">E · 和同类怎么选 / 注意点</a><a href="#panel-F">F · 快速结论</a></nav><div class="am-doc-body">
+<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 元信息</a><a href="#panel-B">B · 能力边界</a><a href="#panel-C">C · 同栈怎么分工</a><a href="#panel-D">D · 注意点与建议</a><a href="#panel-E">E · 场景与用法</a></nav><div class="am-doc-body">
 <section class="am-panel" id="panel-A">
-<header class="am-panel-head"><span class="am-panel-id">A</span><h2>它是什么</h2></header>
-<div class="am-panel-body"><div class="am-md"><p>丝滑平滑滚动库，让整页滚动质感接近高端作品集站点。</p>
-<p>所属分类：<strong>代码库 / 引擎</strong>——给别人用的库、框架、工具。</p>
-</div></div>
-</section>
-<section class="am-panel" id="panel-B">
-<header class="am-panel-head"><span class="am-panel-id">B</span><h2>元信息</h2></header>
+<header class="am-panel-head"><span class="am-panel-id">A</span><h2>元信息</h2></header>
 <div class="am-panel-body"><dl class="am-kv" style="--kv-cols: 1"><div class="am-kv-cell"><dt>元信息</dt><dd>2022-02-21，★ 16,500</dd></div><div class="am-kv-cell"><dt>分类</dt><dd>代码库 / 引擎</dd></div><div class="am-kv-cell"><dt>仓库</dt><dd><a href="https://github.com/darkroomengineering/lenis">darkroomengineering/lenis</a></dd></div><div class="am-kv-cell"><dt>主页</dt><dd><a href="https://lenis.dev">lenis.dev</a></dd></div><div class="am-kv-cell"><dt>分类说明</dt><dd>给别人用的库、框架、工具</dd></div></dl></div>
 </section>
+<section class="am-panel" id="panel-B">
+<header class="am-panel-head"><span class="am-panel-id">B</span><h2>能力边界</h2></header>
+<div class="am-panel-body"><div class="am-limits"><div class="am-lim">
+<div class="am-lim-head"><span>整页滚动质感<span class="am-lim-note">高端作品集手感</span></span><span class="am-lim-val">9 / max 10 分</span></div>
+<div class="am-lim-track"><div class="am-lim-fill" style="width: 60%"></div><div class="am-lim-mark" style="left: 66.67%"></div></div>
+<div class="am-lim-ticks" aria-hidden="true"><span style="left: 0%">0</span><span style="left: 16.67%">2.5</span><span style="left: 33.33%">5</span><span style="left: 50%">7.5</span><span style="left: 66.67%">10</span><span style="left: 83.33%">12.5</span><span style="left: 100%">15</span></div>
+</div><div class="am-lim">
+<div class="am-lim-head"><span>元素关键帧动画<span class="am-lim-note">交给 Motion</span></span><span class="am-lim-val">3 / max 10 分</span></div>
+<div class="am-lim-track"><div class="am-lim-fill" style="width: 20%"></div><div class="am-lim-mark" style="left: 66.67%"></div></div>
+<div class="am-lim-ticks" aria-hidden="true"><span style="left: 0%">0</span><span style="left: 16.67%">2.5</span><span style="left: 33.33%">5</span><span style="left: 50%">7.5</span><span style="left: 66.67%">10</span><span style="left: 83.33%">12.5</span><span style="left: 100%">15</span></div>
+</div><div class="am-lim">
+<div class="am-lim-head"><span>无障碍风险<span class="am-lim-note">必须尊重 reduced-motion</span></span><span class="am-lim-val">6 / max 10 分</span></div>
+<div class="am-lim-track"><div class="am-lim-fill" style="width: 40%"></div><div class="am-lim-mark" style="left: 66.67%"></div></div>
+<div class="am-lim-ticks" aria-hidden="true"><span style="left: 0%">0</span><span style="left: 16.67%">2.5</span><span style="left: 33.33%">5</span><span style="left: 50%">7.5</span><span style="left: 66.67%">10</span><span style="left: 83.33%">12.5</span><span style="left: 100%">15</span></div>
+</div><div class="am-lim">
+<div class="am-lim-head"><span>与 ScrollTrigger 同步<span class="am-lim-note">布局里初始化并桥接</span></span><span class="am-lim-val">8 / max 10 分</span></div>
+<div class="am-lim-track"><div class="am-lim-fill" style="width: 53.33%"></div><div class="am-lim-mark" style="left: 66.67%"></div></div>
+<div class="am-lim-ticks" aria-hidden="true"><span style="left: 0%">0</span><span style="left: 16.67%">2.5</span><span style="left: 33.33%">5</span><span style="left: 50%">7.5</span><span style="left: 66.67%">10</span><span style="left: 83.33%">12.5</span><span style="left: 100%">15</span></div>
+</div></div></div>
+</section>
 <section class="am-panel" id="panel-C">
-<header class="am-panel-head"><span class="am-panel-id">C</span><h2>解决什么问题 / 适用场景</h2></header>
-<div class="am-panel-body"><div class="am-md"><p>默认滚动偏「网页感」，高端作品集需要更丝滑的整页滚动质感。</p>
-<p>结合本站摘要，典型场景还包括：
-在布局里初始化 Lenis，并与 ScrollTrigger / Motion 的滚动监听同步。适合长落地页与作品集；记得尊重 <code>prefers-reduced-motion</code>。</p>
+<header class="am-panel-head"><span class="am-panel-id">C</span><h2>同栈怎么分工</h2></header>
+<div class="am-panel-body"><div class="am-md"><div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>Lenis</th>
+<th>Motion</th>
+<th>Magic UI</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>管什么</td>
+<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>滚动插值</span></td>
+<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>元素动画</span></td>
+<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>特效块</span></td>
+</tr>
+<tr>
+<td>长落地页</td>
+<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>常一起</span></td>
+<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span></span></td>
+<td><span class="am-status am-status--warn"><span class="am-status-icon" aria-hidden="true">!</span>局部</span></td>
+</tr>
+<tr>
+<td>可关停</td>
+<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>prefers-reduced-motion</span></td>
+<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span></span></td>
+<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span></span></td>
+</tr>
+</tbody></table></div>
 </div></div>
 </section>
 <section class="am-panel" id="panel-D">
-<header class="am-panel-head"><span class="am-panel-id">D</span><h2>怎么用好</h2></header>
-<div class="am-panel-body"><div class="am-md"><p>在布局里初始化 Lenis，并与 ScrollTrigger / Motion 的滚动监听同步。适合长落地页与作品集；记得尊重 <code>prefers-reduced-motion</code>。</p>
-<p>补充：
-在布局里初始化 Lenis，并与 Motion 的滚动监听同步。适合长落地页与作品集。</p>
+<header class="am-panel-head"><span class="am-panel-id">D</span><h2>注意点与建议</h2></header>
+<div class="am-panel-body"><div class="am-callout am-callout--warn" role="note"><div class="am-callout-title">不要只为「酷」</div><div class="am-callout-body am-md"><p>忽略 <code>prefers-reduced-motion</code> 会伤用户。默认滚动「网页感」在文档站往往够用。</p>
 </div></div>
+<div class="am-callout am-callout--ok" role="note"><div class="am-callout-title">适合场景</div><div class="am-callout-body am-md"><p>长落地页与作品集；在布局初始化 Lenis，并与 Motion 滚动监听同步。</p>
+</div></div></div>
 </section>
 <section class="am-panel" id="panel-E">
-<header class="am-panel-head"><span class="am-panel-id">E</span><h2>和同类怎么选 / 注意点</h2></header>
-<div class="am-panel-body"><div class="am-md"><p>相对 Motion：Lenis 管滚动插值；Motion 管元素。长落地页与作品集常两者一起，并与 ScrollTrigger 等同步。务必尊重 prefers-reduced-motion。</p>
-</div></div>
-</section>
-<section class="am-panel" id="panel-F">
-<header class="am-panel-head"><span class="am-panel-id">F</span><h2>快速结论</h2></header>
-<div class="am-panel-body"><div class="am-callout am-callout--ok" role="note"><div class="am-callout-title">记住这句</div><div class="am-callout-body am-md"><p>要丝滑滚动 → Lenis；要元素动画 → Motion；不要只为「酷」忽略无障碍。</p>
+<header class="am-panel-head"><span class="am-panel-id">E</span><h2>场景与用法</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>在布局里初始化 Lenis，并与 ScrollTrigger / Motion 的滚动监听同步。适合长落地页与作品集；记得尊重 <code>prefers-reduced-motion</code>。</p>
+</div>
+<div class="am-callout am-callout--ok" role="note"><div class="am-callout-title">记住这句</div><div class="am-callout-body am-md"><p>要丝滑滚动 → Lenis；要元素动画 → Motion；不要只为「酷」忽略无障碍。</p>
 </div></div>
 <div class="am-md"><h3>入口</h3>
 <ul>
