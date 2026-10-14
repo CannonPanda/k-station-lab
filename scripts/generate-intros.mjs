@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 /**
- * Generate K站 Lab project intro HTML via answer-me-with-html (am render).
+ * Generate K站 Lab project intro HTML via sam (paper-only, no toolbar/runtime).
  *
- * MUST run postprocessStripAmChrome after every render. K站 intros never ship
- * am chrome (.am-colophon, .am-toolbar) and also lighten: drop runtime JS,
- * unused themes (blueprint/shadcn), and chrome-only CSS so iframe modal opens fast.
- * Do not hand-write whole intro HTML pages — always am render + this strip.
+ * Pipeline:
+ *   1. `sam css -o public/intros/theme.css`
+ *   2. draft Markdown (Chinese, deep panels) → `sam render --css-href … --no-open`
+ *   3. postprocess: drop #am-source / any script / leftover chrome (sam keeps source for patch)
  *
  * Usage: node scripts/generate-intros.mjs
  */
@@ -16,9 +16,26 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
-const AM = "/workspace/answer-me-with-html/skills/answer-me-with-html/scripts/am.mjs";
 const OUT_DIR = join(ROOT, "public", "intros");
 const DRAFT_DIR = "/tmp/k-lab-intros";
+const THEME_CSS_HREF = "/k-station-lab/intros/theme.css";
+const THEME_CSS_PATH = join(OUT_DIR, "theme.css");
+
+/** Prefer local sam bin, then skill bundle, then PATH. */
+function resolveSam() {
+  const candidates = [
+    "/workspace/sam/bin/sam.js",
+    "/workspace/sam/skills/sam/scripts/sam.mjs",
+    join(ROOT, "..", "sam", "bin", "sam.js"),
+    join(ROOT, "..", "sam", "skills", "sam", "scripts", "sam.mjs"),
+  ];
+  for (const c of candidates) {
+    if (existsSync(c)) return { cmd: "node", argsPrefix: [c] };
+  }
+  return { cmd: "sam", argsPrefix: [] };
+}
+
+const SAM = resolveSam();
 
 mkdirSync(OUT_DIR, { recursive: true });
 mkdirSync(DRAFT_DIR, { recursive: true });
@@ -43,9 +60,9 @@ const DEPTH = {
     problem:
       "复杂概念在终端里常变成文字墙：难扫读、难对照、难带走。备课、考点讲解、技术原理需要一页可离线打开的讲义。",
     compare:
-      "同站 Skill 里，anthropics/skills 是官方合集（含 frontend-design）；Claude-Code-Frontend-Design-Toolkit 与 claude-code-ui-agents 偏前端美学与 UI agent 提示。answer-me-with-html 专做「答成一页 HTML」：图文、公式、单文件离线。需要讲义页时点名本 skill；做 UI 改版则看另外几个。",
-    tips: "面板标题避免塞公式；正文可用 KaTeX/Temml。交付前对本站 intros 跑 generate-intros 后处理，去掉工具条与 colophon。",
-    verdict: "要「一页讲清」时用本 skill；要「前端更美」时用同站 frontend-design 相关 skill。",
+      "同站 Skill 里，anthropics/skills 是官方合集（含 frontend-design）；Claude-Code-Frontend-Design-Toolkit 与 claude-code-ui-agents 偏前端美学与 UI agent 提示。answer-me-with-html 专做「答成一页 HTML」：图文、公式、单文件离线。需要讲义页时点名本 skill；做 UI 改版则看另外几个。同站精简版 sam 适合 iframe 轻页。",
+    tips: "面板标题避免塞公式；正文可用 KaTeX/Temml。K站 intros 现已改用 sam 渲染；需要多主题/视频时仍直接用本 skill。",
+    verdict: "要「一页讲清」且要全功能时用本 skill；要轻量 iframe/讲义优先 sam；要「前端更美」用同站 frontend-design 相关 skill。",
   },
   astro: {
     problem:
@@ -98,7 +115,7 @@ const DEPTH = {
     verdict: "要预制酷站特效 → Magic UI；要自控动画时间线 → Motion；要基础件 → shadcn。",
   },
   motion: {
-    problem: "React/原生要流畅入场、手势与布局动画，CSS  alone 难表达编排。",
+    problem: "React/原生要流畅入场、手势与布局动画，CSS alone 难表达编排。",
     compare:
       "相对 Magic UI：Motion（原 Framer Motion）是引擎；Magic UI 是成品特效。相对 Lenis：Lenis 管平滑滚动；Motion 管元素动画。可与 Lenis 搭配，并尊重 prefers-reduced-motion。",
     tips: "卡片入场、滚动揭示、页面转场用 motion 组件或 animate。酷站关键：少量、有目的 + whileInView，避免满屏乱动。",
@@ -135,9 +152,9 @@ const DEPTH = {
   "anthropics-skills": {
     problem: "Agent 需要可安装的专项技能说明书，而不是一次性长提示。",
     compare:
-      "同站：answer-me-with-html 专做讲义页；Frontend-Design-Toolkit / ui-agents 聚焦 Claude Code 前端观感。本仓是 Anthropic 官方 mega-repo，按子目录按需装（如 frontend-design），不要整仓当单一 skill。",
+      "同站：answer-me-with-html / sam 专做讲义页；Frontend-Design-Toolkit / ui-agents 聚焦 Claude Code 前端观感。本仓是 Anthropic 官方 mega-repo，按子目录按需装（如 frontend-design），不要整仓当单一 skill。",
     tips: "优先安装 skills/frontend-design 做 Web UI 美学与去模板化。整仓按需引入。",
-    verdict: "官方 skill 合集入口 → 本仓；讲义页 → answer-me-with-html；前端提示精选 → 另两个 toolkit/agents。",
+    verdict: "官方 skill 合集入口 → 本仓；讲义页 → 优先 sam（轻）或 am（全功能）；前端提示精选 → 另两个 toolkit/agents。",
   },
   "claude-code-frontend-design-toolkit": {
     problem: "Claude Code 默认前端输出易模板化，需要可落地的 skills/插件/MCP/CLAUDE.md 清单。",
@@ -154,9 +171,9 @@ const DEPTH = {
     verdict: "UI/UX agent 提示 → 本仓；安装与 CLAUDE.md → toolkit；官方底座 → anthropics/skills。",
   },
   "ke-rules": {
-    problem: "长期协作需要可版本管理的规矩：双 K站、分类、介绍格式、am 用法，避免口头约定漂移。",
+    problem: "长期协作需要可版本管理的规矩：双 K站、分类、介绍格式、讲义用法，避免口头约定漂移。",
     compare:
-      "这是本站配置类条目：人读 README/RULES.md；助手开工前对照。与讲义 skill 不同——它规范「怎么维护 K站与介绍」，不生成讲义页本身。介绍页生成可用 sam（更轻）或 am + 本脚本后处理。",
+      "这是本站配置类条目：人读 README/RULES.md；助手开工前对照。与讲义 skill 不同——它规范「怎么维护 K站与介绍」，不生成讲义页本身。介绍页生成优先用 sam（轻页）；需要全功能时用 am。",
     tips: "助手开工前对照；用户说新规矩就改 RULES.md 再推到 k。表达格式：YYYY-MM-DD，★ N。",
     verdict: "协作与双站规矩 → ke-rules；生成讲义 → 优先 sam，全功能用 am。",
   },
@@ -222,7 +239,7 @@ ${d.tips}
 ${d.compare}
 
 ## 快速结论
-\`\`\`callout tip 记住这句
+\`\`\`callout ok 记住这句
 ${d.verdict}
 \`\`\`
 
@@ -233,92 +250,32 @@ ${p.homepage ? `- 主页：[打开](${p.homepage})` : "- 暂无单独主页，�
 }
 
 /**
- * Strip am chrome AND lighten the page for iframe modal open:
- *   - remove toolbar / colophon / orphan chrome controls
- *   - drop #am-source draft textarea
- *   - drop full am runtime JS (reply/remark/theme/justify) — CSS grid is enough
- *   - keep only paper theme tokens; drop blueprint/shadcn CSS
- *   - drop unused chrome CSS (toolbar, reply, annot, lightbox)
- *   - extract shared CSS to public/intros/theme.css (link, not inline)
- * Measured: ~98KB → ~5KB HTML + shared theme.css; cold open much faster with CSS cache.
+ * sam already omits toolbar/runtime/colophon, but still embeds #am-source for patch.
+ * K站 iframe intros are read-only: drop source textarea, scripts, and any stray chrome.
  */
-function lightenIntroCss(css) {
-  const drop = ["blueprint", "shadcn"];
-  for (const t of drop) {
-    css = css.replace(
-      new RegExp(
-        String.raw`@media\s*\(prefers-color-scheme:\s*dark\)\s*\{\s*html\[data-theme="${t}"\]\[data-mode="auto"\]\s*\{[^}]*\}\s*\}`,
-        "g",
-      ),
-      "",
-    );
-  }
-  for (let i = 0; i < 4; i++) {
-    const prev = css;
-    for (const t of drop) {
-      css = css.replace(
-        new RegExp(String.raw`html\[data-theme="${t}"\][^{]*\{[^}]*\}`, "g"),
-        "",
-      );
-    }
-    if (css === prev) break;
-  }
-  css = css.replace(/\/\* ── Toolbar ─+\s*\*\/[\s\S]*?(?=\/\* ── Header)/, "");
-  css = css.replace(
-    /\/\* Comment box under each panel[\s\S]*?(?=\/\* ── Status badges)/,
-    "",
-  );
-  css = css.replace(
-    /\/\* ── annot sentence notes ─+\s*\*\/[\s\S]*?(?=\/\* ── limits)/,
-    "",
-  );
-  css = css.replace(
-    /\/\* ── Diagram Lightbox and Pan-Zoom Viewer ─+\s*\*\/[\s\S]*?(?=\/\* ── doc template)/,
-    "",
-  );
-  css = css.replace(/@media print\s*\{\s*\.am-remark-pop[^}]*\}\s*/g, "");
-  css = css.replace(/\n{3,}/g, "\n\n");
-  return css.trim() + "\n";
-}
-
-const THEME_CSS_HREF = "/k-station-lab/intros/theme.css";
-const THEME_CSS_PATH = join(OUT_DIR, "theme.css");
-let themeCssWritten = false;
-
-function postprocessStripAmChrome(htmlPath) {
+function postprocessLite(htmlPath) {
   let html = readFileSync(htmlPath, "utf8");
 
-  // Toolbar is a single flat div (labels + buttons); no nested divs in current am output.
-  html = html.replace(/<div class="am-toolbar\b[^"]*"[^>]*>[\s\S]*?<\/div>\s*/i, "");
-  html = html.replace(/<p class="am-colophon\b[^"]*"[^>]*>[\s\S]*?<\/p>\s*/gi, "");
-  html = html.replace(/<label class="am-pick">[\s\S]*?<\/label>\s*/gi, "");
-  html = html.replace(
-    /<button\b[^>]*\bdata-am="(?:reply|remark|copy)"[^>]*>[\s\S]*?<\/button>\s*/gi,
-    "",
-  );
   html = html.replace(
     /<textarea\b[^>]*id="am-source"[^>]*>[\s\S]*?<\/textarea>\s*/gi,
     "",
   );
-  // Runtime is for am chrome (theme/reply/remark) + justify. K站 intros are
-  // read-only in an iframe; CSS defaults cover layout without the 50KB+ parse.
   html = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>\s*/gi, "");
+  html = html.replace(/<div class="am-toolbar\b[^"]*"[^>]*>[\s\S]*?<\/div>\s*/i, "");
+  html = html.replace(/<p class="am-colophon\b[^"]*"[^>]*>[\s\S]*?<\/p>\s*/gi, "");
 
-  // Shared paper theme CSS → external file (one cache hit for all intros).
-  html = html.replace(/<style([^>]*)>([\s\S]*?)<\/style>/gi, (full, attrs, body) => {
-    if (
-      String(attrs).includes("k-lab-strip-am-chrome") ||
-      body.includes("k-lab-strip-am-chrome")
-    ) {
-      return "";
-    }
-    const light = lightenIntroCss(body);
-    if (!themeCssWritten) {
-      writeFileSync(THEME_CSS_PATH, light);
-      themeCssWritten = true;
-      console.log(`theme.css → ${THEME_CSS_PATH}`);
-    }
-    return `<link rel="stylesheet" href="${THEME_CSS_HREF}">`;
+  // Ensure shared theme link (sam --css-href should already emit it).
+  if (!html.includes(THEME_CSS_HREF) && !/<link\b[^>]*rel=["']stylesheet["'][^>]*>/i.test(html)) {
+    html = html.replace(
+      /<\/head>/i,
+      `<link rel="stylesheet" href="${THEME_CSS_HREF}">\n</head>`,
+    );
+  }
+  // Drop any large leftover inline <style> (should not happen with --css-href).
+  html = html.replace(/<style\b[^>]*>[\s\S]*?<\/style>\s*/gi, (block) => {
+    // Keep tiny empty/marker styles only; drop everything else.
+    if (block.length < 80) return block;
+    return `<link rel="stylesheet" href="${THEME_CSS_HREF}">\n`;
   });
 
   if (!/\sdata-k-lab-lite=/.test(html)) {
@@ -328,17 +285,41 @@ function postprocessStripAmChrome(htmlPath) {
   writeFileSync(htmlPath, html);
 }
 
-function renderOnce(draftPath, outPath) {
-  // Do NOT pass --replace with the same path as -o: am deletes the replace
-  // target after a successful write, which would wipe the new intro.
-  const args = ["render", draftPath, "-o", outPath, "--no-open"];
-  const r = spawnSync("node", [AM, ...args], {
+function runSam(args) {
+  const r = spawnSync(SAM.cmd, [...SAM.argsPrefix, ...args], {
     encoding: "utf8",
     maxBuffer: 8 * 1024 * 1024,
   });
-  const out = `${r.stdout || ""}${r.stderr || ""}`;
-  return { code: r.status ?? 1, out };
+  return {
+    code: r.status ?? 1,
+    out: `${r.stdout || ""}${r.stderr || ""}`,
+  };
 }
+
+function writeThemeCss() {
+  const { code, out } = runSam(["css", "-o", THEME_CSS_PATH]);
+  if (code !== 0 || !existsSync(THEME_CSS_PATH)) {
+    console.error(`FAIL sam css:\n${out}`);
+    process.exit(1);
+  }
+  console.log(`theme.css → ${THEME_CSS_PATH} (${readFileSync(THEME_CSS_PATH).length} bytes)`);
+}
+
+function renderOnce(draftPath, outPath) {
+  const args = [
+    "render",
+    draftPath,
+    "-o",
+    outPath,
+    "--no-open",
+    "--css-href",
+    THEME_CSS_HREF,
+  ];
+  return runSam(args);
+}
+
+console.log(`sam via: ${SAM.cmd} ${SAM.argsPrefix.join(" ")}`.trim());
+writeThemeCss();
 
 const results = [];
 for (const p of data.projects) {
@@ -349,24 +330,30 @@ for (const p of data.projects) {
 
   if (existsSync(outPath)) unlinkSync(outPath);
   const { code, out } = renderOnce(draftPath, outPath);
-  const success = /✓\s+\S+/.test(out) && existsSync(outPath);
-  if (success && existsSync(outPath)) {
-    postprocessStripAmChrome(outPath);
-    results.push({ id: p.id, name: p.name, path: outPath, ok: true });
-    console.log(`OK ${p.id}`);
+  const success = code === 0 && existsSync(outPath) && /✓/.test(out);
+  if (success) {
+    postprocessLite(outPath);
+    const bytes = readFileSync(outPath).length;
+    results.push({ id: p.id, name: p.name, path: outPath, ok: true, bytes });
+    console.log(`OK ${p.id} (${bytes} B)`);
   } else {
-    console.error(`FAIL ${p.id}:\n${out}`);
+    console.error(`FAIL ${p.id} (code=${code}):\n${out}`);
     results.push({ id: p.id, name: p.name, ok: false, out: out.slice(0, 800) });
   }
 }
 
 const failed = results.filter((r) => !r.ok);
+const ok = results.filter((r) => r.ok);
+const htmlBytes = ok.reduce((s, r) => s + (r.bytes || 0), 0);
+const themeBytes = existsSync(THEME_CSS_PATH) ? readFileSync(THEME_CSS_PATH).length : 0;
 console.log(
   JSON.stringify(
     {
       total: data.projects.length,
-      ok: results.filter((r) => r.ok).length,
+      ok: ok.length,
       failed: failed.map((f) => f.id),
+      htmlBytes,
+      themeBytes,
     },
     null,
     2,

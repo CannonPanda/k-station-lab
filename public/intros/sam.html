@@ -25,7 +25,7 @@
 </section>
 <section class="am-panel" id="panel-C">
 <header class="am-panel-head"><span class="am-panel-id">C</span><h2>解决什么问题 / 适用场景</h2></header>
-<div class="am-panel-body"><div class="am-md"><p>完整 am 页带工具栏与运行时，iframe 讲义偏重。sam 只要干净纸张页。</p>
+<div class="am-panel-body"><div class="am-md"><p>完整 am 页带工具栏与运行时，iframe 讲义偏重；只想要干净纸张页时还要手工 strip。</p>
 <p>结合本站摘要，典型场景还包括：
 讲义、原理说明、K站 intro 优先用 sam（paper-only、轻页）。需要多主题/视频/页内回复标注时仍用上游 answer-me-with-html。CLI：<code>sam render</code> 或 <code>node skills/sam/scripts/sam.mjs</code>；可用 <code>--css-href</code> 外置 paper.css。</p>
 </div></div>
@@ -33,17 +33,18 @@
 <section class="am-panel" id="panel-D">
 <header class="am-panel-head"><span class="am-panel-id">D</span><h2>怎么用好</h2></header>
 <div class="am-panel-body"><div class="am-md"><p>讲义、原理说明、K站 intro 优先用 sam（paper-only、轻页）。需要多主题/视频/页内回复标注时仍用上游 answer-me-with-html。CLI：<code>sam render</code> 或 <code>node skills/sam/scripts/sam.mjs</code>；可用 <code>--css-href</code> 外置 paper.css。</p>
-<p>补充：CLI 用 <code>sam render</code>；外置 CSS 用 <code>sam css</code> + <code>--css-href</code>。</p>
+<p>补充：
+CLI：<code>sam render</code> 或 skill 内 <code>scripts/sam.mjs</code>。可用 <code>sam css</code> + <code>--css-href</code> 外置 paper.css 做 iframe 缓存。面板规则仍是 3–8、一问一板、STE。</p>
 </div></div>
 </section>
 <section class="am-panel" id="panel-E">
 <header class="am-panel-head"><span class="am-panel-id">E</span><h2>和同类怎么选 / 注意点</h2></header>
-<div class="am-panel-body"><div class="am-md"><p>同站 answer-me-with-html 是全量上游。讲义/iframe 优先 sam；多主题/视频/回复标注用 am。</p>
+<div class="am-panel-body"><div class="am-md"><p>同站：answer-me-with-html 是功能全量上游（多主题、视频、回复标注）。sam 是自用精简 fork：强制 paper、无工具栏/运行时/ask/视频，适合 K站 intro 与备课页。要轻页用 sam；要全功能用 am。</p>
 </div></div>
 </section>
 <section class="am-panel" id="panel-F">
 <header class="am-panel-head"><span class="am-panel-id">F</span><h2>快速结论</h2></header>
-<div class="am-panel-body"><div class="am-callout am-callout--info" role="note"><div class="am-callout-title">tip 记住这句</div><div class="am-callout-body am-md"><p>讲义/iframe 优先 sam；需要主题切换或视频时用 answer-me-with-html。</p>
+<div class="am-panel-body"><div class="am-callout am-callout--ok" role="note"><div class="am-callout-title">记住这句</div><div class="am-callout-body am-md"><p>讲义/iframe 优先 sam；需要主题切换或视频时用 answer-me-with-html。</p>
 </div></div>
 <div class="am-md"><h3>入口</h3>
 <ul>
