@@ -12,30 +12,15 @@
 <header class="am-head"><h1>Motion</h1><p class="am-sub">UI 动效引擎</p><div class="am-intro am-md"><div class="am-callout am-callout--info" role="note"><div class="am-callout-body am-md"><p><strong>Motion</strong>：现代动画库（原 Framer Motion），React 与原生 JS 都能做流畅入场、手势与布局动画。</p>
 </div></div></div></header>
 <div class="am-doc-layout">
-<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 坐标</a><a href="#panel-B">B · 能力边界（相对整页滚动 / 预制块）</a><a href="#panel-C">C · 三者怎么配</a><a href="#panel-D">D · 用法</a></nav><div class="am-doc-body">
+<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 速览</a><a href="#panel-B">B · 能力边界（相对整页滚动 / 预制块）</a><a href="#panel-C">C · 三者怎么配</a><a href="#panel-D">D · 用法</a></nav><div class="am-doc-body">
 <section class="am-panel" id="panel-A">
-<header class="am-panel-head"><span class="am-panel-id">A</span><h2>坐标</h2></header>
+<header class="am-panel-head"><span class="am-panel-id">A</span><h2>速览</h2></header>
 <div class="am-panel-body"><div class="am-kv-host"><dl class="am-kv" style="--kv-cols: 1"><div class="am-kv-cell"><dt>元信息</dt><dd>2018-11-16，★ 34,066</dd></div><div class="am-kv-cell"><dt>分类</dt><dd>代码库 / 引擎</dd></div><div class="am-kv-cell"><dt>仓库</dt><dd><a href="https://github.com/motiondivision/motion">motiondivision/motion</a></dd></div><div class="am-kv-cell"><dt>主页</dt><dd><a href="https://motion.dev">motion.dev</a></dd></div></dl></div></div>
 </section>
 <section class="am-panel" id="panel-B">
 <header class="am-panel-head"><span class="am-panel-id">B</span><h2>能力边界（相对整页滚动 / 预制块）</h2></header>
-<div class="am-panel-body"><div class="am-limits"><div class="am-lim">
-<div class="am-lim-head"><span>元素/布局动画<span class="am-lim-note">React + 原生平手</span></span><span class="am-lim-val">9 / max 10 分</span></div>
-<div class="am-lim-track"><div class="am-lim-fill" style="width: 60%"></div><div class="am-lim-mark" style="left: 66.67%"></div></div>
-<div class="am-lim-ticks" aria-hidden="true"><span style="left: 0%">0</span><span style="left: 16.67%">2.5</span><span style="left: 33.33%">5</span><span style="left: 50%">7.5</span><span style="left: 66.67%">10</span><span style="left: 83.33%">12.5</span><span style="left: 100%">15</span></div>
-</div><div class="am-lim">
-<div class="am-lim-head"><span>滚动插值整页<span class="am-lim-note">整页丝滑交给 Lenis</span></span><span class="am-lim-val">4 / max 10 分</span></div>
-<div class="am-lim-track"><div class="am-lim-fill" style="width: 26.67%"></div><div class="am-lim-mark" style="left: 66.67%"></div></div>
-<div class="am-lim-ticks" aria-hidden="true"><span style="left: 0%">0</span><span style="left: 16.67%">2.5</span><span style="left: 33.33%">5</span><span style="left: 50%">7.5</span><span style="left: 66.67%">10</span><span style="left: 83.33%">12.5</span><span style="left: 100%">15</span></div>
-</div><div class="am-lim">
-<div class="am-lim-head"><span>预制光效块<span class="am-lim-note">预制块用 Magic UI</span></span><span class="am-lim-val">3 / max 10 分</span></div>
-<div class="am-lim-track"><div class="am-lim-fill" style="width: 20%"></div><div class="am-lim-mark" style="left: 66.67%"></div></div>
-<div class="am-lim-ticks" aria-hidden="true"><span style="left: 0%">0</span><span style="left: 16.67%">2.5</span><span style="left: 33.33%">5</span><span style="left: 50%">7.5</span><span style="left: 66.67%">10</span><span style="left: 83.33%">12.5</span><span style="left: 100%">15</span></div>
-</div><div class="am-lim">
-<div class="am-lim-head"><span>无障碍尊重<span class="am-lim-note">需接 prefers-reduced-motion</span></span><span class="am-lim-val">8 / max 10 分</span></div>
-<div class="am-lim-track"><div class="am-lim-fill" style="width: 53.33%"></div><div class="am-lim-mark" style="left: 66.67%"></div></div>
-<div class="am-lim-ticks" aria-hidden="true"><span style="left: 0%">0</span><span style="left: 16.67%">2.5</span><span style="left: 33.33%">5</span><span style="left: 50%">7.5</span><span style="left: 66.67%">10</span><span style="left: 83.33%">12.5</span><span style="left: 100%">15</span></div>
-</div></div></div>
+<div class="am-panel-body"><div class="am-md"><p>元素与布局动画、whileInView、手势是主场；整页丝滑滚动交给 Lenis；预制光效块用 Magic UI。接 <code>prefers-reduced-motion</code>。</p>
+</div></div>
 </section>
 <section class="am-panel" id="panel-C">
 <header class="am-panel-head"><span class="am-panel-id">C</span><h2>三者怎么配</h2></header>

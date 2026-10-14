@@ -12,33 +12,18 @@
 <header class="am-head"><h1>three.js</h1><p class="am-sub">WebGL 三维事实标准</p><div class="am-intro am-md"><div class="am-callout am-callout--info" role="note"><div class="am-callout-body am-md"><p><strong>three.js</strong>：WebGL 三维图形库，浏览器里做 3D 场景、粒子与交互可视化的事实标准。</p>
 </div></div></div></header>
 <div class="am-doc-layout">
-<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 坐标</a><a href="#panel-B">B · 该不该上 3D</a><a href="#panel-C">C · 和 2D 动效栈别混用错位</a><a href="#panel-D">D · 用法</a></nav><div class="am-doc-body">
+<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 速览</a><a href="#panel-B">B · 该不该上 3D</a><a href="#panel-C">C · 和 2D 动效栈怎么分工</a><a href="#panel-D">D · 用法</a></nav><div class="am-doc-body">
 <section class="am-panel" id="panel-A">
-<header class="am-panel-head"><span class="am-panel-id">A</span><h2>坐标</h2></header>
+<header class="am-panel-head"><span class="am-panel-id">A</span><h2>速览</h2></header>
 <div class="am-panel-body"><div class="am-kv-host"><dl class="am-kv" style="--kv-cols: 1"><div class="am-kv-cell"><dt>元信息</dt><dd>2010-03-23，★ 116,336</dd></div><div class="am-kv-cell"><dt>分类</dt><dd>代码库 / 引擎</dd></div><div class="am-kv-cell"><dt>仓库</dt><dd><a href="https://github.com/mrdoob/three.js">mrdoob/three.js</a></dd></div><div class="am-kv-cell"><dt>主页</dt><dd><a href="https://threejs.org/">threejs.org/</a></dd></div></dl></div></div>
 </section>
 <section class="am-panel" id="panel-B">
 <header class="am-panel-head"><span class="am-panel-id">B</span><h2>该不该上 3D</h2></header>
-<div class="am-panel-body"><div class="am-limits"><div class="am-lim">
-<div class="am-lim-head"><span>真 3D / WebGL<span class="am-lim-note">事实标准</span></span><span class="am-lim-val">10 / max 10 分</span></div>
-<div class="am-lim-track"><div class="am-lim-fill" style="width: 66.67%"></div><div class="am-lim-mark" style="left: 66.67%"></div></div>
-<div class="am-lim-ticks" aria-hidden="true"><span style="left: 0%">0</span><span style="left: 16.67%">2.5</span><span style="left: 33.33%">5</span><span style="left: 50%">7.5</span><span style="left: 66.67%">10</span><span style="left: 83.33%">12.5</span><span style="left: 100%">15</span></div>
-</div><div class="am-lim">
-<div class="am-lim-head"><span>2D UI 动效<span class="am-lim-note">用 Motion/Magic UI</span></span><span class="am-lim-val">2 / max 10 分</span></div>
-<div class="am-lim-track"><div class="am-lim-fill" style="width: 13.33%"></div><div class="am-lim-mark" style="left: 66.67%"></div></div>
-<div class="am-lim-ticks" aria-hidden="true"><span style="left: 0%">0</span><span style="left: 16.67%">2.5</span><span style="left: 33.33%">5</span><span style="left: 50%">7.5</span><span style="left: 66.67%">10</span><span style="left: 83.33%">12.5</span><span style="left: 100%">15</span></div>
-</div><div class="am-lim">
-<div class="am-lim-head"><span>移动端性能预算<span class="am-lim-note">低面数+降级必备</span></span><span class="am-lim-val">5 / max 10 分</span></div>
-<div class="am-lim-track"><div class="am-lim-fill" style="width: 33.33%"></div><div class="am-lim-mark" style="left: 66.67%"></div></div>
-<div class="am-lim-ticks" aria-hidden="true"><span style="left: 0%">0</span><span style="left: 16.67%">2.5</span><span style="left: 33.33%">5</span><span style="left: 50%">7.5</span><span style="left: 66.67%">10</span><span style="left: 83.33%">12.5</span><span style="left: 100%">15</span></div>
-</div><div class="am-lim">
-<div class="am-lim-head"><span>落地页轻 hero<span class="am-lim-note">控制面数与光照</span></span><span class="am-lim-val">7 / max 10 分</span></div>
-<div class="am-lim-track"><div class="am-lim-fill" style="width: 46.67%"></div><div class="am-lim-mark" style="left: 66.67%"></div></div>
-<div class="am-lim-ticks" aria-hidden="true"><span style="left: 0%">0</span><span style="left: 16.67%">2.5</span><span style="left: 33.33%">5</span><span style="left: 50%">7.5</span><span style="left: 66.67%">10</span><span style="left: 83.33%">12.5</span><span style="left: 100%">15</span></div>
-</div></div></div>
+<div class="am-panel-body"><div class="am-md"><p>真 3D / WebGL 场景用 three.js；2D UI 动效用 Motion / Magic UI。别把「适不适合」写成打分条。</p>
+</div></div>
 </section>
 <section class="am-panel" id="panel-C">
-<header class="am-panel-head"><span class="am-panel-id">C</span><h2>和 2D 动效栈别混用错位</h2></header>
+<header class="am-panel-head"><span class="am-panel-id">C</span><h2>和 2D 动效栈怎么分工</h2></header>
 <div class="am-panel-body"><div class="am-md"><div class="am-table-wrap"><table>
 <thead>
 <tr>
@@ -50,10 +35,10 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>维度</td>
-<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>3D</span></td>
-<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>2D UI</span></td>
-<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>2D 特效</span></td>
+<td>主战场</td>
+<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>3D / WebGL</span></td>
+<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>2D UI 动效</span></td>
+<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>2D 特效块</span></td>
 <td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>滚动</span></td>
 </tr>
 <tr>
@@ -62,6 +47,13 @@
 <td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>中</span></td>
 <td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>中</span></td>
 <td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>轻</span></td>
+</tr>
+<tr>
+<td>性能红线</td>
+<td>低面数 + 简单光照；移动端降级</td>
+<td>避免满屏叠 three</td>
+<td>勿替 Dialog/Form</td>
+<td>单独引入即可</td>
 </tr>
 </tbody></table></div>
 </div>

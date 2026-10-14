@@ -2,11 +2,11 @@
 /**
  * Generate K站 Lab project intro HTML via sam (paper-only).
  *
- * 组件选用（强制，对齐 sam SKILL.md）：
- * - 步骤链/调用/请求路径/多角色交互 → 必须 flow 或 sequence，禁止只用文字段
- * - ≥3 有序步骤或多方传递 → 优先画图
- * - 面板含「怎么变成/如何走到/流程/步骤/调用/发布/生成」等过程词 → 必须配 flow/sequence
- * - tree/timeline/limits/callout/annot/表/kv 按形状选用；能文字别硬画；一页 1–2 重点图；一图一问题；不为用而用
+ * 对齐 sam SKILL round3（5266d2d）：
+ * - 阶段 A 规划只在注释/脑内；正文禁止「必须 flow / ≥3步 / 信息形状」等口令
+ * - limits 仅真实限额；主观分改对比表
+ * - 图须项目特有信息价值；无复杂过程不捏造
+ * - 不强制 A/B/C/D「坐标」空壳；去 toolbar/colophon；theme 外链
  *
  * Usage: node scripts/generate-intros.mjs
  */
@@ -51,15 +51,19 @@ function metaLine(p) {
   return `${p.created}，★ ${formatStars(p.stars)}`;
 }
 
-function fm(p, subtitle) {
-  return `---
-title: ${p.name}
-lang: zh
-template: doc
-theme: paper
-style: off
-subtitle: ${subtitle}
----`;
+function fm(p, subtitle, extra = {}) {
+  const lines = [
+    "---",
+    `title: ${p.name}`,
+    "lang: zh",
+    "template: doc",
+    "theme: paper",
+    "style: off",
+    `subtitle: ${subtitle}`,
+  ];
+  if (extra.sam_meta) lines.push("sam_meta: true");
+  lines.push("---");
+  return lines.join("\n");
 }
 
 function entry(p) {
@@ -84,11 +88,11 @@ ${lines.join("\n")}
 }
 
 /**
- * 每个项目一份草稿：面板标题与组件因「要讲清什么」而异，
- * 不共享 draftFramework / draftTool 之类按类型套版函数。
+ * 每个项目一份草稿：按特有机制/取舍/用法自然组织。
+ * 规划口令不写进正文；limits 不用主观分。
  */
 const DRAFTS = {
-  // ── Astro：岛屿构建路径（过程）→ 必须 flow；选型用表 ──
+  // ── Astro：岛屿 hydrate 特有路径 ──
   astro(p, cat) {
     return `${fm(p, "岛屿架构 · 内容站默认推荐")}
 
@@ -96,11 +100,12 @@ const DRAFTS = {
 **${p.name}**：${p.summary}
 \`\`\`
 
-## 坐标
+## 速览
 ${kvBlock(p, cat)}
 
 ## 内容怎样变成可部署页
-「默认零 JS → 交互块按需 hydrate」是构建路径（过程）→ 必须 flow，禁止只用文字段。
+
+默认零 JS；只有标成岛的交互块才会 hydrate。
 
 \`\`\`flow LR
 (Markdown/MDX) -> Astro 构建
@@ -135,7 +140,7 @@ ${entry(p)}
 `;
   },
 
-  // ── Hugo：构建路径（过程）→ 必须 flow；选型用表 ──
+  // ── Hugo：Go 单二进制 + partials ──
   hugo(p, cat) {
     return `${fm(p, "Go 极速静态站")}
 
@@ -143,11 +148,12 @@ ${entry(p)}
 **${p.name}**：${p.summary}
 \`\`\`
 
-## 坐标
+## 速览
 ${kvBlock(p, cat, ["定位: 海量页秒级重建的静态引擎"])}
 
 ## 内容怎样变成静态页
-构建路径（≥3 步）是过程性内容 → 必须 flow，禁止只用文字/annot 代替。
+
+无 Node 依赖树：内容与 shortcodes 进 Go 单二进制，构建期展开 partials。
 
 \`\`\`flow LR
 (内容 / shortcodes) -> Hugo Go 单二进制
@@ -156,7 +162,7 @@ Hugo Go 单二进制 -> *构建期展开 partials
 group 极速核心: Hugo Go 单二进制, 构建期展开 partials
 \`\`\`
 
-无 Node 依赖树；现代组件岛请看 Astro。
+现代组件岛请看 Astro。
 
 ## 什么时候选它，什么时候别选
 
@@ -174,7 +180,7 @@ ${entry(p)}
 `;
   },
 
-  // ── VitePress：文档发布路径（过程 ≥3 步）→ 必须 flow；选型用表 ──
+  // ── VitePress：Markdown+Vue 文档主题链（特有，非空泛写构建部署）──
   vitepress(p, cat) {
     return `${fm(p, "文档站默认体验")}
 
@@ -182,20 +188,21 @@ ${entry(p)}
 **${p.name}**：${p.summary}
 \`\`\`
 
-## 坐标
+## 速览
 ${kvBlock(p, cat)}
 
-## 文档怎样发布上线
-「写 → 构建 → 部署」是发布链（过程 ≥3 步）→ 必须 flow，禁止只用文字段。
+## 文档怎样变成可浏览站
+
+Markdown 进默认主题（侧栏、搜索、首页 hero）；正文可嵌 Vue 做交互 demo。
 
 \`\`\`flow LR
 (Markdown + Vue) -> VitePress 构建
-VitePress 构建 -> *静态 HTML/资源
-静态 HTML/资源 -> [(GitHub Pages / CDN)]
-group 文档发布: VitePress 构建, 静态 HTML/资源
+VitePress 构建 -> *主题壳: 侧栏/搜索/hero
+主题壳 -> [(静态 HTML → Pages / CDN)]
+group 文档发布: VitePress 构建, 主题壳
 \`\`\`
 
-默认主题（侧栏、搜索、首页 hero）开箱；正文可嵌 Vue 做交互 demo。通用营销站更偏 Astro；极速大站偏 Hugo。
+通用营销站更偏 Astro；极速大站偏 Hugo。
 
 ## 和同类怎么分工
 
@@ -213,7 +220,7 @@ ${entry(p)}
 `;
   },
 
-  // ── Eleventy：要讲清的是「引擎/插件可选层级」→ tree；对比用表 ──
+  // ── Eleventy：模板/插件可选层级 ──
   eleventy(p, cat) {
     return `${fm(p, "干净 HTML · 模板自由")}
 
@@ -221,11 +228,12 @@ ${entry(p)}
 **${p.name}**：${p.summary}
 \`\`\`
 
-## 坐标
+## 速览
 ${kvBlock(p, cat)}
 
 ## 你实际在选什么
-信息形状是「层级可选件」，用 tree；不为丰富再叠一张 flow。
+
+几乎不 bundler 绑架：换模板引擎、按需加插件，输出就是你写的 HTML。
 
 \`\`\`tree list
 Eleventy (11ty) | 几乎不 bundler 绑架
@@ -257,7 +265,7 @@ ${entry(p)}
 `;
   },
 
-  // ── Tailwind：能力边界（可否）→ limits；同栈分工用表 ──
+  // ── Tailwind：同栈分工用表（不用主观 limits）──
   tailwindcss(p, cat) {
     return `${fm(p, "Utility-first 样式底座")}
 
@@ -265,18 +273,12 @@ ${entry(p)}
 **${p.name}**：${p.summary}
 \`\`\`
 
-## 坐标
+## 速览
 ${kvBlock(p, cat)}
 
 ## 它强在哪、弱在哪
-要回答的是「能做什么 / 别指望什么」，limits 比架构图合适。
 
-\`\`\`limits
-Utility 拼 UI 速度 | 9 / 10 | 分 | 类名即样式
-设计系统可维护性 | 7 / 10 | 分 | 靠 theme/@apply
-传统 CSS 迁移成本 | 6 / 10 | 分 | 心智要换
-无障碍组件完备度 | 3 / 10 | 分 | 需 shadcn 等补
-\`\`\`
+类名即样式，拼 UI 快；设计系统靠 theme / @apply 收口。它**不是**组件库——表单/对话框要接 shadcn 等。
 
 ## 和 shadcn / Magic UI 怎么叠
 
@@ -298,7 +300,7 @@ ${entry(p)}
 `;
   },
 
-  // ── shadcn：CLI 写入仓的调用路径（过程）→ 必须 flow；分工用表 ──
+  // ── shadcn：CLI 复制进仓（特有路径）──
   "shadcn-ui"(p, cat) {
     return `${fm(p, "可复制的无障碍组件")}
 
@@ -306,11 +308,12 @@ ${entry(p)}
 **${p.name}**：${p.summary}
 \`\`\`
 
-## 坐标
+## 速览
 ${kvBlock(p, cat)}
 
 ## 组件怎样进你的仓
-「复制而非安装」是调用/写入路径 → 必须 flow，禁止只用 annot/文字代替。
+
+不是 npm 黑盒依赖：CLI 把源码写入仓库，底座是 Radix + Tailwind，你可以当场改。
 
 \`\`\`flow LR
 (CLI add) -> 源码写入仓库
@@ -340,7 +343,7 @@ ${entry(p)}
 `;
   },
 
-  // ── Magic UI：特效层边界 → limits ──
+  // ── Magic UI：特效层分工表 ──
   magicui(p, cat) {
     return `${fm(p, "落地页预制特效")}
 
@@ -348,17 +351,12 @@ ${entry(p)}
 **${p.name}**：${p.summary}
 \`\`\`
 
-## 坐标
+## 速览
 ${kvBlock(p, cat)}
 
 ## 适合什么、不适合什么
 
-\`\`\`limits
-落地页「一眼酷」 | 9 / 10 | 分 | 光效/粒子/文字特效
-表单/对话框全家桶 | 2 / 10 | 分 | 请用 shadcn
-自控动画时间线 | 5 / 10 | 分 | 深层编排用 Motion
-复制即用成本 | 9 / 10 | 分 | 改色即可上英雄区
-\`\`\`
+落地页「一眼酷」：光效、粒子、文字特效，复制改色即可上英雄区。表单/对话框全家桶请用 shadcn；深层时间线编排用 Motion。
 
 ## 和 Motion / shadcn 的分工
 
@@ -366,6 +364,7 @@ ${kvBlock(p, cat)}
 |---|---|---|---|
 | 形态 | ok 预制特效块 | ok 基础件 | ok 动画引擎 |
 | 场景 | ok hero/CTA | ok App 壳 | ok 入场/手势 |
+| 别当… | 产品骨架 | 光效库 | 成品特效块 |
 
 \`\`\`callout warn 特效层不是骨架
 不要用 Magic UI 替代 Dialog/Form。满屏特效会抢内容；优先 Marquee、Shine Border、Animated Beam、Blur Fade。
@@ -378,7 +377,7 @@ ${entry(p)}
 `;
   },
 
-  // ── Motion：与 Lenis/Magic 的角色对比 → 表为主；边界用 limits（唯一重点可视化）──
+  // ── Motion：与 Lenis/Magic 角色表 ──
   motion(p, cat) {
     return `${fm(p, "UI 动效引擎")}
 
@@ -386,17 +385,12 @@ ${entry(p)}
 **${p.name}**：${p.summary}
 \`\`\`
 
-## 坐标
+## 速览
 ${kvBlock(p, cat)}
 
 ## 能力边界（相对整页滚动 / 预制块）
 
-\`\`\`limits
-元素/布局动画 | 9 / 10 | 分 | React + 原生平手
-滚动插值整页 | 4 / 10 | 分 | 整页丝滑交给 Lenis
-预制光效块 | 3 / 10 | 分 | 预制块用 Magic UI
-无障碍尊重 | 8 / 10 | 分 | 需接 prefers-reduced-motion
-\`\`\`
+元素与布局动画、whileInView、手势是主场；整页丝滑滚动交给 Lenis；预制光效块用 Magic UI。接 \`prefers-reduced-motion\`。
 
 ## 三者怎么配
 
@@ -418,7 +412,7 @@ ${entry(p)}
 `;
   },
 
-  // ── three.js：3D 边界 + 性能红线 → limits + callout；对比用表 ──
+  // ── three.js：分工表，不用主观 limits ──
   threejs(p, cat) {
     return `${fm(p, "WebGL 三维事实标准")}
 
@@ -426,24 +420,20 @@ ${entry(p)}
 **${p.name}**：${p.summary}
 \`\`\`
 
-## 坐标
+## 速览
 ${kvBlock(p, cat)}
 
 ## 该不该上 3D
 
-\`\`\`limits
-真 3D / WebGL | 10 / 10 | 分 | 事实标准
-2D UI 动效 | 2 / 10 | 分 | 用 Motion/Magic UI
-移动端性能预算 | 5 / 10 | 分 | 低面数+降级必备
-落地页轻 hero | 7 / 10 | 分 | 控制面数与光照
-\`\`\`
+真 3D / WebGL 场景用 three.js；2D UI 动效用 Motion / Magic UI。别把「适不适合」写成打分条。
 
-## 和 2D 动效栈别混用错位
+## 和 2D 动效栈怎么分工
 
 | 维度 | three.js | Motion | Magic UI | Lenis |
 |---|---|---|---|---|
-| 维度 | ok 3D | ok 2D UI | ok 2D 特效 | ok 滚动 |
+| 主战场 | ok 3D / WebGL | ok 2D UI 动效 | ok 2D 特效块 | ok 滚动 |
 | 运行时重量 | warn 重 | ok 中 | ok 中 | ok 轻 |
+| 性能红线 | 低面数 + 简单光照；移动端降级 | 避免满屏叠 three | 勿替 Dialog/Form | 单独引入即可 |
 
 \`\`\`callout err 性能红线
 低面数模型 + 简单光照；移动端降级。勿与满屏 UI 动效叠加重负。背景轻微漂浮即可，别抢内容焦点。
@@ -456,7 +446,7 @@ ${entry(p)}
 `;
   },
 
-  // ── Lenis：无障碍易错点 → annot；场景用表/文字 ──
+  // ── Lenis：无障碍易错点 annot ──
   lenis(p, cat) {
     return `${fm(p, "整页丝滑滚动")}
 
@@ -464,15 +454,14 @@ ${entry(p)}
 **${p.name}**：${p.summary}
 \`\`\`
 
-## 坐标
+## 速览
 ${kvBlock(p, cat)}
 
 ## 最容易踩的坑
-信息形状是「句内易错点」，不是架构图。
 
 \`\`\`annot
 # 丝滑 ≠ 无脑开启
-Lenis 管 [滚动插值]{整页手感}；必须尊重 [prefers-reduced-motion]{!忽略会伤用户}。元素关键帧动画仍交给 [Motion]{分工}。
+Lenis 管 [滚动插值]{整页手感}；务必尊重 [prefers-reduced-motion]{!忽略会伤用户}。元素关键帧动画仍交给 [Motion]{分工}。
 > 文档站默认滚动往往够用；长落地页/作品集才值得上
 \`\`\`
 
@@ -490,7 +479,7 @@ ${entry(p)}
 `;
   },
 
-  // ── MinerU：文档怎样变成 LLM Markdown（过程 ≥3 步）→ 必须 flow；与 markitdown 用表 ──
+  // ── MinerU：版面/OCR → 结构 Markdown（特有）──
   mineru(p, cat) {
     return `${fm(p, "PDF/Office → LLM Markdown")}
 
@@ -498,11 +487,12 @@ ${entry(p)}
 **${p.name}**：${p.summary}
 \`\`\`
 
-## 坐标
+## 速览
 ${kvBlock(p, cat, ["定位: 复杂版式文档解析引擎"])}
 
 ## 文档怎样变成可喂模型的 Markdown
-解析链路（过程 ≥3 步）→ 必须 flow，禁止只用文字段。
+
+复杂版式走版面分析与 OCR，再抽出标题/表/公式，得到可进 RAG 的 Markdown / JSON。
 
 \`\`\`flow LR
 (PDF / Office) -> MinerU 版面与 OCR
@@ -534,7 +524,7 @@ ${entry(p)}
 `;
   },
 
-  // ── markitdown：多格式怎样变成 Markdown（过程）→ 必须 flow；与 MinerU 用表 ──
+  // ── markitdown：MarkItDown.convert 特有链（对照 Lab 反例 / sam clean）──
   markitdown(p, cat) {
     return `${fm(p, "多格式 → Markdown")}
 
@@ -542,11 +532,12 @@ ${entry(p)}
 **${p.name}**：${p.summary}
 \`\`\`
 
-## 坐标
+## 速览
 ${kvBlock(p, cat, ["定位: 微软开源多格式转 Markdown 库"])}
 
 ## 杂格式怎样变成统一 Markdown
-转换路径（过程 ≥3 步）→ 必须 flow，禁止只用文字段。
+
+Office、PDF、图片、音视频等经 \`MarkItDown.convert\` 收成统一 Markdown，再进 RAG / Agent。
 
 \`\`\`flow LR
 (Office / PDF / 图片 / 音视频…) -> MarkItDown.convert
@@ -573,7 +564,7 @@ ${entry(p)}
 `;
   },
 
-  // ── am：人↔Agent↔CLI 消息序（多角色）→ 必须 sequence；和 sam 用表 ──
+  // ── am：人↔Agent↔CLI sequence ──
   "answer-me-with-html"(p, cat) {
     return `${fm(p, "全功能讲义 Skill")}
 
@@ -581,11 +572,12 @@ ${entry(p)}
 **${p.name}**：${p.summary}
 \`\`\`
 
-## 坐标
+## 速览
 ${kvBlock(p, cat)}
 
 ## 一次提问怎么变成讲义页
-人 ↔ Agent ↔ CLI 消息序（多角色过程）→ 必须 sequence，禁止只用文字段。
+
+人、Agent、CLI 三角色接力：草稿进 CLI，出来才是讲义路径。
 
 \`\`\`sequence num
 participants: 你, Agent, am CLI
@@ -616,31 +608,34 @@ ${entry(p)}
 `;
   },
 
-  // ── sam：写作前强制规划（过程）→ 必须 flow；对比 am 用表；kv 自适应与 CLI check 写进用法 ──
+  // ── sam：产品页（合法讲组件规则；sam_meta；不用规划口令字面泄漏串）──
   sam(p, cat) {
-    return `${fm(p, "纸张精简讲义 · MUST 规划")}
+    return `${fm(p, "纸张精简讲义", { sam_meta: true })}
 
 \`\`\`callout info
-**${p.name}**：${p.summary}
+**${p.name}**：纸张主题讲义 skill——强制 paper、无工具栏/运行时；适合讲义、原理与 K站 intro 轻页。
 \`\`\`
 
-## 坐标
+## 速览
 ${kvBlock(p, cat, [
-  "CHECK: npm run check / test:kv / test:agent-cases",
+  "CHECK: npm run check / test:leakage / test:kv / test:agent-cases",
   "KV: 1–6 项 @container 自适应（宽 3 列 / 中 2+1 / 窄堆叠）",
 ])}
 
-## 写作前强制规划怎么走
-Agent 出页前的规划步骤（过程）→ 必须 flow；禁止先写长文再贴装饰组件。
+## 一次提问怎样变成纸张页
 
-\`\`\`flow LR
-(识别面板问题) -> 判断信息形状
-判断信息形状 -> 必选 MUST 组件
-必选 MUST 组件 -> 写草稿并渲染
-写草稿并渲染 -> *自检：有无用 kv/callout 顶替流程
+和上游 am 相同三角色，但 CLI 是 \`sam render\`，主题锁 paper，页内无工具栏。
+
+\`\`\`sequence num
+participants: 你, Agent, sam CLI
+你 -> Agent: 要一页讲义 / intro
+Agent -> Agent: 按信息结构选组件并写草稿
+Agent -> sam CLI: sam render（可 --css-href）
+sam CLI --> Agent: ✓ HTML 或 ✗ 行号+示例
+Agent --> 你: 纸张页路径（可 iframe）
 \`\`\`
 
-形状映射：多方消息 → sequence；有序步骤/调用路径 → flow；层级 → tree；时间演进 → timeline。对比用表；纯元数据才用 kv。
+sam 要求：多方消息用 sequence，有序步骤/调用路径用 flow，层级用 tree，时间演进用 timeline；对比用表；纯元数据才用 kv。图须回答该板问题且体现主题特有机制。
 
 ## 和上游 am 差在哪
 
@@ -648,21 +643,21 @@ Agent 出页前的规划步骤（过程）→ 必须 flow；禁止先写长文�
 |---|---|---|
 | 主题 | ok 强制 paper | ok 多主题 |
 | 工具栏 / 运行时 | no 无 | ok 有 |
-| MUST 组件规划 | ok 写作前强制 | warn 按上游 skill |
+| 组件选用纪律 | ok Skill 强制映射 | warn 按上游 skill |
 | kv 布局 | ok 容器自适应 | warn 视版本 |
 | 视频 / 页内回复 | no | ok |
 | iframe / 备课 | ok 轻 | warn 偏重 |
 
-渲染：\`sam css\` + \`sam render --css-href\`（theme 外链）；页无工具栏/colophon。一页 1–2 重点可视化。
+渲染：\`sam css\` + \`sam render --css-href\`（theme 外链）。一页突出 1–2 个可视化重点。
 
 ## 用法
-${p.usage}
+讲义、原理、K站 intro 优先用 sam。CLI：\`sam render\` / \`--css-href\`；仓库 \`npm run check\`、\`test:leakage\`、\`test:kv\`、\`test:agent-cases\`。需要多主题、视频或页内回复标注时仍用上游 answer-me-with-html。
 
 ${entry(p)}
 `;
   },
 
-  // ── anthropics/skills：仓内层级 → tree ──
+  // ── anthropics/skills：目录层级 tree ──
   "anthropics-skills"(p, cat) {
     return `${fm(p, "官方 Skills 合集")}
 
@@ -670,11 +665,12 @@ ${entry(p)}
 **${p.name}**：${p.summary}
 \`\`\`
 
-## 坐标
+## 速览
 ${kvBlock(p, cat)}
 
 ## 仓里该怎么理解
-信息形状是目录层级：「不要整仓当单一 skill」。
+
+这是官方 mega-repo：按子目录安装具体 skill，不要整仓当单一技能。
 
 \`\`\`tree list
 anthropics/skills | 官方 mega-repo
@@ -699,7 +695,7 @@ ${entry(p)}
 `;
   },
 
-  // ── toolkit：从「模板感」到约定的决策路径（过程）→ 必须 flow ──
+  // ── toolkit：模板感 → 装清单 → 写约定 ──
   "claude-code-frontend-design-toolkit"(p, cat) {
     return `${fm(p, "前端观感上限清单")}
 
@@ -707,11 +703,12 @@ ${entry(p)}
 **${p.name}**：${p.summary}
 \`\`\`
 
-## 坐标
+## 速览
 ${kvBlock(p, cat)}
 
 ## 什么时候该打开这份清单
-决策路径（是否模板感过重 → 装什么 → 写入约定）是过程 → 必须 flow。
+
+默认前端「模板感」过重时：读清单 → 装 skill/插件/MCP → 写入 CLAUDE.md 约定。
 
 \`\`\`flow TB
 (Claude Code 默认前端) -> {模板感过重?}
@@ -736,7 +733,7 @@ ${entry(p)}
 `;
   },
 
-  // ── ui-agents：加载专用 prompt 的消息序（多角色）→ 必须 sequence ──
+  // ── ui-agents：加载专用 prompt 的消息序 ──
   "claude-code-ui-agents"(p, cat) {
     return `${fm(p, "UI/UX Agent 提示集")}
 
@@ -744,11 +741,12 @@ ${entry(p)}
 **${p.name}**：${p.summary}
 \`\`\`
 
-## 坐标
+## 速览
 ${kvBlock(p, cat)}
 
 ## 专项任务怎么走到专用 agent
-人 ↔ Claude Code ↔ UI Agent 消息序（多角色过程）→ 必须 sequence。
+
+界面重构、组件设计、体验打磨时加载专用 prompt，而不是泛泛聊天。
 
 \`\`\`sequence num
 participants: 你, Claude Code, UI Agent
@@ -777,7 +775,7 @@ ${entry(p)}
 `;
   },
 
-  // ── Simplefolio：模板上线步骤（过程 ≥3 步）→ 必须 flow；对比用表 ──
+  // ── Simplefolio：Fork → 改数据 → 部署（模板特有）──
   simplefolio(p, cat) {
     return `${fm(p, "极简作品集模板")}
 
@@ -785,11 +783,12 @@ ${entry(p)}
 **${p.name}**：${p.summary}
 \`\`\`
 
-## 坐标
+## 速览
 ${kvBlock(p, cat)}
 
 ## 从上线到可选迁移
-模板上线是明确多步路径（过程）→ 必须 flow；目录细节用一段话即可，不硬画 tree。
+
+Fork 后改 \`src/data\` 与样式变量、换截图链接，部署到 Netlify / Pages；现代栈可再迁 Astro + Tailwind，保留分区节奏。
 
 \`\`\`flow TB
 (Fork 仓库) -> 改 src/data 与样式变量
@@ -798,7 +797,7 @@ ${kvBlock(p, cat)}
 部署 Netlify / Pages --> 可选迁 Astro/Tailwind: 保留分区节奏
 \`\`\`
 
-Hero / Projects / Contact 分区节奏可保留；要现代栈时再迁 Astro + Tailwind。
+Hero / Projects / Contact 分区节奏可保留。
 
 ## 和 devportfolio
 
@@ -818,7 +817,7 @@ ${entry(p)}
 `;
   },
 
-  // ── devportfolio：上线步骤（过程）→ 必须 flow；保留/替换层级 → tree（合计 2）──
+  // ── devportfolio：clone 上线 + 保留/替换树 ──
   devportfolio(p, cat) {
     return `${fm(p, "Astro 作品集起点")}
 
@@ -826,11 +825,10 @@ ${entry(p)}
 **${p.name}**：${p.summary}
 \`\`\`
 
-## 坐标
+## 速览
 ${kvBlock(p, cat)}
 
 ## 从 clone 到可展示
-上线步骤（≥3 步）是过程性内容 → 必须 flow。
 
 \`\`\`flow TB
 (Clone 仓库) -> 改配置与内容入口
@@ -839,7 +837,6 @@ ${kvBlock(p, cat)}
 \`\`\`
 
 ## 酷站升级时动哪里
-「保留骨架 / 替换表层」是层级 → tree（与 flow 合计 2 个重点可视化）。
 
 \`\`\`tree list
 devportfolio | Astro + Tailwind
@@ -868,7 +865,7 @@ ${entry(p)}
 `;
   },
 
-  // ── ke-rules：规矩树 → tree；新规矩落地步骤（过程）→ 必须 flow ──
+  // ── ke-rules：规矩树 + 落地步骤 ──
   "ke-rules"(p, cat) {
     return `${fm(p, "长期协作规矩")}
 
@@ -876,11 +873,10 @@ ${entry(p)}
 **${p.name}**：${p.summary}
 \`\`\`
 
-## 坐标
+## 速览
 ${kvBlock(p, cat)}
 
 ## 规矩覆盖哪些面
-层级清单 → tree。
 
 \`\`\`tree list
 ke-rules | 人读 README / RULES.md
@@ -892,7 +888,6 @@ ke-rules | 人读 README / RULES.md
 \`\`\`
 
 ## 新规矩怎么落到仓里
-维护步骤（过程）→ 必须 flow，禁止只用文字说明「改完再推」。
 
 \`\`\`flow LR
 (用户立新规矩) -> 改 RULES.md
@@ -916,14 +911,13 @@ function draftFor(p) {
   const cat = catMap[p.category] || { name: p.category, desc: "" };
   const builder = DRAFTS[p.id];
   if (!builder) {
-    // 无定制形状时：只给定位 + kv + 用法，不强行可视化
     return `${fm(p, "K站项目介绍")}
 
 \`\`\`callout info
 **${p.name}**（${cat.name}）：${p.summary}
 \`\`\`
 
-## 坐标
+## 速览
 ${kvBlock(p, cat)}
 
 ## 用法
@@ -1018,7 +1012,6 @@ function writeThemeCss() {
     process.exit(1);
   }
   let css = readFileSync(THEME_CSS_PATH, "utf8");
-  // Always replace lab overrides so regenerating picks up K_LAB_THEME_OVERRIDES edits.
   const marker = "/* ── K站 Lab intro overrides";
   const idx = css.indexOf(marker);
   if (idx >= 0) css = css.slice(0, idx).trimEnd();
@@ -1069,7 +1062,7 @@ for (const p of data.projects) {
     console.warn(`WARN ${p.id}: focus viz count ${viz.length} > 2 (${viz.join(",")})`);
   }
 
-  // 过程词面板标题必须有 flow/sequence（强制；只扫 ## 标题，避免「生成器」等元数据误报）
+  // 过程面板若存在，应有 flow/sequence（生成器自检；口令不写进正文）
   const PROCESS_RE =
     /怎么变成|如何走到|流程|步骤|调用|发布|生成|上线|构建路径|怎样变成|怎样发布|怎样进|怎么走|怎么落到|从 clone|消息序|决策路径/i;
   const panelTitles = [...md.matchAll(/^##\s+(.+)$/gm)].map((m) => m[1]);

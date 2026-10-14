@@ -12,32 +12,15 @@
 <header class="am-head"><h1>Tailwind CSS</h1><p class="am-sub">Utility-first 样式底座</p><div class="am-intro am-md"><div class="am-callout am-callout--info" role="note"><div class="am-callout-body am-md"><p><strong>Tailwind CSS</strong>：Utility-first CSS 框架，用类名快速拼出精致 UI，几乎是现代酷站标配。</p>
 </div></div></div></header>
 <div class="am-doc-layout">
-<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 坐标</a><a href="#panel-B">B · 它强在哪、弱在哪</a><a href="#panel-C">C · 和 shadcn / Magic UI 怎么叠</a><a href="#panel-D">D · 酷站怎么用</a></nav><div class="am-doc-body">
+<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 速览</a><a href="#panel-B">B · 它强在哪、弱在哪</a><a href="#panel-C">C · 和 shadcn / Magic UI 怎么叠</a><a href="#panel-D">D · 酷站怎么用</a></nav><div class="am-doc-body">
 <section class="am-panel" id="panel-A">
-<header class="am-panel-head"><span class="am-panel-id">A</span><h2>坐标</h2></header>
+<header class="am-panel-head"><span class="am-panel-id">A</span><h2>速览</h2></header>
 <div class="am-panel-body"><div class="am-kv-host"><dl class="am-kv" style="--kv-cols: 1"><div class="am-kv-cell"><dt>元信息</dt><dd>2017-10-06，★ 97,887</dd></div><div class="am-kv-cell"><dt>分类</dt><dd>代码库 / 引擎</dd></div><div class="am-kv-cell"><dt>仓库</dt><dd><a href="https://github.com/tailwindlabs/tailwindcss">tailwindlabs/tailwindcss</a></dd></div><div class="am-kv-cell"><dt>主页</dt><dd><a href="https://tailwindcss.com/">tailwindcss.com/</a></dd></div></dl></div></div>
 </section>
 <section class="am-panel" id="panel-B">
 <header class="am-panel-head"><span class="am-panel-id">B</span><h2>它强在哪、弱在哪</h2></header>
-<div class="am-panel-body"><div class="am-md"><p>要回答的是「能做什么 / 别指望什么」，limits 比架构图合适。</p>
-</div>
-<div class="am-limits"><div class="am-lim">
-<div class="am-lim-head"><span>Utility 拼 UI 速度<span class="am-lim-note">类名即样式</span></span><span class="am-lim-val">9 / max 10 分</span></div>
-<div class="am-lim-track"><div class="am-lim-fill" style="width: 60%"></div><div class="am-lim-mark" style="left: 66.67%"></div></div>
-<div class="am-lim-ticks" aria-hidden="true"><span style="left: 0%">0</span><span style="left: 16.67%">2.5</span><span style="left: 33.33%">5</span><span style="left: 50%">7.5</span><span style="left: 66.67%">10</span><span style="left: 83.33%">12.5</span><span style="left: 100%">15</span></div>
-</div><div class="am-lim">
-<div class="am-lim-head"><span>设计系统可维护性<span class="am-lim-note">靠 theme/@apply</span></span><span class="am-lim-val">7 / max 10 分</span></div>
-<div class="am-lim-track"><div class="am-lim-fill" style="width: 46.67%"></div><div class="am-lim-mark" style="left: 66.67%"></div></div>
-<div class="am-lim-ticks" aria-hidden="true"><span style="left: 0%">0</span><span style="left: 16.67%">2.5</span><span style="left: 33.33%">5</span><span style="left: 50%">7.5</span><span style="left: 66.67%">10</span><span style="left: 83.33%">12.5</span><span style="left: 100%">15</span></div>
-</div><div class="am-lim">
-<div class="am-lim-head"><span>传统 CSS 迁移成本<span class="am-lim-note">心智要换</span></span><span class="am-lim-val">6 / max 10 分</span></div>
-<div class="am-lim-track"><div class="am-lim-fill" style="width: 40%"></div><div class="am-lim-mark" style="left: 66.67%"></div></div>
-<div class="am-lim-ticks" aria-hidden="true"><span style="left: 0%">0</span><span style="left: 16.67%">2.5</span><span style="left: 33.33%">5</span><span style="left: 50%">7.5</span><span style="left: 66.67%">10</span><span style="left: 83.33%">12.5</span><span style="left: 100%">15</span></div>
-</div><div class="am-lim">
-<div class="am-lim-head"><span>无障碍组件完备度<span class="am-lim-note">需 shadcn 等补</span></span><span class="am-lim-val">3 / max 10 分</span></div>
-<div class="am-lim-track"><div class="am-lim-fill" style="width: 20%"></div><div class="am-lim-mark" style="left: 66.67%"></div></div>
-<div class="am-lim-ticks" aria-hidden="true"><span style="left: 0%">0</span><span style="left: 16.67%">2.5</span><span style="left: 33.33%">5</span><span style="left: 50%">7.5</span><span style="left: 66.67%">10</span><span style="left: 83.33%">12.5</span><span style="left: 100%">15</span></div>
-</div></div></div>
+<div class="am-panel-body"><div class="am-md"><p>类名即样式，拼 UI 快；设计系统靠 theme / @apply 收口。它<strong>不是</strong>组件库——表单/对话框要接 shadcn 等。</p>
+</div></div>
 </section>
 <section class="am-panel" id="panel-C">
 <header class="am-panel-head"><span class="am-panel-id">C</span><h2>和 shadcn / Magic UI 怎么叠</h2></header>

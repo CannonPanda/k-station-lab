@@ -12,17 +12,17 @@
 <header class="am-head"><h1>Hugo</h1><p class="am-sub">Go 极速静态站</p><div class="am-intro am-md"><div class="am-callout am-callout--info" role="note"><div class="am-callout-body am-md"><p><strong>Hugo</strong>：以速度著称的静态站点生成器，Go 编写，适合博客、文档与大型内容站。</p>
 </div></div></div></header>
 <div class="am-doc-layout">
-<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 坐标</a><a href="#panel-B">B · 内容怎样变成静态页</a><a href="#panel-C">C · 什么时候选它，什么时候别选</a><a href="#panel-D">D · 用法</a></nav><div class="am-doc-body">
+<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 速览</a><a href="#panel-B">B · 内容怎样变成静态页</a><a href="#panel-C">C · 什么时候选它，什么时候别选</a><a href="#panel-D">D · 用法</a></nav><div class="am-doc-body">
 <section class="am-panel" id="panel-A">
-<header class="am-panel-head"><span class="am-panel-id">A</span><h2>坐标</h2></header>
+<header class="am-panel-head"><span class="am-panel-id">A</span><h2>速览</h2></header>
 <div class="am-panel-body"><div class="am-kv-host"><dl class="am-kv" style="--kv-cols: 1"><div class="am-kv-cell"><dt>元信息</dt><dd>2013-07-04，★ 90,109</dd></div><div class="am-kv-cell"><dt>分类</dt><dd>代码库 / 引擎</dd></div><div class="am-kv-cell"><dt>仓库</dt><dd><a href="https://github.com/gohugoio/hugo">gohugoio/hugo</a></dd></div><div class="am-kv-cell"><dt>主页</dt><dd><a href="https://gohugo.io">gohugo.io</a></dd></div><div class="am-kv-cell"><dt>定位</dt><dd>海量页秒级重建的静态引擎</dd></div></dl></div></div>
 </section>
 <section class="am-panel" id="panel-B">
 <header class="am-panel-head"><span class="am-panel-id">B</span><h2>内容怎样变成静态页</h2></header>
-<div class="am-panel-body"><div class="am-md"><p>构建路径（≥3 步）是过程性内容 → 必须 flow，禁止只用文字/annot 代替。</p>
+<div class="am-panel-body"><div class="am-md"><p>无 Node 依赖树：内容与 shortcodes 进 Go 单二进制，构建期展开 partials。</p>
 </div>
 <figure class="am-diagram am-flow"><svg viewBox="0 0 748 143" width="748" height="143" role="img" aria-label="流程图：内容 / shortcodes、Hugo Go 单二进制、构建期展开 partials、纯静态 HTML" xmlns="http://www.w3.org/2000/svg"><defs><marker id="am1-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="am-arrow" d="M0,0 L10,5 L0,10 z"/></marker></defs><g><rect class="am-cluster" x="207.6" y="26" width="371.6" height="91" rx="4"/><text class="am-cluster-label" x="215.6" y="40">极速核心</text></g><g><g data-step="0"><path class="am-edge" d="M161.6,71.5 L173.1,71.5 Q184.6,71.5 196.1,71.5 Q207.6,71.5 219.1,71.5 L230.6,71.5" marker-end="url(#am1-arrow)"/></g><g data-step="1"><path class="am-edge" d="M367.6,71.5 L379.1,71.5 Q390.6,71.5 402.1,71.5 L413.6,71.5" marker-end="url(#am1-arrow)"/></g><g data-step="2"><path class="am-edge" d="M556.2,71.5 L567.7,71.5 Q579.2,71.5 590.7,71.5 Q602.2,71.5 613.7,71.5 L625.2,71.5" marker-end="url(#am1-arrow)"/></g></g><g><g class="am-node am-node--round" data-key="内容 / shortcodes" data-step="0"><rect class="am-node-shape" x="14" y="54" width="147.6" height="35" rx="17.5"/><text x="87.8" y="71.5" text-anchor="middle" dominant-baseline="central">内容 / shortcodes</text></g><g class="am-node am-node--rect" data-key="Hugo Go 单二进制" data-step="0"><rect class="am-node-shape" x="230.6" y="54" width="136.9" height="35" rx="3"/><text x="299.1" y="71.5" text-anchor="middle" dominant-baseline="central">Hugo Go 单二进制</text></g><g class="am-node am-node--rect am-node--hi" data-key="构建期展开 partials" data-step="1"><rect class="am-node-shape" x="413.6" y="54" width="142.7" height="35" rx="3"/><text x="484.9" y="71.5" text-anchor="middle" dominant-baseline="central">构建期展开 partials</text></g><g class="am-node am-node--db" data-key="纯静态 HTML" data-step="2"><path class="am-node-shape" d="M625.2,54 A54.3,7 0 0 1 733.8,54 V89 A54.3,7 0 0 1 625.2,89 Z"/><path class="am-node-shape" d="M625.2,54 A54.3,7 0 0 0 733.8,54"/><text x="679.5" y="75.5" text-anchor="middle" dominant-baseline="central">纯静态 HTML</text></g></g></svg></figure>
-<div class="am-md"><p>无 Node 依赖树；现代组件岛请看 Astro。</p>
+<div class="am-md"><p>现代组件岛请看 Astro。</p>
 </div></div>
 </section>
 <section class="am-panel" id="panel-C">

@@ -12,16 +12,14 @@
 <header class="am-head"><h1>Lenis</h1><p class="am-sub">整页丝滑滚动</p><div class="am-intro am-md"><div class="am-callout am-callout--info" role="note"><div class="am-callout-body am-md"><p><strong>Lenis</strong>：丝滑平滑滚动库，让整页滚动质感接近高端作品集站点。</p>
 </div></div></div></header>
 <div class="am-doc-layout">
-<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 坐标</a><a href="#panel-B">B · 最容易踩的坑</a><a href="#panel-C">C · 和 Motion / Magic UI</a><a href="#panel-D">D · 用法</a></nav><div class="am-doc-body">
+<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 速览</a><a href="#panel-B">B · 最容易踩的坑</a><a href="#panel-C">C · 和 Motion / Magic UI</a><a href="#panel-D">D · 用法</a></nav><div class="am-doc-body">
 <section class="am-panel" id="panel-A">
-<header class="am-panel-head"><span class="am-panel-id">A</span><h2>坐标</h2></header>
+<header class="am-panel-head"><span class="am-panel-id">A</span><h2>速览</h2></header>
 <div class="am-panel-body"><div class="am-kv-host"><dl class="am-kv" style="--kv-cols: 1"><div class="am-kv-cell"><dt>元信息</dt><dd>2022-02-21，★ 16,500</dd></div><div class="am-kv-cell"><dt>分类</dt><dd>代码库 / 引擎</dd></div><div class="am-kv-cell"><dt>仓库</dt><dd><a href="https://github.com/darkroomengineering/lenis">darkroomengineering/lenis</a></dd></div><div class="am-kv-cell"><dt>主页</dt><dd><a href="https://lenis.dev">lenis.dev</a></dd></div></dl></div></div>
 </section>
 <section class="am-panel" id="panel-B">
 <header class="am-panel-head"><span class="am-panel-id">B</span><h2>最容易踩的坑</h2></header>
-<div class="am-panel-body"><div class="am-md"><p>信息形状是「句内易错点」，不是架构图。</p>
-</div>
-<div class="am-annot"><div class="am-annot-head"><span>丝滑 ≠ 无脑开启</span></div><div class="am-annot-scroll"><div class="am-annot-line" style="--rows: 1">Lenis 管 <span class="am-seg"><span class="am-seg-t">滚动插值</span><span class="am-seg-n" style="--row: 0">整页手感</span></span>；必须尊重 <span class="am-seg am-seg--err"><span class="am-seg-t">prefers-reduced-motion</span><span class="am-seg-n" style="--row: 0">忽略会伤用户</span></span>。元素关键帧动画仍交给 <span class="am-seg"><span class="am-seg-t">Motion</span><span class="am-seg-n" style="--row: 0">分工</span></span>。</div></div><div class="am-annot-caption">文档站默认滚动往往够用；长落地页/作品集才值得上</div></div></div>
+<div class="am-panel-body"><div class="am-annot"><div class="am-annot-head"><span>丝滑 ≠ 无脑开启</span></div><div class="am-annot-scroll"><div class="am-annot-line" style="--rows: 1">Lenis 管 <span class="am-seg"><span class="am-seg-t">滚动插值</span><span class="am-seg-n" style="--row: 0">整页手感</span></span>；务必尊重 <span class="am-seg am-seg--err"><span class="am-seg-t">prefers-reduced-motion</span><span class="am-seg-n" style="--row: 0">忽略会伤用户</span></span>。元素关键帧动画仍交给 <span class="am-seg"><span class="am-seg-t">Motion</span><span class="am-seg-n" style="--row: 0">分工</span></span>。</div></div><div class="am-annot-caption">文档站默认滚动往往够用；长落地页/作品集才值得上</div></div></div>
 </section>
 <section class="am-panel" id="panel-C">
 <header class="am-panel-head"><span class="am-panel-id">C</span><h2>和 Motion / Magic UI</h2></header>
