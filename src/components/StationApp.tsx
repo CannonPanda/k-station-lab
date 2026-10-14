@@ -137,19 +137,9 @@ export function StationApp({ projects, categories, updated }: Props) {
         </div>
       </header>
 
-      {/* Hero */}
-      <section className="relative mx-auto max-w-6xl px-4 pb-2 pt-10 sm:px-6 sm:pt-14">
-        <p className="mb-3 font-mono text-[11px] tracking-wide text-[var(--color-accent)]">
-          cannonpanda · github 收集
-        </p>
-        <h1 className="max-w-2xl font-display text-[2rem] font-bold leading-[1.15] tracking-tight text-[var(--color-ink)] sm:text-5xl">
-          星标收成一站
-        </h1>
-        <p className="mt-3 max-w-lg text-sm leading-relaxed text-[var(--color-muted)] sm:text-base">
-          KE 的开源图鉴 — 筛选、检索、读用法。与经典站同源数据。
-        </p>
-
-        <div className="relative mt-8 h-px w-full bg-[var(--color-line)]">
+      {/* Status strip (hero brand copy removed) */}
+      <section className="relative mx-auto max-w-6xl px-4 pb-2 pt-4 sm:px-6 sm:pt-6">
+        <div className="relative h-px w-full bg-[var(--color-line)]">
           <div className="border-beam" aria-hidden />
         </div>
 
