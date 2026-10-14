@@ -8,9 +8,11 @@ import { introHref, prefetchIntro } from "@/lib/introPrefetch";
 type Props = {
   project: Project;
   category?: Category;
+  favorited: boolean;
+  onToggleFavorite: (id: string) => void;
 };
 
-export function ProjectCard({ project, category }: Props) {
+export function ProjectCard({ project, category, favorited, onToggleFavorite }: Props) {
   const [copied, setCopied] = useState(false);
   const href = introHref(project.id);
 
@@ -39,6 +41,15 @@ export function ProjectCard({ project, category }: Props) {
       }
     },
     [project.name],
+  );
+
+  const onFavorite = useCallback(
+    (e: MouseEvent<HTMLButtonElement>) => {
+      e.stopPropagation();
+      e.preventDefault();
+      onToggleFavorite(project.id);
+    },
+    [onToggleFavorite, project.id],
   );
 
   return (
@@ -71,10 +82,26 @@ export function ProjectCard({ project, category }: Props) {
               {copied ? <CheckIcon /> : <CopyIcon />}
             </button>
           </div>
-          <span className="inline-flex shrink-0 items-baseline gap-0.5 pt-0.5 font-mono text-[11px] tabular-nums text-[var(--color-star)]">
-            <span aria-hidden>★</span>
-            <span>{formatStars(project.stars)}</span>
-          </span>
+          <div className="flex shrink-0 items-center gap-1 pt-0.5">
+            <button
+              type="button"
+              onClick={onFavorite}
+              aria-label={favorited ? "取消收藏" : "收藏"}
+              aria-pressed={favorited}
+              title={favorited ? "取消收藏" : "收藏"}
+              className={`inline-flex h-7 w-7 items-center justify-center rounded-md transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] ${
+                favorited
+                  ? "text-[var(--color-star)] hover:bg-[var(--color-surface)]"
+                  : "text-[var(--color-faint)] hover:bg-[var(--color-surface)] hover:text-[var(--color-star)]"
+              }`}
+            >
+              <FavStar filled={favorited} />
+            </button>
+            <span className="inline-flex items-baseline gap-0.5 font-mono text-[11px] tabular-nums text-[var(--color-star)]">
+              <span aria-hidden>★</span>
+              <span>{formatStars(project.stars)}</span>
+            </span>
+          </div>
         </div>
 
         <a
@@ -107,6 +134,20 @@ export function ProjectCard({ project, category }: Props) {
         </a>
       </div>
     </article>
+  );
+}
+
+function FavStar({ filled }: { filled: boolean }) {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden>
+      <path
+        d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.8 6.8 19.6l1-5.8L3.5 9.7l5.9-.9L12 3.5z"
+        fill={filled ? "currentColor" : "none"}
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }
 

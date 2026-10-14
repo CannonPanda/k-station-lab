@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { Category, Project } from "@/lib/types";
+import { useFavorites } from "@/lib/favorites";
 import { FilterBar } from "./FilterBar";
 import { ProjectGrid } from "./ProjectGrid";
 import { CommandPalette } from "./CommandPalette";
@@ -18,6 +19,7 @@ export function StationApp({ projects, categories, updated }: Props) {
   const [filter, setFilter] = useState("all");
   const [cmdOpen, setCmdOpen] = useState(false);
   const [filtersCollapsed, setFiltersCollapsed] = useState(true);
+  const { favorites, count: favoriteCount, toggle, isFavorite } = useFavorites();
 
   const categoryMap = useMemo(() => {
     const m: Record<string, Category> = {};
@@ -37,9 +39,12 @@ export function StationApp({ projects, categories, updated }: Props) {
   );
 
   const visible = useMemo(() => {
-    const list = filter === "all" ? projects : projects.filter((p) => p.category === filter);
+    let list: Project[];
+    if (filter === "all") list = projects;
+    else if (filter === "favorites") list = projects.filter((p) => isFavorite(p.id));
+    else list = projects.filter((p) => p.category === filter);
     return [...list].sort((a, b) => b.stars - a.stars);
-  }, [projects, filter]);
+  }, [projects, filter, isFavorite]);
 
   const openIntro = useCallback((p: Project) => {
     window.open(introHref(p.id), "_blank", "noopener");
@@ -57,6 +62,13 @@ export function StationApp({ projects, categories, updated }: Props) {
       9,
     );
   }, [visible]);
+
+  const filterLabel =
+    filter === "favorites"
+      ? "收藏"
+      : filter !== "all" && categoryMap[filter]
+        ? categoryMap[filter].name
+        : null;
 
   return (
     <>
@@ -145,8 +157,8 @@ export function StationApp({ projects, categories, updated }: Props) {
           <p className="text-sm text-[var(--color-muted)]">
             <span className="font-mono tabular-nums text-[var(--color-ink)]">{visible.length}</span>
             {" 个项目"}
-            {filter !== "all" && categoryMap[filter] ? (
-              <span className="text-[var(--color-faint)]"> · {categoryMap[filter].name}</span>
+            {filterLabel ? (
+              <span className="text-[var(--color-faint)]"> · {filterLabel}</span>
             ) : null}
           </p>
           <p className="font-mono text-[11px] text-[var(--color-faint)]">{updated}</p>
@@ -163,13 +175,20 @@ export function StationApp({ projects, categories, updated }: Props) {
           }}
           counts={counts}
           total={projects.length}
+          favoriteCount={favoriteCount}
           collapsed={filtersCollapsed}
           onToggleCollapse={() => setFiltersCollapsed((v) => !v)}
         />
       </div>
 
       <main className="relative">
-        <ProjectGrid projects={visible} categoryMap={categoryMap} filterKey={filter} />
+        <ProjectGrid
+          projects={visible}
+          categoryMap={categoryMap}
+          filterKey={filter}
+          favorites={favorites}
+          onToggleFavorite={toggle}
+        />
       </main>
 
       <footer className="relative border-t border-[var(--color-line)] py-10 text-center">

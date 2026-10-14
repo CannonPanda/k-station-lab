@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import type { Category } from "@/lib/types";
 
 type Props = {
@@ -8,6 +9,7 @@ type Props = {
   onChange: (id: string) => void;
   counts: Record<string, number>;
   total: number;
+  favoriteCount: number;
   collapsed: boolean;
   onToggleCollapse: () => void;
 };
@@ -18,9 +20,17 @@ export function FilterBar({
   onChange,
   counts,
   total,
+  favoriteCount,
   collapsed,
   onToggleCollapse,
 }: Props) {
+  const activeLabel =
+    active === "all"
+      ? "通览"
+      : active === "favorites"
+        ? "收藏"
+        : (categories.find((c) => c.id === active)?.name ?? "");
+
   return (
     <div className="border-b border-[var(--color-line)]">
       <div className="mx-auto flex max-w-6xl items-center gap-2 px-4 py-3 sm:px-6">
@@ -32,7 +42,7 @@ export function FilterBar({
         >
           筛选
           <span className="font-mono text-[10px] text-[var(--color-accent)]">
-            {active === "all" ? "通览" : categories.find((c) => c.id === active)?.name ?? ""}
+            {activeLabel}
           </span>
           <Chevron open={!collapsed} />
         </button>
@@ -47,6 +57,14 @@ export function FilterBar({
             count={total}
             active={active === "all"}
             onClick={() => onChange("all")}
+          />
+          <Chip
+            label="收藏"
+            count={favoriteCount}
+            active={active === "favorites"}
+            onClick={() => onChange("favorites")}
+            title="只看已收藏项目"
+            icon={<StarIcon filled={active === "favorites"} />}
           />
           {categories.map((c) => (
             <Chip
@@ -70,12 +88,14 @@ function Chip({
   active,
   onClick,
   title,
+  icon,
 }: {
   label: string;
   count: number;
   active: boolean;
   onClick: () => void;
   title?: string;
+  icon?: ReactNode;
 }) {
   return (
     <button
@@ -88,6 +108,7 @@ function Chip({
           : "border-[var(--color-line)] text-[var(--color-ink)] hover:border-[var(--color-ink)]"
       }`}
     >
+      {icon}
       {label}
       <span
         className={`font-mono text-[10px] tabular-nums ${
@@ -97,6 +118,20 @@ function Chip({
         {count}
       </span>
     </button>
+  );
+}
+
+function StarIcon({ filled }: { filled: boolean }) {
+  return (
+    <svg width="11" height="11" viewBox="0 0 24 24" aria-hidden>
+      <path
+        d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.8 6.8 19.6l1-5.8L3.5 9.7l5.9-.9L12 3.5z"
+        fill={filled ? "currentColor" : "none"}
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }
 

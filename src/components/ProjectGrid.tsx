@@ -9,6 +9,8 @@ type Props = {
   projects: Project[];
   categoryMap: Record<string, Category>;
   filterKey: string;
+  favorites: Set<string>;
+  onToggleFavorite: (id: string) => void;
 };
 
 /**
@@ -16,7 +18,13 @@ type Props = {
  * only — content updates in place so React reconciles cards by id without
  * tearing down the layout container.
  */
-export function ProjectGrid({ projects, categoryMap, filterKey }: Props) {
+export function ProjectGrid({
+  projects,
+  categoryMap,
+  filterKey,
+  favorites,
+  onToggleFavorite,
+}: Props) {
   const reduce = useReducedMotion();
   const controls = useAnimationControls();
   const prevKey = useRef(filterKey);
@@ -40,11 +48,13 @@ export function ProjectGrid({ projects, categoryMap, filterKey }: Props) {
   }, [filterKey, controls, reduce]);
 
   if (projects.length === 0) {
+    const emptyMsg =
+      filterKey === "favorites"
+        ? "还没有收藏。点卡片右上角星标即可收藏，刷新后仍在。"
+        : "没有匹配的项目。试试别的筛选或按 ⌘K 搜索。";
     return (
       <div className="mx-auto max-w-6xl px-4 py-20 text-center sm:px-6">
-        <p className="text-sm text-[var(--color-muted)]">
-          没有匹配的项目。试试别的筛选或按 ⌘K 搜索。
-        </p>
+        <p className="text-sm text-[var(--color-muted)]">{emptyMsg}</p>
       </div>
     );
   }
@@ -60,6 +70,8 @@ export function ProjectGrid({ projects, categoryMap, filterKey }: Props) {
           key={p.id}
           project={p}
           category={categoryMap[p.category]}
+          favorited={favorites.has(p.id)}
+          onToggleFavorite={onToggleFavorite}
         />
       ))}
     </motion.div>
