@@ -490,6 +490,89 @@ ${entry(p)}
 `;
   },
 
+  // ── MinerU：文档怎样变成 LLM Markdown（过程 ≥3 步）→ 必须 flow；与 markitdown 用表 ──
+  mineru(p, cat) {
+    return `${fm(p, "PDF/Office → LLM Markdown")}
+
+\`\`\`callout info 一句话
+**${p.name}**：${p.summary}
+\`\`\`
+
+## 坐标
+${kvBlock(p, cat, ["定位: 复杂版式文档解析引擎"])}
+
+## 文档怎样变成可喂模型的 Markdown
+解析链路（过程 ≥3 步）→ 必须 flow，禁止只用文字段。
+
+\`\`\`flow LR
+(PDF / Office) -> MinerU 版面与 OCR
+MinerU 版面与 OCR -> *结构化抽取: 标题/表/公式
+结构化抽取 -> [(Markdown / JSON)]
+Markdown / JSON -> RAG / LLM / Agent
+group 解析核心: MinerU 版面与 OCR, 结构化抽取
+\`\`\`
+
+## 和 markitdown 怎么分工
+
+| 维度 | MinerU | markitdown |
+|---|---|---|
+| 擅长 | ok 复杂 PDF 版式 / 公式 / OCR | ok 多格式轻量统一转 Markdown |
+| 重量 | warn 偏重（解析引擎） | ok 轻、易嵌管道 |
+| 输出 | ok Markdown + JSON 结构 | ok Markdown 为主 |
+| 典型场景 | ok 论文 / 扫描件入库 | ok 附件批转进 Agent |
+
+复杂版式与公式 → MinerU；杂格式附件快速统一 → markitdown；也可串联：先 MinerU 精解析，管道其余用 markitdown。
+
+## 用法
+${p.usage}
+
+\`\`\`callout ok 记住
+把它当「文档清洗层」：输出可直接进 RAG/LLM，不必再手撕版式。
+\`\`\`
+
+${entry(p)}
+`;
+  },
+
+  // ── markitdown：多格式怎样变成 Markdown（过程）→ 必须 flow；与 MinerU 用表 ──
+  markitdown(p, cat) {
+    return `${fm(p, "多格式 → Markdown")}
+
+\`\`\`callout info 一句话
+**${p.name}**：${p.summary}
+\`\`\`
+
+## 坐标
+${kvBlock(p, cat, ["定位: 微软开源多格式转 Markdown 库"])}
+
+## 杂格式怎样变成统一 Markdown
+转换路径（过程 ≥3 步）→ 必须 flow，禁止只用文字段。
+
+\`\`\`flow LR
+(Office / PDF / 图片 / 音视频…) -> MarkItDown.convert
+MarkItDown.convert -> *统一 Markdown
+统一 Markdown -> [(RAG / Agent / LLM)]
+group 转换核心: MarkItDown.convert, 统一 Markdown
+\`\`\`
+
+CLI 或 Python API 均可；适合插件与批处理管道。
+
+## 和 MinerU 怎么选
+
+| 你要… | 更合适 |
+|---|---|
+| 轻量批转、多格式一把梭 | ok markitdown |
+| 复杂 PDF 版式 / 公式 / OCR | ok MinerU |
+| Agent 附件预处理默认层 | ok markitdown |
+| 论文/扫描件高质量入库 | ok MinerU |
+
+## 用法
+${p.usage}
+
+${entry(p)}
+`;
+  },
+
   // ── am：人↔Agent↔CLI 消息序（多角色）→ 必须 sequence；和 sam 用表 ──
   "answer-me-with-html"(p, cat) {
     return `${fm(p, "全功能讲义 Skill")}

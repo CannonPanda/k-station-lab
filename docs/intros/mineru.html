@@ -1,0 +1,77 @@
+<!doctype html>
+<html data-k-lab-lite="1" lang="zh-CN" data-theme="paper" data-mode="auto" data-style="off">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="sam 0.1.0">
+<title>MinerU</title>
+<link rel="stylesheet" href="/k-station-lab/intros/theme.css">
+</head>
+<body>
+<main class="am-doc">
+<header class="am-head"><h1>MinerU</h1><p class="am-sub">PDF/Office → LLM Markdown</p><div class="am-intro am-md"><div class="am-callout am-callout--info" role="note"><div class="am-callout-title">一句话</div><div class="am-callout-body am-md"><p><strong>MinerU</strong>：PDF/Office→LLM Markdown 解析引擎：复杂版式文档转成结构化 Markdown/JSON，服务 RAG 与 Agent 工作流。</p>
+</div></div></div></header>
+<div class="am-doc-layout">
+<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 坐标</a><a href="#panel-B">B · 文档怎样变成可喂模型的 Markdown</a><a href="#panel-C">C · 和 markitdown 怎么分工</a><a href="#panel-D">D · 用法</a></nav><div class="am-doc-body">
+<section class="am-panel" id="panel-A">
+<header class="am-panel-head"><span class="am-panel-id">A</span><h2>坐标</h2></header>
+<div class="am-panel-body"><dl class="am-kv" style="--kv-cols: 1"><div class="am-kv-cell"><dt>元信息</dt><dd>2024-02-29，★ 81,695</dd></div><div class="am-kv-cell"><dt>分类</dt><dd>代码库 / 引擎</dd></div><div class="am-kv-cell"><dt>仓库</dt><dd><a href="https://github.com/opendatalab/MinerU">opendatalab/MinerU</a></dd></div><div class="am-kv-cell"><dt>主页</dt><dd><a href="https://opendatalab.github.io/MinerU/">opendatalab.github.io/MinerU/</a></dd></div><div class="am-kv-cell"><dt>定位</dt><dd>复杂版式文档解析引擎</dd></div></dl></div>
+</section>
+<section class="am-panel" id="panel-B">
+<header class="am-panel-head"><span class="am-panel-id">B</span><h2>文档怎样变成可喂模型的 Markdown</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>解析链路（过程 ≥3 步）→ 必须 flow，禁止只用文字段。</p>
+</div>
+<figure class="am-diagram am-flow"><svg viewBox="0 0 997 143" width="997" height="143" role="img" aria-label="流程图：PDF / Office、MinerU 版面与 OCR、结构化抽取、Markdown / JSON、RAG / LLM / Agent" xmlns="http://www.w3.org/2000/svg"><defs><marker id="am1-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="am-arrow" d="M0,0 L10,5 L0,10 z"/></marker></defs><g><rect class="am-cluster" x="182.2" y="26" width="413.9" height="91" rx="4"/><text class="am-cluster-label" x="190.2" y="40">解析核心</text></g><g><g data-step="0"><path class="am-edge" d="M136.2,71.5 L147.7,71.5 Q159.2,71.5 170.7,71.5 Q182.2,71.5 193.7,71.5 L205.2,71.5" marker-end="url(#am1-arrow)"/></g><g data-step="1"><path class="am-edge" d="M351.7,71.5 L383.8,71.5 Q415.9,71.5 448,71.5 L480.1,71.5" marker-end="url(#am1-arrow)"/><g class="am-edge-label"><rect x="375.7" y="62.5" width="80.4" height="18" rx="3"/><text x="415.9" y="71.5" text-anchor="middle" dominant-baseline="central">标题/表/公式</text></g></g><g data-step="2"><path class="am-edge" d="M573.1,71.5 L584.6,71.5 Q596.1,71.5 607.6,71.5 Q619.1,71.5 630.6,71.5 L642.1,71.5" marker-end="url(#am1-arrow)"/></g><g data-step="3"><path class="am-edge" d="M785.8,71.5 L797.3,71.5 Q808.8,71.5 820.3,71.5 L831.8,71.5" marker-end="url(#am1-arrow)"/></g></g><g><g class="am-node am-node--round" data-key="PDF / Office" data-step="0"><rect class="am-node-shape" x="14" y="54" width="122.2" height="35" rx="17.5"/><text x="75.1" y="71.5" text-anchor="middle" dominant-baseline="central">PDF / Office</text></g><g class="am-node am-node--rect" data-key="MinerU 版面与 OCR" data-step="0"><rect class="am-node-shape" x="205.2" y="54" width="146.6" height="35" rx="3"/><text x="278.4" y="71.5" text-anchor="middle" dominant-baseline="central">MinerU 版面与 OCR</text></g><g class="am-node am-node--rect am-node--hi" data-key="结构化抽取" data-step="1"><rect class="am-node-shape" x="480.1" y="54" width="93" height="35" rx="3"/><text x="526.6" y="71.5" text-anchor="middle" dominant-baseline="central">结构化抽取</text></g><g class="am-node am-node--db" data-key="Markdown / JSON" data-step="2"><path class="am-node-shape" d="M642.1,54 A71.9,7 0 0 1 785.8,54 V89 A71.9,7 0 0 1 642.1,89 Z"/><path class="am-node-shape" d="M642.1,54 A71.9,7 0 0 0 785.8,54"/><text x="714" y="75.5" text-anchor="middle" dominant-baseline="central">Markdown / JSON</text></g><g class="am-node am-node--rect" data-key="RAG / LLM / Agent" data-step="3"><rect class="am-node-shape" x="831.8" y="54" width="150.7" height="35" rx="3"/><text x="907.2" y="71.5" text-anchor="middle" dominant-baseline="central">RAG / LLM / Agent</text></g></g></svg></figure></div>
+</section>
+<section class="am-panel" id="panel-C">
+<header class="am-panel-head"><span class="am-panel-id">C</span><h2>和 markitdown 怎么分工</h2></header>
+<div class="am-panel-body"><div class="am-md"><div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>MinerU</th>
+<th>markitdown</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>擅长</td>
+<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>复杂 PDF 版式 / 公式 / OCR</span></td>
+<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>多格式轻量统一转 Markdown</span></td>
+</tr>
+<tr>
+<td>重量</td>
+<td><span class="am-status am-status--warn"><span class="am-status-icon" aria-hidden="true">!</span>偏重（解析引擎）</span></td>
+<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>轻、易嵌管道</span></td>
+</tr>
+<tr>
+<td>输出</td>
+<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>Markdown + JSON 结构</span></td>
+<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>Markdown 为主</span></td>
+</tr>
+<tr>
+<td>典型场景</td>
+<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>论文 / 扫描件入库</span></td>
+<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>附件批转进 Agent</span></td>
+</tr>
+</tbody></table></div>
+<p>复杂版式与公式 → MinerU；杂格式附件快速统一 → markitdown；也可串联：先 MinerU 精解析，管道其余用 markitdown。</p>
+</div></div>
+</section>
+<section class="am-panel" id="panel-D">
+<header class="am-panel-head"><span class="am-panel-id">D</span><h2>用法</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>用 pip 安装后对 PDF、DOCX、PPTX、XLSX 跑解析，输出带标题/表格/公式结构的 Markdown 或 JSON，直接喂给 RAG 或 LLM。扫描件开 OCR；批量入库时把它当统一文档清洗层。复杂版式与公式场景优先于轻量转换器。</p>
+</div>
+<div class="am-callout am-callout--ok" role="note"><div class="am-callout-title">记住</div><div class="am-callout-body am-md"><p>把它当「文档清洗层」：输出可直接进 RAG/LLM，不必再手撕版式。</p>
+</div></div>
+<div class="am-md"><h3>入口</h3>
+<ul>
+<li>GitHub：<a href="https://github.com/opendatalab/MinerU">MinerU</a></li>
+<li>主页：<a href="https://opendatalab.github.io/MinerU/">打开</a></li>
+</ul>
+</div></div>
+</section>
+</div>
+</div>
+</main>
+</body>
+</html>

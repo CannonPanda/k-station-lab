@@ -191,6 +191,29 @@
       "added": "2026-10-13"
     },
     {
+      "id": "mineru",
+      "name": "MinerU",
+      "url": "https://github.com/opendatalab/MinerU",
+      "homepage": "https://opendatalab.github.io/MinerU/",
+      "created": "2024-02-29",
+      "stars": 81695,
+      "summary": "PDF/Office→LLM Markdown 解析引擎：复杂版式文档转成结构化 Markdown/JSON，服务 RAG 与 Agent 工作流。",
+      "usage": "用 pip 安装后对 PDF、DOCX、PPTX、XLSX 跑解析，输出带标题/表格/公式结构的 Markdown 或 JSON，直接喂给 RAG 或 LLM。扫描件开 OCR；批量入库时把它当统一文档清洗层。复杂版式与公式场景优先于轻量转换器。",
+      "category": "library",
+      "added": "2026-10-14"
+    },
+    {
+      "id": "markitdown",
+      "name": "markitdown",
+      "url": "https://github.com/microsoft/markitdown",
+      "created": "2024-11-13",
+      "stars": 190091,
+      "summary": "微软开源多格式→Markdown 库：Office、PDF、图片、音视频等一键转成 LLM 友好文本。",
+      "usage": "`pip install markitdown` 后用 CLI 或 `MarkItDown().convert(path)`；把杂格式附件统一成 Markdown 再进 RAG/Agent。轻量批转、插件/管道集成优先它；要复杂版式与公式级 PDF 解析时搭配 MinerU。",
+      "category": "library",
+      "added": "2026-10-14"
+    },
+    {
       "id": "simplefolio",
       "name": "Simplefolio",
       "url": "https://github.com/cobiwave/simplefolio",
