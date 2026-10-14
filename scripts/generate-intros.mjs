@@ -970,7 +970,7 @@ function runSam(args) {
   };
 }
 
-/* K站 Lab intro layout: center title + full-width summary callout (no title label). */
+/* K站 Lab intro layout: center title + compact one-line summary callout (no title label). */
 const K_LAB_THEME_OVERRIDES = `
 /* ── K站 Lab intro overrides ───────────────── */
 html[data-k-lab-lite] .am-head {
@@ -985,15 +985,24 @@ html[data-k-lab-lite] .am-sub {
 html[data-k-lab-lite] .am-intro {
   max-width: none;
   width: 100%;
+  margin-top: 8px;
   margin-inline: 0;
   text-align: center;
+  line-height: 1.4;
+  min-height: 0;
 }
 html[data-k-lab-lite] .am-intro .am-callout {
   text-align: center;
+  padding: 4px 12px;
+  min-height: 0;
+  line-height: 1.4;
 }
 html[data-k-lab-lite] .am-intro .am-callout-body,
 html[data-k-lab-lite] .am-intro .am-callout-body p {
   text-align: center;
+  margin: 0;
+  line-height: 1.4;
+  min-height: 0;
 }
 `.trim();
 
@@ -1004,10 +1013,12 @@ function writeThemeCss() {
     process.exit(1);
   }
   let css = readFileSync(THEME_CSS_PATH, "utf8");
-  if (!css.includes("K站 Lab intro overrides")) {
-    css = `${css.trimEnd()}\n\n${K_LAB_THEME_OVERRIDES}\n`;
-    writeFileSync(THEME_CSS_PATH, css);
-  }
+  // Always replace lab overrides so regenerating picks up K_LAB_THEME_OVERRIDES edits.
+  const marker = "/* ── K站 Lab intro overrides";
+  const idx = css.indexOf(marker);
+  if (idx >= 0) css = css.slice(0, idx).trimEnd();
+  css = `${css}\n\n${K_LAB_THEME_OVERRIDES}\n`;
+  writeFileSync(THEME_CSS_PATH, css);
   console.log(`theme.css → ${THEME_CSS_PATH} (${readFileSync(THEME_CSS_PATH).length} bytes)`);
 }
 
