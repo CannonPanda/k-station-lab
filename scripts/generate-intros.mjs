@@ -1,18 +1,10 @@
 #!/usr/bin/env node
 /**
- * Generate K站 Lab project intro HTML via sam (paper-only, no toolbar/runtime).
+ * Generate K站 Lab project intro HTML via sam (paper-only).
  *
- * Pipeline:
- *   1. `sam css -o public/intros/theme.css`
- *   2. draft Markdown by category/traits → `sam render --css-href … --no-open`
- *   3. postprocess: drop #am-source / any script / leftover chrome
- *
- * Drafts intentionally differ by type (no global A–F form template):
- *   framework/engine → flow + kv + annot (+ timeline when historic)
- *   template/scaffold → tree + timeline
- *   skill/agent      → sequence or flow
- *   tool library     → limits + callout + compare table
- *   config           → tree + annot + limits
+ * 组件选用：先看每个项目要讲清的信息形状，再选 flow/sequence/tree/timeline/
+ * 对比表/limits/callout/annot/kv。禁止按 category 套统一面板，禁止全站 A–F。
+ * 一页最多 1–2 个重点可视化；能文字别硬画。
  *
  * Usage: node scripts/generate-intros.mjs
  */
@@ -30,10 +22,10 @@ const THEME_CSS_PATH = join(OUT_DIR, "theme.css");
 
 function resolveSam() {
   const candidates = [
-    "/workspace/sam/bin/sam.js",
     "/workspace/sam/skills/sam/scripts/sam.mjs",
-    join(ROOT, "..", "sam", "bin", "sam.js"),
+    "/workspace/sam/bin/sam.js",
     join(ROOT, "..", "sam", "skills", "sam", "scripts", "sam.mjs"),
+    join(ROOT, "..", "sam", "bin", "sam.js"),
   ];
   for (const c of candidates) {
     if (existsSync(c)) return { cmd: "node", argsPrefix: [c] };
@@ -48,45 +40,13 @@ mkdirSync(DRAFT_DIR, { recursive: true });
 
 const data = JSON.parse(readFileSync(join(ROOT, "src/data/projects.json"), "utf8"));
 const catMap = Object.fromEntries(data.categories.map((c) => [c.id, c]));
+
 function formatStars(n) {
   return n.toLocaleString("en-US");
 }
 
-/** Subtypes within library: framework engines vs tool/UI libraries. */
-const FRAMEWORK_IDS = new Set(["astro", "hugo", "vitepress", "eleventy"]);
-const TOOL_IDS = new Set([
-  "tailwindcss",
-  "shadcn-ui",
-  "magicui",
-  "motion",
-  "threejs",
-  "lenis",
-]);
-/** Projects with meaningful history → add timeline panel. */
-const HISTORIC_IDS = new Set([
-  "hugo",
-  "eleventy",
-  "threejs",
-  "motion",
-  "simplefolio",
-  "devportfolio",
-  "astro",
-  "vitepress",
-  "tailwindcss",
-]);
-
-function metaKv(p, cat) {
-  const metaLine = `${p.created}，★ ${formatStars(p.stars)}`;
-  const lines = [
-    `元信息: ${metaLine}`,
-    `分类: ${cat.name}`,
-    `仓库: [${p.url.replace("https://github.com/", "")}](${p.url})`,
-  ];
-  if (p.homepage) {
-    lines.push(`主页: [${p.homepage.replace(/^https?:\/\//, "")}](${p.homepage})`);
-  }
-  if (cat.desc) lines.push(`分类说明: ${cat.desc}`);
-  return lines.join("\n");
+function metaLine(p) {
+  return `${p.created}，★ ${formatStars(p.stars)}`;
 }
 
 function fm(p, subtitle) {
@@ -106,675 +66,756 @@ function entry(p) {
 ${p.homepage ? `- 主页：[打开](${p.homepage})` : "- 暂无单独主页，以 GitHub 仓库为准。"}`;
 }
 
-/** Per-project visual bodies: fences must be substantive, not empty shells. */
-const VISUAL = {
-  // ── Framework / engine (library) ─────────────────────────────────
-  astro: {
-    kind: "framework",
-    flow: `\`\`\`flow LR
-(内容 Markdown/MDX) -> Astro 构建
+function kvBlock(p, cat, extraLines = []) {
+  const lines = [
+    `元信息: ${metaLine(p)}`,
+    `分类: ${cat.name}`,
+    `仓库: [${p.url.replace("https://github.com/", "")}](${p.url})`,
+  ];
+  if (p.homepage) {
+    lines.push(`主页: [${p.homepage.replace(/^https?:\/\//, "")}](${p.homepage})`);
+  }
+  for (const x of extraLines) lines.push(x);
+  return `\`\`\`kv cols=1
+${lines.join("\n")}
+\`\`\``;
+}
+
+/**
+ * 每个项目一份草稿：面板标题与组件因「要讲清什么」而异，
+ * 不共享 draftFramework / draftTool 之类按类型套版函数。
+ */
+const DRAFTS = {
+  // ── Astro：核心是岛屿构建路径（步骤/调用）→ 一个 flow；选型用表 ──
+  astro(p, cat) {
+    return `${fm(p, "岛屿架构 · 内容站默认推荐")}
+
+\`\`\`callout info 一句话
+**${p.name}**：${p.summary}
+\`\`\`
+
+## 坐标
+${kvBlock(p, cat)}
+
+## 内容怎样变成可部署页
+要讲清的是「默认零 JS → 交互块按需 hydrate」这条路径，用 flow 比长文快。
+
+\`\`\`flow LR
+(Markdown/MDX) -> Astro 构建
 Astro 构建 -> *零 JS HTML: 默认
 Astro 构建 --> {需要交互?}
 {需要交互?} -> React/Vue/Svelte 岛: hydrate
 {需要交互?} --> 静态输出
-静态输出 & React/Vue/Svelte 岛 -> [(部署 Pages/CDN)]
-group Astro 核心: Astro 构建, 零 JS HTML, React/Vue/Svelte 岛
-\`\`\``,
-    annot: `\`\`\`annot
-# 岛屿架构一句话
-默认输出 [零客户端 JS]{首屏只下 HTML/CSS}；交互块标成 [岛屿]{按需 hydrate React/Vue/Svelte}，其余保持静态。
-> 内容站优先；满屏 SPA 交互不是它的甜点区
-\`\`\``,
-    timeline: `\`\`\`timeline
-2021-03 | 公开发布 | withastro/astro
-2022 | 岛屿架构定型 | 内容站与营销页起飞
-2023–24 | View Transitions / Content Layer | 酷站与内容管线加强
-*2026 | K站选用 | 内容为主、交互为辅的默认推荐
-\`\`\``,
-    compare: `| 维度 | Astro | VitePress | Hugo | Eleventy |
+静态输出 & React/Vue/Svelte 岛 -> [(Pages/CDN)]
+group 岛屿核心: Astro 构建, 零 JS HTML, React/Vue/Svelte 岛
+\`\`\`
+
+## 和 Hugo / VitePress / Eleventy 怎么选
+
+| 维度 | Astro | VitePress | Hugo | Eleventy |
 |---|---|---|---|---|
 | 默认 JS | ok 零 JS + 岛 | warn 文档壳有 Vue | ok 几乎无运行时 | ok 干净 HTML |
 | 文档约定 | warn 自搭 | ok 开箱文档 UX | warn 主题自制 | warn 自拼 |
 | 构建速度 | ok 快 | ok Vite | ok 极致 Go | ok 中等 |
 | 组件岛 | ok 多框架 | warn 绑 Vue | no 弱 | no 弱 |
-| 酷站适配 | ok 强 | warn 偏文档 | ok 主题/partials | ok 杂志风 |`,
-    verdict: "内容为主、交互为辅 → Astro；纯文档默认体验 → VitePress；极速大站 → Hugo。",
-    tips: "用 `npm create astro` 起步；交互块用岛屿。配 Tailwind + 静态输出。酷站可开 View Transitions，严格控制客户端岛数量。",
+| 酷站适配 | ok 强 | warn 偏文档 | ok 主题/partials | ok 杂志风 |
+
+内容为主、交互为辅 → Astro；纯文档默认体验 → VitePress；极速大站 → Hugo；要完全掌控标记 → Eleventy。
+
+## 落地要点
+${p.usage}
+
+\`\`\`callout ok 记住
+交互块用岛屿，严格控制客户端岛数量；满屏 SPA 不是甜点区。
+\`\`\`
+
+${entry(p)}
+`;
   },
-  hugo: {
-    kind: "framework",
-    flow: `\`\`\`flow TB
-(Markdown + shortcodes) -> Hugo 引擎: Go
-Hugo 引擎 -> 主题 / partials
-主题 / partials -> 资源管线: 图片/CSS/JS
-资源管线 -> *静态站点
-静态站点 -> [(CDN / Pages)]
-group 构建: Hugo 引擎, 主题 / partials, 资源管线
-\`\`\``,
-    annot: `\`\`\`annot
-# 速度从哪来
+
+  // ── Hugo：要讲清的是「快从哪来」（句内强调）→ annot；选型用表；不画第二张构建图 ──
+  hugo(p, cat) {
+    return `${fm(p, "Go 极速静态站")}
+
+\`\`\`callout info 一句话
+**${p.name}**：${p.summary}
+\`\`\`
+
+## 坐标
+${kvBlock(p, cat, ["定位: 海量页秒级重建的静态引擎"])}
+
+## 速度从哪来
+这里要强调的是「Go 单二进制 + 构建期展开」，用 annot 标关键短语比再画一张流水线图更贴切。
+
+\`\`\`annot
+# 为什么海量页仍能秒级
 Hugo 用 [Go 单二进制]{无 Node 依赖树} 扫内容；[shortcodes]{可复用内容块} 与主题 partials 在构建期展开，输出纯静态。
-> 海量页重建常是秒级；现代组件岛要另想办法
-\`\`\``,
-    timeline: `\`\`\`timeline
-2013-07 | 初版 | gohugoio/hugo
-2015–18 | 主题生态爆发 | 博客/文档标配
-2020+ | 管线与模块化 | 资源处理、模块
-*今 | 极速大站首选 | 与 Astro/VitePress 分工并存
-\`\`\``,
-    compare: `| 维度 | Hugo | Astro | VitePress | Eleventy |
-|---|---|---|---|---|
-| 构建 | ok Go 极速 | ok 快 | ok Vite | ok 中等 |
-| 主题 | ok 成熟 | warn 自选起步 | ok 文档默认 | warn 自拼 |
-| 岛屿/组件 | no 弱 | ok 强 | warn Vue | no 弱 |
-| 模板感 | warn shortcodes | ok 组件 | ok Vue | ok 引擎自由 |`,
-    verdict: "大量页面 + 要快 → Hugo；要现代组件岛 → Astro；要 Vue 文档站 → VitePress。",
-    tips: "装好 Hugo 后选主题快速出站；内容用 Markdown + shortcodes。管线资源处理与内联关键 CSS 做酷站。",
+> 现代组件岛要另想办法；要岛屿请看 Astro
+\`\`\`
+
+## 什么时候选它，什么时候别选
+
+| 你要… | 更合适 |
+|---|---|
+| 大量页面 + 极致构建速度 | ok Hugo |
+| 多框架组件岛 / 营销酷站 | ok Astro |
+| Vue 文档站开箱体验 | ok VitePress |
+| 完全自控干净 HTML、杂志风 | ok Eleventy |
+
+## 用法
+${p.usage}
+
+${entry(p)}
+`;
   },
-  vitepress: {
-    kind: "framework",
-    flow: `\`\`\`flow LR
-(Markdown 文档) -> VitePress: Vite+Vue
-VitePress -> 默认主题: 侧栏/搜索/hero
-默认主题 --> 自定义主题
-VitePress -> Vue 组件岛: 文档内 demo
-默认主题 & Vue 组件岛 -> *文档站
-\`\`\``,
-    annot: `\`\`\`annot
-# 为什么文档站爱它
+
+  // ── VitePress：要讲清「文档默认体验」→ annot；选型用表 ──
+  vitepress(p, cat) {
+    return `${fm(p, "文档站默认体验")}
+
+\`\`\`callout info 一句话
+**${p.name}**：${p.summary}
+\`\`\`
+
+## 坐标
+${kvBlock(p, cat)}
+
+## 为什么文档站爱它
+关键是「开箱主题 + 正文可嵌 Vue」，不是又一条通用 SSG 流水线——用 annot，不硬画 flow。
+
+\`\`\`annot
+# 文档站甜点区
 [默认主题]{侧栏、搜索、首页 hero 开箱} 省掉主题从零；正文可嵌 [Vue 组件]{交互 demo}，与 Vite 热更新一体。
 > 通用营销站/作品集更偏 Astro；纯速度大站偏 Hugo
-\`\`\``,
-    timeline: `\`\`\`timeline
-2020-04 | 启动 | vuejs/vitepress
-2022 | 1.x 稳定 | 文档站默认体验成型
-*今 | API/知识库首选 | 与 Vue 生态强绑定
-\`\`\``,
-    compare: `| 维度 | VitePress | Astro | Hugo | Eleventy |
+\`\`\`
+
+## 和同类怎么分工
+
+| 维度 | VitePress | Astro | Hugo | Eleventy |
 |---|---|---|---|---|
 | 文档 UX | ok 开箱 | warn 自搭 | warn 主题 | warn 自拼 |
 | 框架绑定 | warn Vue | ok 多框架岛 | no 无 | no 无 |
 | 交互 demo | ok Vue | ok 多框架 | no 弱 | no 弱 |
-| 通用酷站 | warn 偏文档 | ok 强 | ok 可 | ok 可 |`,
-    verdict: "文档站默认体验 → VitePress；作品集/营销多形态 → Astro；极速纯内容 → Hugo。",
-    tips: "先默认主题上线，再自定义主题、首页 hero、特性卡片。文档内可用 Vue 组件做 demo。",
+| 通用酷站 | warn 偏文档 | ok 强 | ok 可 | ok 可 |
+
+## 怎么上手
+${p.usage}
+
+${entry(p)}
+`;
   },
-  eleventy: {
-    kind: "framework",
-    flow: `\`\`\`flow LR
-(内容 + 数据) -> 11ty: 模板引擎自选
-11ty -> Nunjucks/Liquid/…
-Nunjucks/Liquid/… -> 插件: Image/分页
-插件 -> *干净 HTML
-干净 HTML -> [(任意静态宿主)]
-\`\`\``,
-    annot: `\`\`\`annot
-# 灵活的代价
-Eleventy [几乎不 bundler 绑架]{输出即你写的 HTML}；模板引擎 [可换]{Nunjucks/Liquid 等}。文档站/岛屿生态要 [自己拼]{!没有 VitePress 那种开箱文档壳}。
-> 杂志风、作品集、完全掌控标记时很香
-\`\`\``,
-    timeline: `\`\`\`timeline
-2017-11 | 发布 | 11ty/eleventy
-2019–22 | 插件生态 | Image、分页、边缘构建
-*今 | 干净 HTML 派 | 与 Astro 岛屿路线并存
-\`\`\``,
-    compare: `| 维度 | Eleventy | Astro | VitePress | Hugo |
+
+  // ── Eleventy：要讲清的是「引擎/插件可选层级」→ tree；对比用表 ──
+  eleventy(p, cat) {
+    return `${fm(p, "干净 HTML · 模板自由")}
+
+\`\`\`callout info 一句话
+**${p.name}**：${p.summary}
+\`\`\`
+
+## 坐标
+${kvBlock(p, cat)}
+
+## 你实际在选什么
+信息形状是「层级可选件」，用 tree；不为丰富再叠一张 flow。
+
+\`\`\`tree list
+Eleventy (11ty) | 几乎不 bundler 绑架
+  模板引擎（可换）
+    Nunjucks
+    Liquid
+    其他…
+  常用插件
+    Image | 图片优化
+    分页
+  *输出 | 就是你写的 HTML
+\`\`\`
+
+## 灵活的代价
+
+| 维度 | Eleventy | Astro | VitePress | Hugo |
 |---|---|---|---|---|
 | HTML 掌控 | ok 极强 | ok 强 | warn 主题层 | ok 强 |
 | 文档开箱 | no 弱 | warn 自搭 | ok 强 | warn 主题 |
 | 岛屿 | no 弱 | ok 强 | warn Vue | no 弱 |
-| 学习曲线 | warn 拼装 | ok 中 | ok 低 | warn Go 主题 |`,
-    verdict: "要掌控干净 HTML → Eleventy；要文档默认体验 → VitePress；要岛屿 → Astro。",
-    tips: "用 11ty Image 等插件做图片优化与分页。与 Tailwind 搭配做作品集、杂志风站点很顺手。",
+| 学习曲线 | warn 拼装 | ok 中 | ok 低 | warn Go 主题 |
+
+要掌控干净 HTML → Eleventy；要文档默认体验 → VitePress；要岛屿 → Astro。
+
+## 用法
+${p.usage}
+
+${entry(p)}
+`;
   },
 
-  // ── Tool libraries ───────────────────────────────────────────────
-  tailwindcss: {
-    kind: "tool",
-    limits: `\`\`\`limits
+  // ── Tailwind：能力边界（可否）→ limits；同栈分工用表 ──
+  tailwindcss(p, cat) {
+    return `${fm(p, "Utility-first 样式底座")}
+
+\`\`\`callout info 一句话
+**${p.name}**：${p.summary}
+\`\`\`
+
+## 坐标
+${kvBlock(p, cat)}
+
+## 它强在哪、弱在哪
+要回答的是「能做什么 / 别指望什么」，limits 比架构图合适。
+
+\`\`\`limits
 Utility 拼 UI 速度 | 9 / 10 | 分 | 类名即样式
 设计系统可维护性 | 7 / 10 | 分 | 靠 theme/@apply
 传统 CSS 迁移成本 | 6 / 10 | 分 | 心智要换
 无障碍组件完备度 | 3 / 10 | 分 | 需 shadcn 等补
-\`\`\``,
-    compare: `| 角色 | Tailwind | shadcn/ui | Magic UI |
+\`\`\`
+
+## 和 shadcn / Magic UI 怎么叠
+
+| 角色 | Tailwind | shadcn/ui | Magic UI |
 |---|---|---|---|
 | 样式原子 | ok 底座 | no 消费它 | no 消费它 |
 | 无障碍组件 | no 无 | ok Button/Dialog… | no 偏特效 |
 | 落地页特效 | warn 自写 | warn 基础 | ok 预制光效 |
-| 源码归属 | ok 框架 | ok 复制进仓 | ok 复制进仓 |`,
-    callouts: `\`\`\`callout warn 别指望它单独给组件
-Tailwind 是样式语言，不是组件库。表单/对话框请接 shadcn；「一眼很酷」接 Magic UI。
+| 源码归属 | ok 框架 | ok 复制进仓 | ok 复制进仓 |
+
+\`\`\`callout warn 别指望它单独给组件
+Tailwind 是样式语言，不是组件库。表单/对话框接 shadcn；「一眼很酷」接 Magic UI。
 \`\`\`
 
-\`\`\`callout ok 酷站底座
-自定义 theme（色板、阴影、动画）+ backdrop-blur / gradient / bento；v4 可用 CSS-first 配置。
-\`\`\``,
-    timeline: `\`\`\`timeline
-2017-10 | 初版 | utility-first 抬头
-2020 | JIT | 构建体积与 DX 质变
-2024 | v4 方向 | CSS-first 配置
-*今 | 酷站标配 | 几乎与 Astro/Next 同出场
-\`\`\``,
-    verdict: "样式底座用 Tailwind；要现成无障碍组件加 shadcn；要一眼很酷的动效加 Magic UI。",
+## 酷站怎么用
+${p.usage}
+
+${entry(p)}
+`;
   },
-  "shadcn-ui": {
-    kind: "tool",
-    limits: `\`\`\`limits
-App/仪表盘出活 | 9 / 10 | 分 | CLI 按需加组件
-无障碍基线 | 9 / 10 | 分 | Radix 底座
-落地页光效 | 4 / 10 | 分 | 交给 Magic UI
-黑盒 npm 依赖 | 1 / 10 | 分 | 源码复制进你的仓
-\`\`\``,
-    compare: `| 维度 | shadcn/ui | Magic UI | Tailwind |
+
+  // ── shadcn：核心概念「复制而非安装」→ annot；分工用表 ──
+  "shadcn-ui"(p, cat) {
+    return `${fm(p, "可复制的无障碍组件")}
+
+\`\`\`callout info 一句话
+**${p.name}**：${p.summary}
+\`\`\`
+
+## 坐标
+${kvBlock(p, cat)}
+
+## 和普通 npm 组件库差在哪
+关键语义是「源码进你的仓」，用 annot 标出来；不再画调用流水线。
+
+\`\`\`annot
+# 复制而非安装
+CLI 把组件源码 [写进仓库]{你可以改}，底座是 [Radix + Tailwind]{无障碍 + 原子样式}——不是黑盒包。
+> 做 App/仪表盘极快；英雄区光效仍交给 Magic UI
+\`\`\`
+
+## 同栈怎么分工
+
+| 维度 | shadcn/ui | Magic UI | Tailwind |
 |---|---|---|---|
 | 定位 | ok 产品 UI 骨架 | ok 营销特效 | ok 样式原子 |
 | 典型件 | Button/Dialog/Card | Marquee/Shine… | 类名 |
-| 同栈 | ok Radix+TW | ok 同栈 | ok 底座 |
-| 用法 | ok 一起：结构+特效 | ok | ok |`,
-    callouts: `\`\`\`callout info 复制而非安装
-CLI 把组件源码写进仓库，你可以改变体、接 Motion、对齐自有设计系统——不是黑盒包。
+| 用法 | ok 结构 + 特效一起 | ok | ok 底座 |
+
+## 用法
+${p.usage}
+
+\`\`\`callout ok 组合
+结构用 shadcn，英雄区用 Magic UI，原子用 Tailwind。
 \`\`\`
 
-\`\`\`callout ok 组合建议
-结构用 shadcn，英雄区用 Magic UI，原子用 Tailwind。
-\`\`\``,
-    verdict: "产品 UI 骨架 → shadcn；营销动效 → Magic UI；样式原子 → Tailwind。",
+${entry(p)}
+`;
   },
-  magicui: {
-    kind: "tool",
-    limits: `\`\`\`limits
+
+  // ── Magic UI：特效层边界 → limits ──
+  magicui(p, cat) {
+    return `${fm(p, "落地页预制特效")}
+
+\`\`\`callout info 一句话
+**${p.name}**：${p.summary}
+\`\`\`
+
+## 坐标
+${kvBlock(p, cat)}
+
+## 适合什么、不适合什么
+
+\`\`\`limits
 落地页「一眼酷」 | 9 / 10 | 分 | 光效/粒子/文字特效
 表单/对话框全家桶 | 2 / 10 | 分 | 请用 shadcn
 自控动画时间线 | 5 / 10 | 分 | 深层编排用 Motion
 复制即用成本 | 9 / 10 | 分 | 改色即可上英雄区
-\`\`\``,
-    compare: `| 维度 | Magic UI | shadcn | Motion |
+\`\`\`
+
+## 和 Motion / shadcn 的分工
+
+| 维度 | Magic UI | shadcn | Motion |
 |---|---|---|---|
 | 形态 | ok 预制特效块 | ok 基础件 | ok 动画引擎 |
 | 场景 | ok hero/CTA | ok App 壳 | ok 入场/手势 |
-| 依赖 | warn 同 TW 栈 | ok | ok 可精用 |`,
-    callouts: `\`\`\`callout warn 特效层不是骨架
-不要用 Magic UI 替代 Dialog/Form。满屏特效会抢内容，优先 Marquee、Shine Border、Animated Beam、Blur Fade。
+
+\`\`\`callout warn 特效层不是骨架
+不要用 Magic UI 替代 Dialog/Form。满屏特效会抢内容；优先 Marquee、Shine Border、Animated Beam、Blur Fade。
 \`\`\`
 
-\`\`\`callout ok 常见组合
-shadcn + Magic UI + 少量 Motion。
-\`\`\``,
-    verdict: "要预制酷站特效 → Magic UI；要自控动画时间线 → Motion；要基础件 → shadcn。",
+## 用法
+${p.usage}
+
+${entry(p)}
+`;
   },
-  motion: {
-    kind: "tool",
-    limits: `\`\`\`limits
+
+  // ── Motion：与 Lenis/Magic 的角色对比 → 表为主；边界用 limits（唯一重点可视化）──
+  motion(p, cat) {
+    return `${fm(p, "UI 动效引擎")}
+
+\`\`\`callout info 一句话
+**${p.name}**：${p.summary}
+\`\`\`
+
+## 坐标
+${kvBlock(p, cat)}
+
+## 能力边界（相对整页滚动 / 预制块）
+
+\`\`\`limits
 元素/布局动画 | 9 / 10 | 分 | React + 原生平手
 滚动插值整页 | 4 / 10 | 分 | 整页丝滑交给 Lenis
 预制光效块 | 3 / 10 | 分 | 预制块用 Magic UI
 无障碍尊重 | 8 / 10 | 分 | 需接 prefers-reduced-motion
-\`\`\``,
-    compare: `| 维度 | Motion | Magic UI | Lenis |
+\`\`\`
+
+## 三者怎么配
+
+| 维度 | Motion | Magic UI | Lenis |
 |---|---|---|---|
 | 角色 | ok 动画引擎 | ok 成品特效 | ok 滚动插值 |
 | whileInView | ok | warn 组件内 | no |
 | 手势/布局 | ok | no | no |
-| 整页质感 | warn 配合 | no | ok |`,
-    callouts: `\`\`\`callout warn 少即是多
+| 整页质感 | warn 配合 | no | ok |
+
+\`\`\`callout warn 少即是多
 酷站关键：少量、有目的 + \`whileInView\`，避免满屏乱动。
 \`\`\`
 
-\`\`\`callout ok 搭配
-可与 Lenis 同步滚动监听；预制块不够再动 Motion 时间线。
-\`\`\``,
-    timeline: `\`\`\`timeline
-2018-11 | Framer Motion | React 动画主流
-2024+ | Motion 品牌 | 原语扩展到原生 JS
-*今 | UI 动效引擎 | 与 Lenis/Magic UI 分工
-\`\`\``,
-    verdict: "元素/布局动画 → Motion；整页丝滑滚动 → Lenis；预制特效块 → Magic UI。",
+## 用法
+${p.usage}
+
+${entry(p)}
+`;
   },
-  threejs: {
-    kind: "tool",
-    limits: `\`\`\`limits
+
+  // ── three.js：3D 边界 + 性能红线 → limits + callout；对比用表 ──
+  threejs(p, cat) {
+    return `${fm(p, "WebGL 三维事实标准")}
+
+\`\`\`callout info 一句话
+**${p.name}**：${p.summary}
+\`\`\`
+
+## 坐标
+${kvBlock(p, cat)}
+
+## 该不该上 3D
+
+\`\`\`limits
 真 3D / WebGL | 10 / 10 | 分 | 事实标准
 2D UI 动效 | 2 / 10 | 分 | 用 Motion/Magic UI
 移动端性能预算 | 5 / 10 | 分 | 低面数+降级必备
 落地页轻 hero | 7 / 10 | 分 | 控制面数与光照
-\`\`\``,
-    compare: `| 维度 | three.js | Motion | Magic UI | Lenis |
+\`\`\`
+
+## 和 2D 动效栈别混用错位
+
+| 维度 | three.js | Motion | Magic UI | Lenis |
 |---|---|---|---|---|
 | 维度 | ok 3D | ok 2D UI | ok 2D 特效 | ok 滚动 |
 | 运行时重量 | warn 重 | ok 中 | ok 中 | ok 轻 |
-| 典型用法 | 场景/粒子 | 入场/手势 | 光效块 | 丝滑滚 |`,
-    callouts: `\`\`\`callout err 性能红线
-低面数模型 + 简单光照；移动端降级。勿与满屏 UI 动效叠加重负。
+
+\`\`\`callout err 性能红线
+低面数模型 + 简单光照；移动端降级。勿与满屏 UI 动效叠加重负。背景轻微漂浮即可，别抢内容焦点。
 \`\`\`
 
-\`\`\`callout ok 酷站用法
-背景网格/球体轻微漂浮即可，别抢内容焦点；复杂场景可上 React Three Fiber。
-\`\`\``,
-    timeline: `\`\`\`timeline
-2010-03 | 诞生 | mrdoob/three.js
-2015–20 | WebGL 普及 | 作品集 3D hero 流行
-*今 | 3D 事实标准 | 与 2D 动效栈分工
-\`\`\``,
-    verdict: "需要真 3D → three.js；2D UI 动效 → Motion/Magic UI；滚动质感 → Lenis。",
+## 用法
+${p.usage}
+
+${entry(p)}
+`;
   },
-  lenis: {
-    kind: "tool",
-    limits: `\`\`\`limits
-整页滚动质感 | 9 / 10 | 分 | 高端作品集手感
-元素关键帧动画 | 3 / 10 | 分 | 交给 Motion
-无障碍风险 | 6 / 10 | 分 | 必须尊重 reduced-motion
-与 ScrollTrigger 同步 | 8 / 10 | 分 | 布局里初始化并桥接
-\`\`\``,
-    compare: `| 维度 | Lenis | Motion | Magic UI |
+
+  // ── Lenis：无障碍易错点 → annot；场景用表/文字 ──
+  lenis(p, cat) {
+    return `${fm(p, "整页丝滑滚动")}
+
+\`\`\`callout info 一句话
+**${p.name}**：${p.summary}
+\`\`\`
+
+## 坐标
+${kvBlock(p, cat)}
+
+## 最容易踩的坑
+信息形状是「句内易错点」，不是架构图。
+
+\`\`\`annot
+# 丝滑 ≠ 无脑开启
+Lenis 管 [滚动插值]{整页手感}；必须尊重 [prefers-reduced-motion]{!忽略会伤用户}。元素关键帧动画仍交给 [Motion]{分工}。
+> 文档站默认滚动往往够用；长落地页/作品集才值得上
+\`\`\`
+
+## 和 Motion / Magic UI
+
+| 维度 | Lenis | Motion | Magic UI |
 |---|---|---|---|
 | 管什么 | ok 滚动插值 | ok 元素动画 | ok 特效块 |
 | 长落地页 | ok 常一起 | ok | warn 局部 |
-| 可关停 | ok prefers-reduced-motion | ok | ok |`,
-    callouts: `\`\`\`callout warn 不要只为「酷」
-忽略 \`prefers-reduced-motion\` 会伤用户。默认滚动「网页感」在文档站往往够用。
-\`\`\`
 
-\`\`\`callout ok 适合场景
-长落地页与作品集；在布局初始化 Lenis，并与 Motion 滚动监听同步。
-\`\`\``,
-    verdict: "要丝滑滚动 → Lenis；要元素动画 → Motion；不要只为「酷」忽略无障碍。",
+## 用法
+${p.usage}
+
+${entry(p)}
+`;
   },
 
-  // ── Skills ───────────────────────────────────────────────────────
-  "answer-me-with-html": {
-    kind: "skill",
-    sequence: `\`\`\`sequence num
+  // ── am：人↔Agent↔CLI 消息序 → 一个 sequence；和 sam 用表 ──
+  "answer-me-with-html"(p, cat) {
+    return `${fm(p, "全功能讲义 Skill")}
+
+\`\`\`callout info 一句话
+**${p.name}**：${p.summary}
+\`\`\`
+
+## 坐标
+${kvBlock(p, cat)}
+
+## 一次提问怎么变成讲义页
+要讲清的是参与者之间的消息序，用 sequence；不再叠一张同构 flow。
+
+\`\`\`sequence num
 participants: 你, Agent, am CLI
 你 -> Agent: 提问（如讲清 TCP 握手）
 Agent -> Agent: 写 3–8 面板 Markdown 草稿
 Agent -> am CLI: am render 草稿
 am CLI --> Agent: ✓ 单文件 HTML 或 ✗ 行号+示例
 Agent --> 你: 讲义页路径（图文/公式/离线）
-\`\`\``,
-    flow: `\`\`\`flow LR
-(复杂问题) -> Agent Skill: answer-me-with-html
-Agent Skill -> 面板草稿: flow/sequence/…
-面板草稿 -> am 渲染
-am 渲染 -> *单文件 HTML
-am 渲染 --> 多主题/视频/回复标注
-\`\`\``,
-    compare: `| 需求 | am（本 skill） | sam | 前端 toolkit |
-|---|---|---|---|
-| 全功能讲义 | ok | warn 精简 | no |
-| iframe 轻页 | warn 偏重 | ok | no |
-| 多主题/视频 | ok | no | no |
-| 前端去模板 | no | no | ok |`,
-    verdict: "要「一页讲清」且要全功能时用本 skill；要轻量 iframe/讲义优先 sam；要「前端更美」用同站 frontend-design 相关 skill。",
-    tips: "面板标题避免塞公式；正文可用 KaTeX/Temml。K站 intros 现已改用 sam 渲染；需要多主题/视频时仍直接用本 skill。",
+\`\`\`
+
+## 什么时候用 am，什么时候用 sam
+
+| 需求 | am（本 skill） | sam |
+|---|---|---|
+| 全功能讲义 | ok | warn 精简 |
+| iframe / 备课轻页 | warn 偏重 | ok |
+| 多主题 / 视频 / 页内回复 | ok | no |
+| K站 intro | warn 现已改用 sam | ok |
+
+## 用法要点
+${p.usage}
+
+\`\`\`callout ok 分工
+要「一页讲清」且要全功能 → am；要轻量 iframe/讲义 → sam。
+\`\`\`
+
+${entry(p)}
+`;
   },
-  sam: {
-    kind: "skill",
-    sequence: `\`\`\`sequence num
+
+  // ── sam：外置 CSS + 渲染轻页的步骤序 → sequence；对比 am 用表 ──
+  sam(p, cat) {
+    return `${fm(p, "纸张精简讲义")}
+
+\`\`\`callout info 一句话
+**${p.name}**：${p.summary}
+\`\`\`
+
+## 坐标
+${kvBlock(p, cat)}
+
+## 出一页轻讲义要几步
+参与者步骤清晰 → sequence；内部 parse/dagre 细节能文字就文字，不硬画第二张 flow。
+
+\`\`\`sequence num
 participants: 作者, sam CLI, 浏览器/iframe
 作者 -> sam CLI: sam css -o theme.css
 作者 -> sam CLI: sam render 草稿 --css-href
 sam CLI --> 作者: ✓ paper HTML（无工具栏/运行时）
 作者 -> 浏览器/iframe: 嵌入轻页
 note 作者, sam CLI: 要视频/多主题则回上游 am
-\`\`\``,
-    flow: `\`\`\`flow LR
-(Markdown 草稿) -> sam parse
-sam parse -> STE + 组件渲染
-组件渲染 -> dagre: flow/er
-STE + 组件渲染 & dagre -> *paper HTML
-group sam: sam parse, STE + 组件渲染, dagre
-\`\`\``,
-    compare: `| 能力 | sam | answer-me-with-html |
+\`\`\`
+
+## 和上游 am 差在哪
+
+| 能力 | sam | answer-me-with-html |
 |---|---|---|
 | 主题 | ok 强制 paper | ok 多主题 |
-| 工具栏/运行时 | no 无 | ok 有 |
-| 视频/页内回复 | no | ok |
-| iframe/备课 | ok 轻 | warn 偏重 |
-| 组件集 | ok 同系展示组件 | ok 更全 |`,
-    verdict: "讲义/iframe 优先 sam；需要主题切换或视频时用 answer-me-with-html。",
-    tips: "CLI：`sam render` 或 skill 内 `scripts/sam.mjs`。可用 `sam css` + `--css-href` 外置 paper.css。面板规则仍是 3–8、一问一板、STE。",
+| 工具栏 / 运行时 | no 无 | ok 有 |
+| 视频 / 页内回复 | no | ok |
+| iframe / 备课 | ok 轻 | warn 偏重 |
+
+组件仍是 flow / sequence / tree / timeline / limits / annot / kv / callout 等同系展示组件；规则：先看信息形状再选，一页最多 1–2 个重点可视化。
+
+## 用法
+${p.usage}
+
+${entry(p)}
+`;
   },
-  "anthropics-skills": {
-    kind: "skill",
-    sequence: `\`\`\`sequence
-participants: 你, Agent, skills 仓
-你 -> Agent: 需要某专项能力（如 frontend-design）
-Agent -> skills 仓: 按子目录安装 skill
-skills 仓 --> Agent: SKILL.md + 脚本/资源
-Agent -> Agent: 按规范执行任务
-Agent --> 你: 去模板化的前端或专项产出
-\`\`\``,
-    tree: `\`\`\`tree list
+
+  // ── anthropics/skills：仓内层级 → tree ──
+  "anthropics-skills"(p, cat) {
+    return `${fm(p, "官方 Skills 合集")}
+
+\`\`\`callout info 一句话
+**${p.name}**：${p.summary}
+\`\`\`
+
+## 坐标
+${kvBlock(p, cat)}
+
+## 仓里该怎么理解
+信息形状是目录层级：「不要整仓当单一 skill」。
+
+\`\`\`tree list
 anthropics/skills | 官方 mega-repo
   skills/
     frontend-design | Web UI 美学与去模板化
     其他专项 skill…
-  不要整仓当单一 skill | 按需引入子目录
-\`\`\``,
-    compare: `| 条目 | 本仓 | sam/am | toolkit / ui-agents |
+  *用法 | 按子目录按需安装，不要整仓当一个 skill
+\`\`\`
+
+## 和同站前端条目怎么选
+
+| 条目 | 本仓 | sam / am | toolkit / ui-agents |
 |---|---|---|---|
-| 性质 | ok 官方合集 | ok 讲义生成 | ok 前端清单/提示 |
+| 性质 | ok 官方合集 | ok 讲义生成 | ok 前端清单 / 提示 |
 | 用法 | ok 子目录按需装 | ok 出 HTML 页 | ok 安装与 prompt |
-| 前端美学 | ok frontend-design | no | ok 互补 |`,
-    verdict: "官方 skill 合集入口 → 本仓；讲义页 → 优先 sam（轻）或 am（全功能）；前端提示精选 → toolkit/ui-agents。",
-    tips: "优先安装 skills/frontend-design 做 Web UI 美学与去模板化。整仓按需引入。",
+| 前端美学 | ok frontend-design | no | ok 互补 |
+
+## 用法
+${p.usage}
+
+${entry(p)}
+`;
   },
-  "claude-code-frontend-design-toolkit": {
-    kind: "skill",
-    flow: `\`\`\`flow TB
+
+  // ── toolkit：从「模板感」到约定的决策路径 → 一个 flow ──
+  "claude-code-frontend-design-toolkit"(p, cat) {
+    return `${fm(p, "前端观感上限清单")}
+
+\`\`\`callout info 一句话
+**${p.name}**：${p.summary}
+\`\`\`
+
+## 坐标
+${kvBlock(p, cat)}
+
+## 什么时候该打开这份清单
+决策路径（是否模板感过重 → 装什么 → 写入约定），用一张 flow 即可。
+
+\`\`\`flow TB
 (Claude Code 默认前端) -> {模板感过重?}
 {模板感过重?} -> 读 toolkit 清单
 读 toolkit 清单 -> 装 skill/插件/MCP
 装 skill/插件/MCP -> 写入 CLAUDE.md 约定
 写入 CLAUDE.md 约定 -> *更好看的落地页/组件
-\`\`\``,
-    sequence: `\`\`\`sequence
-你 -> toolkit: 打开安装清单
-toolkit --> 你: skills / 插件 / MCP / CLAUDE.md
-你 -> 项目: 并入约定并安装
-你 -> Claude Code: 写落地页或改版
-Claude Code --> 你: 去模板化前端
-\`\`\``,
-    compare: `| 维度 | toolkit | anthropics/skills | ui-agents |
+\`\`\`
+
+## 和官方 skills / ui-agents
+
+| 维度 | toolkit | anthropics/skills | ui-agents |
 |---|---|---|---|
-| 形态 | ok 清单+技巧 | ok 官方合集 | ok prompt/agent |
+| 形态 | ok 清单 + 技巧 | ok 官方合集 | ok prompt / agent |
 | 重点 | ok 装什么、怎么约定 | ok 技能源 | ok 任务提示 |
-| 组合 | ok 三者可叠 | ok | ok |`,
-    verdict: "要前端观感上限清单 → 本 toolkit；要官方 skill 源 → anthropics/skills；要 prompt agent → ui-agents。",
-    tips: "按清单安装推荐 skill/插件，把 CLAUDE.md 约定并入项目；写落地页、组件与改版时引用。",
+| 组合 | ok 三者可叠 | ok | ok |
+
+## 用法
+${p.usage}
+
+${entry(p)}
+`;
   },
-  "claude-code-ui-agents": {
-    kind: "skill",
-    sequence: `\`\`\`sequence num
+
+  // ── ui-agents：加载专用 prompt 的消息序 → sequence ──
+  "claude-code-ui-agents"(p, cat) {
+    return `${fm(p, "UI/UX Agent 提示集")}
+
+\`\`\`callout info 一句话
+**${p.name}**：${p.summary}
+\`\`\`
+
+## 坐标
+${kvBlock(p, cat)}
+
+## 专项任务怎么走到专用 agent
+人 ↔ Claude Code ↔ UI Agent 的消息序是核心，用 sequence。
+
+\`\`\`sequence num
 participants: 你, Claude Code, UI Agent
 你 -> Claude Code: 界面重构 / 组件设计 / 体验打磨
 Claude Code -> UI Agent: 加载专用 prompt
 UI Agent -> UI Agent: 按 UI/UX 规范推理
 UI Agent --> Claude Code: 设计与实现建议/补丁
 Claude Code --> 你: 专项任务产出
-\`\`\``,
-    flow: `\`\`\`flow LR
-(通用聊天) -> {UI/UX 专项?}
-{UI/UX 专项?} -> ui-agents 提示集
-ui-agents 提示集 -> *专用 agent
-{UI/UX 专项?} --> 通用对话: 不够稳
-\`\`\``,
-    compare: `| 维度 | ui-agents | toolkit | anthropics/skills |
+\`\`\`
+
+## 和 toolkit / 官方仓
+
+| 维度 | ui-agents | toolkit | anthropics/skills |
 |---|---|---|---|
-| 交付 | ok 提示/agent | ok 安装清单 | ok 官方 skill |
+| 交付 | ok 提示 / agent | ok 安装清单 | ok 官方 skill |
 | 粒度 | ok 任务级 | ok 工程约定 | ok 技能规范 |
-| 组合 | ok +toolkit+官方 | ok | ok |`,
-    verdict: "UI/UX agent 提示 → 本仓；安装与 CLAUDE.md → toolkit；官方底座 → anthropics/skills。",
-    tips: "把对应 UI/组件/体验类 prompt 接入 Claude Code 或 Agent 工作流；专项任务调用专用 agent。",
+
+## 用法
+${p.usage}
+
+\`\`\`callout ok 何时调用
+界面重构、组件设计、体验打磨 → 专用 agent，而不是泛泛聊天。
+\`\`\`
+
+${entry(p)}
+`;
   },
 
-  // ── Templates ────────────────────────────────────────────────────
-  simplefolio: {
-    kind: "template",
-    tree: `\`\`\`tree list
-simplefolio | 极简作品集模板
-  src/data | 姓名、项目、社交
-  样式变量 | 色板与字体
-  分区节奏 | Hero / Projects / Contact
-  *改内容即上线 | 不必先学框架岛
-\`\`\``,
-    timeline: `\`\`\`timeline
+  // ── Simplefolio：上手阶段先后 → timeline；对比用表 ──
+  simplefolio(p, cat) {
+    return `${fm(p, "极简作品集模板")}
+
+\`\`\`callout info 一句话
+**${p.name}**：${p.summary}
+\`\`\`
+
+## 坐标
+${kvBlock(p, cat)}
+
+## 从上线到可选迁移
+时间先后是主问题 → timeline；目录细节用一段话即可，不硬画 tree。
+
+\`\`\`timeline
 1 | Fork 仓库
-2 | 改 src/data 与样式变量
+2 | 改 src/data 与样式变量（姓名、项目、社交）
 3 | 换项目截图与链接
-4 | 部署 Netlify/Pages
-*可选 | 迁到 Astro/Tailwind 保留分区节奏
-\`\`\``,
-    compare: `| 维度 | Simplefolio | devportfolio |
+4 | 部署 Netlify / Pages
+*可选 | 迁到 Astro/Tailwind，保留 Hero / Projects / Contact 分区节奏
+\`\`\`
+
+## 和 devportfolio
+
+| 维度 | Simplefolio | devportfolio |
 |---|---|---|
-| 栈 | warn 经典极简 | ok Astro+Tailwind |
+| 栈 | warn 经典极简 | ok Astro + Tailwind |
 | 上手速度 | ok 改数据即上 | ok clone 改配置 |
 | 酷站起点 | warn 宜迁移 | ok 更合适 |
-| 星标参考 | ★ 14k+ | ★ ~5k |`,
-    verdict: "最快改内容上线 → Simplefolio；现代 Astro 栈 → devportfolio。",
+| 星标参考 | ★ 14k+ | ★ ~5k |
+
+最快改内容上线 → Simplefolio；现代 Astro 栈起点 → devportfolio。
+
+## 用法
+${p.usage}
+
+${entry(p)}
+`;
   },
-  devportfolio: {
-    kind: "template",
-    tree: `\`\`\`tree list
-devportfolio | Astro + Tailwind 作品集
-  配置与内容 | 技能 / 经历 / 项目
-  布局骨架 | 分区可保留
-  *酷站升级点
-    换色板
-    加 glass / bento
+
+  // ── devportfolio：骨架里什么可留/可换 → tree（与 simplefolio 的 timeline 刻意不同）──
+  devportfolio(p, cat) {
+    return `${fm(p, "Astro 作品集起点")}
+
+\`\`\`callout info 一句话
+**${p.name}**：${p.summary}
+\`\`\`
+
+## 坐标
+${kvBlock(p, cat)}
+
+## 酷站升级时动哪里
+信息形状是「保留骨架 / 替换表层」的层级，用 tree；不再复用 Simplefolio 那种阶段 timeline。
+
+\`\`\`tree list
+devportfolio | Astro + Tailwind
+  保留
+    布局骨架与分区
+    配置入口（技能 / 经历 / 项目）
+  替换或加强
+    色板与字体
+    glass / bento
     自有项目卡片
-\`\`\``,
-    timeline: `\`\`\`timeline
-1 | Clone 仓库
-2 | 改配置与 Markdown/内容
-3 | 调 Tailwind 色板
-4 | 部署 GitHub Pages
-*进阶 | glass/bento + 自有卡片，仍留骨架
-\`\`\``,
-    compare: `| 维度 | devportfolio | Simplefolio | 自建 Astro |
+  *目标 | 省布局时间，不锁死视觉
+\`\`\`
+
+## 和 Simplefolio / 自建
+
+| 维度 | devportfolio | Simplefolio | 自建 Astro |
 |---|---|---|---|
 | 技术栈 | ok 现代 | warn 偏经典 | ok 自控 |
 | 省布局时间 | ok | ok | no |
-| 酷站潜力 | ok 高 | warn 需迁 | ok 最高 |`,
-    verdict: "Astro 作品集起点 → devportfolio；更老派极简 fork → Simplefolio。",
+| 酷站潜力 | ok 高 | warn 需迁 | ok 最高 |
+
+## 用法
+${p.usage}
+
+${entry(p)}
+`;
   },
 
-  // ── Config ───────────────────────────────────────────────────────
-  "ke-rules": {
-    kind: "config",
-    tree: `\`\`\`tree list
-ke-rules | 长期协作规矩
+  // ── ke-rules：规矩树 + 职责边界 → tree + limits（两个不同形状，允许）──
+  "ke-rules"(p, cat) {
+    return `${fm(p, "长期协作规矩")}
+
+\`\`\`callout info 一句话
+**${p.name}**：${p.summary}
+\`\`\`
+
+## 坐标
+${kvBlock(p, cat)}
+
+## 规矩覆盖哪些面
+层级清单 → tree。
+
+\`\`\`tree list
+ke-rules | 人读 README / RULES.md
   双 K站推送 | 经典站 + Lab 互不覆盖
-  分类 schema | library/skill/docs/…
+  分类 schema | library / skill / docs / …
   介绍格式 | YYYY-MM-DD，★ N
   讲义优先级 | 轻页 sam → 全功能 am
-  *RULES.md | 用户说新规矩就改并推 k
-\`\`\``,
-    annot: `\`\`\`annot
-# 和讲义 skill 的边界
-ke-rules 管 [怎么维护 K站与介绍]{人读 README/RULES.md}；[不生成讲义页]{出页仍用 sam/am}。
-> 助手开工前对照；口头约定容易漂，以仓库为准
-\`\`\``,
-    limits: `\`\`\`limits
+  *维护方式 | 用户说新规矩就改并推 k
+\`\`\`
+
+## 它可靠在哪、不负责什么
+
+\`\`\`limits
 口头约定可靠度 | 2 / 10 | 分 | 易漂移
 RULES.md 可版本管理 | 9 / 10 | 分 | 改完再推
 介绍日期星标格式 | 10 / 10 | 分 | YYYY-MM-DD，★ N
-替代讲义生成器 | 0 / 10 | 分 | 不是它的职责
-\`\`\``,
-    verdict: "协作与双站规矩 → ke-rules；生成讲义 → 优先 sam，全功能用 am。",
-    tips: "助手开工前对照；用户说新规矩就改 RULES.md 再推到 k。表达格式：YYYY-MM-DD，★ N。",
+替代讲义生成器 | 0 / 10 | 分 | 出页仍用 sam/am
+\`\`\`
+
+## 用法
+${p.usage}
+
+\`\`\`callout ok 边界
+协作与双站规矩 → ke-rules；生成讲义页 → 优先 sam，全功能用 am。
+\`\`\`
+
+${entry(p)}
+`;
   },
 };
 
-function draftFramework(p, cat, v) {
-  const panels = [
-    `\`\`\`callout info 一句话定位
-**${p.name}**（${cat.name}）：${p.summary}
-\`\`\``,
-    `## 元信息与坐标
-\`\`\`kv cols=1
-${metaKv(p, cat)}
-\`\`\``,
-    `## 架构 / 构建怎么走
-${v.flow}`,
-    `## 关键概念怎么读
-${v.annot}`,
-  ];
-  if (v.timeline && HISTORIC_IDS.has(p.id)) {
-    panels.push(`## 简史
-${v.timeline}`);
-  }
-  panels.push(`## 和同类怎么选
-${v.compare}`);
-  panels.push(`## 怎么用好
-${v.tips || p.usage}
-
-\`\`\`callout ok 记住这句
-${v.verdict}
-\`\`\`
-
-${entry(p)}`);
-  return `${fm(p, "框架 / 引擎 · K站介绍")}
-
-${panels.join("\n\n")}
-`;
-}
-
-function draftTool(p, cat, v) {
-  const panels = [
-    `\`\`\`callout info 一句话定位
-**${p.name}**（工具库）：${p.summary}
-\`\`\``,
-    `## 元信息
-\`\`\`kv cols=1
-${metaKv(p, cat)}
-\`\`\``,
-    `## 能力边界
-${v.limits}`,
-    `## 同栈怎么分工
-${v.compare}`,
-    `## 注意点与建议
-${v.callouts}`,
-  ];
-  if (v.timeline && HISTORIC_IDS.has(p.id)) {
-    panels.push(`## 简史
-${v.timeline}`);
-  }
-  panels.push(`## 场景与用法
-${p.usage}
-
-\`\`\`callout ok 记住这句
-${v.verdict}
-\`\`\`
-
-${entry(p)}`);
-  return `${fm(p, "工具库 · K站介绍")}
-
-${panels.join("\n\n")}
-`;
-}
-
-function draftSkill(p, cat, v) {
-  const visualBlock = v.sequence
-    ? `## 一次调用怎么走
-${v.sequence}`
-    : `## 工作流
-${v.flow}`;
-  const second = v.flow && v.sequence
-    ? `## 管线鸟瞰
-${v.flow}`
-    : v.tree
-      ? `## 仓内结构
-${v.tree}`
-      : null;
-
-  const panels = [
-    `\`\`\`callout info 一句话定位
-**${p.name}**（${cat.name}）：${p.summary}
-\`\`\``,
-    `## 元信息
-\`\`\`kv cols=1
-${metaKv(p, cat)}
-\`\`\``,
-    visualBlock,
-  ];
-  if (second) panels.push(second);
-  panels.push(`## 和同站条目怎么选
-${v.compare}`);
-  panels.push(`## 用法要点
-${v.tips || p.usage}
-
-\`\`\`callout ok 记住这句
-${v.verdict}
-\`\`\`
-
-${entry(p)}`);
-  return `${fm(p, "Skill / Agent · K站介绍")}
-
-${panels.join("\n\n")}
-`;
-}
-
-function draftTemplate(p, cat, v) {
-  return `${fm(p, "模板 / 脚手架 · K站介绍")}
-
-\`\`\`callout info 一句话定位
-**${p.name}**（${cat.name}）：${p.summary}
-\`\`\`
-
-## 元信息
-\`\`\`kv cols=1
-${metaKv(p, cat)}
-\`\`\`
-
-## 骨架长什么样
-${v.tree}
-
-## 上手时间线
-${v.timeline}
-
-## 和同类模板怎么选
-${v.compare}
-
-## 用法
-${p.usage}
-
-\`\`\`callout ok 记住这句
-${v.verdict}
-\`\`\`
-
-${entry(p)}
-`;
-}
-
-function draftConfig(p, cat, v) {
-  return `${fm(p, "配置与规范 · K站介绍")}
-
-\`\`\`callout info 一句话定位
-**${p.name}**（${cat.name}）：${p.summary}
-\`\`\`
-
-## 元信息
-\`\`\`kv cols=1
-${metaKv(p, cat)}
-\`\`\`
-
-## 规矩树
-${v.tree}
-
-## 边界怎么读
-${v.annot}
-
-## 可靠度与职责边界
-${v.limits}
-
-## 用法
-${v.tips || p.usage}
-
-\`\`\`callout ok 记住这句
-${v.verdict}
-\`\`\`
-
-${entry(p)}
-`;
-}
-
 function draftFor(p) {
   const cat = catMap[p.category] || { name: p.category, desc: "" };
-  const v = VISUAL[p.id];
-  if (!v) {
-    // Fallback: still avoid A–F form — kv + callout + usage only
+  const builder = DRAFTS[p.id];
+  if (!builder) {
+    // 无定制形状时：只给定位 + kv + 用法，不强行可视化
     return `${fm(p, "K站项目介绍")}
 
-\`\`\`callout info 一句话定位
+\`\`\`callout info 一句话
 **${p.name}**（${cat.name}）：${p.summary}
 \`\`\`
 
-## 元信息
-\`\`\`kv cols=1
-${metaKv(p, cat)}
-\`\`\`
+## 坐标
+${kvBlock(p, cat)}
 
 ## 用法
 ${p.usage}
@@ -782,13 +823,7 @@ ${p.usage}
 ${entry(p)}
 `;
   }
-
-  if (v.kind === "framework") return draftFramework(p, cat, v);
-  if (v.kind === "tool") return draftTool(p, cat, v);
-  if (v.kind === "skill") return draftSkill(p, cat, v);
-  if (v.kind === "template") return draftTemplate(p, cat, v);
-  if (v.kind === "config") return draftConfig(p, cat, v);
-  throw new Error(`unknown kind for ${p.id}`);
+  return builder(p, cat);
 }
 
 function postprocessLite(htmlPath) {
@@ -841,7 +876,7 @@ function writeThemeCss() {
 }
 
 function renderOnce(draftPath, outPath) {
-  const args = [
+  return runSam([
     "render",
     draftPath,
     "-o",
@@ -849,9 +884,10 @@ function renderOnce(draftPath, outPath) {
     "--no-open",
     "--css-href",
     THEME_CSS_HREF,
-  ];
-  return runSam(args);
+  ]);
 }
+
+const VIZ = new Set(["flow", "sequence", "tree", "timeline", "er", "annot", "limits"]);
 
 console.log(`sam via: ${SAM.cmd} ${SAM.argsPrefix.join(" ")}`.trim());
 writeThemeCss();
@@ -865,12 +901,21 @@ for (const p of data.projects) {
   const draftPath = join(DRAFT_DIR, `${p.id}.md`);
   writeFileSync(draftPath, md);
 
-  // Detect fences used in draft for report
   const fences = [...md.matchAll(/```(\w+)/g)].map((m) => m[1]);
-  const uniq = [...new Set(fences)].filter((x) =>
+  const all = [...new Set(fences)].filter((x) =>
     ["flow", "sequence", "tree", "timeline", "er", "annot", "limits", "kv", "callout"].includes(x),
   );
-  componentReport[p.id] = { category: p.category, kind: VISUAL[p.id]?.kind || "fallback", components: uniq };
+  const viz = all.filter((x) => VIZ.has(x));
+  componentReport[p.id] = {
+    category: p.category,
+    components: all,
+    focusViz: viz,
+    focusVizCount: viz.length,
+  };
+
+  if (viz.length > 2) {
+    console.warn(`WARN ${p.id}: focus viz count ${viz.length} > 2 (${viz.join(",")})`);
+  }
 
   if (existsSync(outPath)) unlinkSync(outPath);
   const { code, out } = renderOnce(draftPath, outPath);
@@ -879,7 +924,7 @@ for (const p of data.projects) {
     postprocessLite(outPath);
     const bytes = readFileSync(outPath).length;
     results.push({ id: p.id, name: p.name, path: outPath, ok: true, bytes });
-    console.log(`OK ${p.id} (${bytes} B) [${uniq.join(",")}]`);
+    console.log(`OK ${p.id} (${bytes} B) viz=[${viz.join(",") || "none"}] all=[${all.join(",")}]`);
   } else {
     console.error(`FAIL ${p.id} (code=${code}):\n${out}`);
     results.push({ id: p.id, name: p.name, ok: false, out: out.slice(0, 800) });

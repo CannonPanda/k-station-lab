@@ -9,16 +9,16 @@
 </head>
 <body>
 <main class="am-doc">
-<header class="am-head"><h1>three.js</h1><p class="am-sub">工具库 · K站介绍</p><div class="am-intro am-md"><div class="am-callout am-callout--info" role="note"><div class="am-callout-title">一句话定位</div><div class="am-callout-body am-md"><p><strong>three.js</strong>（工具库）：WebGL 三维图形库，浏览器里做 3D 场景、粒子与交互可视化的事实标准。</p>
+<header class="am-head"><h1>three.js</h1><p class="am-sub">WebGL 三维事实标准</p><div class="am-intro am-md"><div class="am-callout am-callout--info" role="note"><div class="am-callout-title">一句话</div><div class="am-callout-body am-md"><p><strong>three.js</strong>：WebGL 三维图形库，浏览器里做 3D 场景、粒子与交互可视化的事实标准。</p>
 </div></div></div></header>
 <div class="am-doc-layout">
-<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 元信息</a><a href="#panel-B">B · 能力边界</a><a href="#panel-C">C · 同栈怎么分工</a><a href="#panel-D">D · 注意点与建议</a><a href="#panel-E">E · 简史</a><a href="#panel-F">F · 场景与用法</a></nav><div class="am-doc-body">
+<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 坐标</a><a href="#panel-B">B · 该不该上 3D</a><a href="#panel-C">C · 和 2D 动效栈别混用错位</a><a href="#panel-D">D · 用法</a></nav><div class="am-doc-body">
 <section class="am-panel" id="panel-A">
-<header class="am-panel-head"><span class="am-panel-id">A</span><h2>元信息</h2></header>
-<div class="am-panel-body"><dl class="am-kv" style="--kv-cols: 1"><div class="am-kv-cell"><dt>元信息</dt><dd>2010-03-23，★ 116,336</dd></div><div class="am-kv-cell"><dt>分类</dt><dd>代码库 / 引擎</dd></div><div class="am-kv-cell"><dt>仓库</dt><dd><a href="https://github.com/mrdoob/three.js">mrdoob/three.js</a></dd></div><div class="am-kv-cell"><dt>主页</dt><dd><a href="https://threejs.org/">threejs.org/</a></dd></div><div class="am-kv-cell"><dt>分类说明</dt><dd>给别人用的库、框架、工具</dd></div></dl></div>
+<header class="am-panel-head"><span class="am-panel-id">A</span><h2>坐标</h2></header>
+<div class="am-panel-body"><dl class="am-kv" style="--kv-cols: 1"><div class="am-kv-cell"><dt>元信息</dt><dd>2010-03-23，★ 116,336</dd></div><div class="am-kv-cell"><dt>分类</dt><dd>代码库 / 引擎</dd></div><div class="am-kv-cell"><dt>仓库</dt><dd><a href="https://github.com/mrdoob/three.js">mrdoob/three.js</a></dd></div><div class="am-kv-cell"><dt>主页</dt><dd><a href="https://threejs.org/">threejs.org/</a></dd></div></dl></div>
 </section>
 <section class="am-panel" id="panel-B">
-<header class="am-panel-head"><span class="am-panel-id">B</span><h2>能力边界</h2></header>
+<header class="am-panel-head"><span class="am-panel-id">B</span><h2>该不该上 3D</h2></header>
 <div class="am-panel-body"><div class="am-limits"><div class="am-lim">
 <div class="am-lim-head"><span>真 3D / WebGL<span class="am-lim-note">事实标准</span></span><span class="am-lim-val">10 / max 10 分</span></div>
 <div class="am-lim-track"><div class="am-lim-fill" style="width: 66.67%"></div><div class="am-lim-mark" style="left: 66.67%"></div></div>
@@ -38,7 +38,7 @@
 </div></div></div>
 </section>
 <section class="am-panel" id="panel-C">
-<header class="am-panel-head"><span class="am-panel-id">C</span><h2>同栈怎么分工</h2></header>
+<header class="am-panel-head"><span class="am-panel-id">C</span><h2>和 2D 动效栈别混用错位</h2></header>
 <div class="am-panel-body"><div class="am-md"><div class="am-table-wrap"><table>
 <thead>
 <tr>
@@ -63,34 +63,15 @@
 <td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>中</span></td>
 <td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>轻</span></td>
 </tr>
-<tr>
-<td>典型用法</td>
-<td>场景/粒子</td>
-<td>入场/手势</td>
-<td>光效块</td>
-<td>丝滑滚</td>
-</tr>
 </tbody></table></div>
-</div></div>
-</section>
-<section class="am-panel" id="panel-D">
-<header class="am-panel-head"><span class="am-panel-id">D</span><h2>注意点与建议</h2></header>
-<div class="am-panel-body"><div class="am-callout am-callout--err" role="note"><div class="am-callout-title">性能红线</div><div class="am-callout-body am-md"><p>低面数模型 + 简单光照；移动端降级。勿与满屏 UI 动效叠加重负。</p>
-</div></div>
-<div class="am-callout am-callout--ok" role="note"><div class="am-callout-title">酷站用法</div><div class="am-callout-body am-md"><p>背景网格/球体轻微漂浮即可，别抢内容焦点；复杂场景可上 React Three Fiber。</p>
+</div>
+<div class="am-callout am-callout--err" role="note"><div class="am-callout-title">性能红线</div><div class="am-callout-body am-md"><p>低面数模型 + 简单光照；移动端降级。勿与满屏 UI 动效叠加重负。背景轻微漂浮即可，别抢内容焦点。</p>
 </div></div></div>
 </section>
-<section class="am-panel" id="panel-E">
-<header class="am-panel-head"><span class="am-panel-id">E</span><h2>简史</h2></header>
-<div class="am-panel-body"><div class="am-tl-wrap"><ol class="am-timeline am-timeline--h" style="--n: 3"><li class="am-tl-item"><span class="am-tl-when">2010-03</span><span class="am-tl-dot"></span><span class="am-tl-title">诞生</span><span class="am-tl-text">mrdoob/three.js</span></li><li class="am-tl-item"><span class="am-tl-when">2015–20</span><span class="am-tl-dot"></span><span class="am-tl-title">WebGL 普及</span><span class="am-tl-text">作品集 3D hero 流行</span></li><li class="am-tl-item am-tl-item--hi"><span class="am-tl-when">今</span><span class="am-tl-dot"></span><span class="am-tl-title">3D 事实标准</span><span class="am-tl-text">与 2D 动效栈分工</span></li></ol></div></div>
-</section>
-<section class="am-panel" id="panel-F">
-<header class="am-panel-head"><span class="am-panel-id">F</span><h2>场景与用法</h2></header>
+<section class="am-panel" id="panel-D">
+<header class="am-panel-head"><span class="am-panel-id">D</span><h2>用法</h2></header>
 <div class="am-panel-body"><div class="am-md"><p>落地页放轻量 3D hero（低面数模型 + 简单光照）；或用 React Three Fiber。注意性能与移动端降级。酷站用法：背景网格/球体轻微漂浮，别抢内容焦点。</p>
-</div>
-<div class="am-callout am-callout--ok" role="note"><div class="am-callout-title">记住这句</div><div class="am-callout-body am-md"><p>需要真 3D → three.js；2D UI 动效 → Motion/Magic UI；滚动质感 → Lenis。</p>
-</div></div>
-<div class="am-md"><h3>入口</h3>
+<h3>入口</h3>
 <ul>
 <li>GitHub：<a href="https://github.com/mrdoob/three.js">three.js</a></li>
 <li>主页：<a href="https://threejs.org/">打开</a></li>

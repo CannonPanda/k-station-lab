@@ -9,28 +9,22 @@
 </head>
 <body>
 <main class="am-doc">
-<header class="am-head"><h1>Eleventy</h1><p class="am-sub">框架 / 引擎 · K站介绍</p><div class="am-intro am-md"><div class="am-callout am-callout--info" role="note"><div class="am-callout-title">一句话定位</div><div class="am-callout-body am-md"><p><strong>Eleventy</strong>（代码库 / 引擎）：极简灵活的静态站点生成器，模板引擎自由选型，输出干净 HTML。</p>
+<header class="am-head"><h1>Eleventy</h1><p class="am-sub">干净 HTML · 模板自由</p><div class="am-intro am-md"><div class="am-callout am-callout--info" role="note"><div class="am-callout-title">一句话</div><div class="am-callout-body am-md"><p><strong>Eleventy</strong>：极简灵活的静态站点生成器，模板引擎自由选型，输出干净 HTML。</p>
 </div></div></div></header>
 <div class="am-doc-layout">
-<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 元信息与坐标</a><a href="#panel-B">B · 架构 / 构建怎么走</a><a href="#panel-C">C · 关键概念怎么读</a><a href="#panel-D">D · 简史</a><a href="#panel-E">E · 和同类怎么选</a><a href="#panel-F">F · 怎么用好</a></nav><div class="am-doc-body">
+<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 坐标</a><a href="#panel-B">B · 你实际在选什么</a><a href="#panel-C">C · 灵活的代价</a><a href="#panel-D">D · 用法</a></nav><div class="am-doc-body">
 <section class="am-panel" id="panel-A">
-<header class="am-panel-head"><span class="am-panel-id">A</span><h2>元信息与坐标</h2></header>
-<div class="am-panel-body"><dl class="am-kv" style="--kv-cols: 1"><div class="am-kv-cell"><dt>元信息</dt><dd>2017-11-27，★ 19,964</dd></div><div class="am-kv-cell"><dt>分类</dt><dd>代码库 / 引擎</dd></div><div class="am-kv-cell"><dt>仓库</dt><dd><a href="https://github.com/11ty/eleventy">11ty/eleventy</a></dd></div><div class="am-kv-cell"><dt>主页</dt><dd><a href="https://www.11ty.dev/">www.11ty.dev/</a></dd></div><div class="am-kv-cell"><dt>分类说明</dt><dd>给别人用的库、框架、工具</dd></div></dl></div>
+<header class="am-panel-head"><span class="am-panel-id">A</span><h2>坐标</h2></header>
+<div class="am-panel-body"><dl class="am-kv" style="--kv-cols: 1"><div class="am-kv-cell"><dt>元信息</dt><dd>2017-11-27，★ 19,964</dd></div><div class="am-kv-cell"><dt>分类</dt><dd>代码库 / 引擎</dd></div><div class="am-kv-cell"><dt>仓库</dt><dd><a href="https://github.com/11ty/eleventy">11ty/eleventy</a></dd></div><div class="am-kv-cell"><dt>主页</dt><dd><a href="https://www.11ty.dev/">www.11ty.dev/</a></dd></div></dl></div>
 </section>
 <section class="am-panel" id="panel-B">
-<header class="am-panel-head"><span class="am-panel-id">B</span><h2>架构 / 构建怎么走</h2></header>
-<div class="am-panel-body"><figure class="am-diagram am-flow"><svg viewBox="0 0 996 77" width="996" height="77" role="img" aria-label="流程图：内容 + 数据、11ty、Nunjucks/Liquid/…、插件、干净 HTML、任意静态宿主" xmlns="http://www.w3.org/2000/svg"><defs><marker id="am1-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="am-arrow" d="M0,0 L10,5 L0,10 z"/></marker></defs><g></g><g><g data-step="0"><path class="am-edge" d="M121.1,38.5 L152.8,38.5 Q184.6,38.5 216.3,38.5 L248.1,38.5" marker-end="url(#am1-arrow)"/><g class="am-edge-label"><rect x="145.1" y="29.5" width="79" height="18" rx="3"/><text x="184.6" y="38.5" text-anchor="middle" dominant-baseline="central">模板引擎自选</text></g></g><g data-step="1"><path class="am-edge" d="M312.1,38.5 L323.6,38.5 Q335.1,38.5 346.6,38.5 L358.1,38.5" marker-end="url(#am1-arrow)"/></g><g data-step="2"><path class="am-edge" d="M503.6,38.5 L533.7,38.5 Q563.8,38.5 593.8,38.5 L623.9,38.5" marker-end="url(#am1-arrow)"/><g class="am-edge-label"><rect x="527.6" y="29.5" width="72.3" height="18" rx="3"/><text x="563.8" y="38.5" text-anchor="middle" dominant-baseline="central">Image/分页</text></g></g><g data-step="3"><path class="am-edge" d="M687.9,38.5 L699.4,38.5 Q710.9,38.5 722.4,38.5 L733.9,38.5" marker-end="url(#am1-arrow)"/></g><g data-step="4"><path class="am-edge" d="M829.5,38.5 L841,38.5 Q852.5,38.5 864,38.5 L875.5,38.5" marker-end="url(#am1-arrow)"/></g></g><g><g class="am-node am-node--round" data-key="内容 + 数据" data-step="0"><rect class="am-node-shape" x="14" y="21" width="107.1" height="35" rx="17.5"/><text x="67.5" y="38.5" text-anchor="middle" dominant-baseline="central">内容 + 数据</text></g><g class="am-node am-node--rect" data-key="11ty" data-step="0"><rect class="am-node-shape" x="248.1" y="21" width="64" height="35" rx="3"/><text x="280.1" y="38.5" text-anchor="middle" dominant-baseline="central">11ty</text></g><g class="am-node am-node--rect" data-key="Nunjucks/Liquid/…" data-step="1"><rect class="am-node-shape" x="358.1" y="21" width="145.5" height="35" rx="3"/><text x="430.8" y="38.5" text-anchor="middle" dominant-baseline="central">Nunjucks/Liquid/…</text></g><g class="am-node am-node--rect" data-key="插件" data-step="2"><rect class="am-node-shape" x="623.9" y="21" width="64" height="35" rx="3"/><text x="655.9" y="38.5" text-anchor="middle" dominant-baseline="central">插件</text></g><g class="am-node am-node--rect am-node--hi" data-key="干净 HTML" data-step="3"><rect class="am-node-shape" x="733.9" y="21" width="95.6" height="35" rx="3"/><text x="781.7" y="38.5" text-anchor="middle" dominant-baseline="central">干净 HTML</text></g><g class="am-node am-node--db" data-key="任意静态宿主" data-step="4"><path class="am-node-shape" d="M875.5,21 A53,7 0 0 1 981.5,21 V56 A53,7 0 0 1 875.5,56 Z"/><path class="am-node-shape" d="M875.5,21 A53,7 0 0 0 981.5,21"/><text x="928.5" y="42.5" text-anchor="middle" dominant-baseline="central">任意静态宿主</text></g></g></svg></figure></div>
+<header class="am-panel-head"><span class="am-panel-id">B</span><h2>你实际在选什么</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>信息形状是「层级可选件」，用 tree；不为丰富再叠一张 flow。</p>
+</div>
+<div class="am-tree"><div class="am-tree-root am-tree-root--solo"><div class="am-tree-box am-tree-box--root" data-key="Eleventy (11ty)" data-step="0">Eleventy (11ty)<small>几乎不 bundler 绑架</small></div></div><ul class="am-tree-list"><li data-key="模板引擎（可换）" data-step="1"><span class="am-tree-label">模板引擎（可换）</span><ul><li data-key="Nunjucks" data-step="2"><span class="am-tree-label">Nunjucks</span></li><li data-key="Liquid" data-step="3"><span class="am-tree-label">Liquid</span></li><li data-key="其他…" data-step="4"><span class="am-tree-label">其他…</span></li></ul></li><li data-key="常用插件" data-step="5"><span class="am-tree-label">常用插件</span><ul><li data-key="Image" data-step="6"><span class="am-tree-label">Image</span><span class="am-tree-sub">图片优化</span></li><li data-key="分页" data-step="7"><span class="am-tree-label">分页</span></li></ul></li><li class="am-tree-hi" data-key="输出" data-step="8"><span class="am-tree-label">输出</span><span class="am-tree-sub">就是你写的 HTML</span></li></ul></div></div>
 </section>
 <section class="am-panel" id="panel-C">
-<header class="am-panel-head"><span class="am-panel-id">C</span><h2>关键概念怎么读</h2></header>
-<div class="am-panel-body"><div class="am-annot"><div class="am-annot-head"><span>灵活的代价</span></div><div class="am-annot-scroll"><div class="am-annot-line" style="--rows: 1">Eleventy <span class="am-seg"><span class="am-seg-t">几乎不 bundler 绑架</span><span class="am-seg-n" style="--row: 0">输出即你写的 HTML</span></span>；模板引擎 <span class="am-seg"><span class="am-seg-t">可换</span><span class="am-seg-n" style="--row: 0">Nunjucks/Liquid 等</span></span>。文档站/岛屿生态要 <span class="am-seg am-seg--err"><span class="am-seg-t">自己拼</span><span class="am-seg-n" style="--row: 0">没有 VitePress 那种开箱文档壳</span></span>。</div></div><div class="am-annot-caption">杂志风、作品集、完全掌控标记时很香</div></div></div>
-</section>
-<section class="am-panel" id="panel-D">
-<header class="am-panel-head"><span class="am-panel-id">D</span><h2>简史</h2></header>
-<div class="am-panel-body"><div class="am-tl-wrap"><ol class="am-timeline am-timeline--h" style="--n: 3"><li class="am-tl-item"><span class="am-tl-when">2017-11</span><span class="am-tl-dot"></span><span class="am-tl-title">发布</span><span class="am-tl-text">11ty/eleventy</span></li><li class="am-tl-item"><span class="am-tl-when">2019–22</span><span class="am-tl-dot"></span><span class="am-tl-title">插件生态</span><span class="am-tl-text">Image、分页、边缘构建</span></li><li class="am-tl-item am-tl-item--hi"><span class="am-tl-when">今</span><span class="am-tl-dot"></span><span class="am-tl-title">干净 HTML 派</span><span class="am-tl-text">与 Astro 岛屿路线并存</span></li></ol></div></div>
-</section>
-<section class="am-panel" id="panel-E">
-<header class="am-panel-head"><span class="am-panel-id">E</span><h2>和同类怎么选</h2></header>
+<header class="am-panel-head"><span class="am-panel-id">C</span><h2>灵活的代价</h2></header>
 <div class="am-panel-body"><div class="am-md"><div class="am-table-wrap"><table>
 <thead>
 <tr>
@@ -70,15 +64,13 @@
 <td><span class="am-status am-status--warn"><span class="am-status-icon" aria-hidden="true">!</span>Go 主题</span></td>
 </tr>
 </tbody></table></div>
+<p>要掌控干净 HTML → Eleventy；要文档默认体验 → VitePress；要岛屿 → Astro。</p>
 </div></div>
 </section>
-<section class="am-panel" id="panel-F">
-<header class="am-panel-head"><span class="am-panel-id">F</span><h2>怎么用好</h2></header>
-<div class="am-panel-body"><div class="am-md"><p>用 11ty Image 等插件做图片优化与分页。与 Tailwind 搭配做作品集、杂志风站点很顺手。</p>
-</div>
-<div class="am-callout am-callout--ok" role="note"><div class="am-callout-title">记住这句</div><div class="am-callout-body am-md"><p>要掌控干净 HTML → Eleventy；要文档默认体验 → VitePress；要岛屿 → Astro。</p>
-</div></div>
-<div class="am-md"><h3>入口</h3>
+<section class="am-panel" id="panel-D">
+<header class="am-panel-head"><span class="am-panel-id">D</span><h2>用法</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>适合想完全掌控 HTML/CSS、少框架束缚的酷站。用 Nunjucks/Liquid/11ty Image 等插件做图片优化与分页。与 Tailwind 搭配做作品集、杂志风站点很顺手。</p>
+<h3>入口</h3>
 <ul>
 <li>GitHub：<a href="https://github.com/11ty/eleventy">Eleventy</a></li>
 <li>主页：<a href="https://www.11ty.dev/">打开</a></li>

@@ -9,33 +9,19 @@
 </head>
 <body>
 <main class="am-doc">
-<header class="am-head"><h1>shadcn/ui</h1><p class="am-sub">工具库 · K站介绍</p><div class="am-intro am-md"><div class="am-callout am-callout--info" role="note"><div class="am-callout-title">一句话定位</div><div class="am-callout-body am-md"><p><strong>shadcn/ui</strong>（工具库）：可复制粘贴的高质量无障碍组件集，基于 Radix + Tailwind，源码归你掌控。</p>
+<header class="am-head"><h1>shadcn/ui</h1><p class="am-sub">可复制的无障碍组件</p><div class="am-intro am-md"><div class="am-callout am-callout--info" role="note"><div class="am-callout-title">一句话</div><div class="am-callout-body am-md"><p><strong>shadcn/ui</strong>：可复制粘贴的高质量无障碍组件集，基于 Radix + Tailwind，源码归你掌控。</p>
 </div></div></div></header>
 <div class="am-doc-layout">
-<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 元信息</a><a href="#panel-B">B · 能力边界</a><a href="#panel-C">C · 同栈怎么分工</a><a href="#panel-D">D · 注意点与建议</a><a href="#panel-E">E · 场景与用法</a></nav><div class="am-doc-body">
+<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 坐标</a><a href="#panel-B">B · 和普通 npm 组件库差在哪</a><a href="#panel-C">C · 同栈怎么分工</a><a href="#panel-D">D · 用法</a></nav><div class="am-doc-body">
 <section class="am-panel" id="panel-A">
-<header class="am-panel-head"><span class="am-panel-id">A</span><h2>元信息</h2></header>
-<div class="am-panel-body"><dl class="am-kv" style="--kv-cols: 1"><div class="am-kv-cell"><dt>元信息</dt><dd>2023-01-04，★ 125,490</dd></div><div class="am-kv-cell"><dt>分类</dt><dd>代码库 / 引擎</dd></div><div class="am-kv-cell"><dt>仓库</dt><dd><a href="https://github.com/shadcn-ui/ui">shadcn-ui/ui</a></dd></div><div class="am-kv-cell"><dt>主页</dt><dd><a href="https://ui.shadcn.com">ui.shadcn.com</a></dd></div><div class="am-kv-cell"><dt>分类说明</dt><dd>给别人用的库、框架、工具</dd></div></dl></div>
+<header class="am-panel-head"><span class="am-panel-id">A</span><h2>坐标</h2></header>
+<div class="am-panel-body"><dl class="am-kv" style="--kv-cols: 1"><div class="am-kv-cell"><dt>元信息</dt><dd>2023-01-04，★ 125,490</dd></div><div class="am-kv-cell"><dt>分类</dt><dd>代码库 / 引擎</dd></div><div class="am-kv-cell"><dt>仓库</dt><dd><a href="https://github.com/shadcn-ui/ui">shadcn-ui/ui</a></dd></div><div class="am-kv-cell"><dt>主页</dt><dd><a href="https://ui.shadcn.com">ui.shadcn.com</a></dd></div></dl></div>
 </section>
 <section class="am-panel" id="panel-B">
-<header class="am-panel-head"><span class="am-panel-id">B</span><h2>能力边界</h2></header>
-<div class="am-panel-body"><div class="am-limits"><div class="am-lim">
-<div class="am-lim-head"><span>App/仪表盘出活<span class="am-lim-note">CLI 按需加组件</span></span><span class="am-lim-val">9 / max 10 分</span></div>
-<div class="am-lim-track"><div class="am-lim-fill" style="width: 60%"></div><div class="am-lim-mark" style="left: 66.67%"></div></div>
-<div class="am-lim-ticks" aria-hidden="true"><span style="left: 0%">0</span><span style="left: 16.67%">2.5</span><span style="left: 33.33%">5</span><span style="left: 50%">7.5</span><span style="left: 66.67%">10</span><span style="left: 83.33%">12.5</span><span style="left: 100%">15</span></div>
-</div><div class="am-lim">
-<div class="am-lim-head"><span>无障碍基线<span class="am-lim-note">Radix 底座</span></span><span class="am-lim-val">9 / max 10 分</span></div>
-<div class="am-lim-track"><div class="am-lim-fill" style="width: 60%"></div><div class="am-lim-mark" style="left: 66.67%"></div></div>
-<div class="am-lim-ticks" aria-hidden="true"><span style="left: 0%">0</span><span style="left: 16.67%">2.5</span><span style="left: 33.33%">5</span><span style="left: 50%">7.5</span><span style="left: 66.67%">10</span><span style="left: 83.33%">12.5</span><span style="left: 100%">15</span></div>
-</div><div class="am-lim">
-<div class="am-lim-head"><span>落地页光效<span class="am-lim-note">交给 Magic UI</span></span><span class="am-lim-val">4 / max 10 分</span></div>
-<div class="am-lim-track"><div class="am-lim-fill" style="width: 26.67%"></div><div class="am-lim-mark" style="left: 66.67%"></div></div>
-<div class="am-lim-ticks" aria-hidden="true"><span style="left: 0%">0</span><span style="left: 16.67%">2.5</span><span style="left: 33.33%">5</span><span style="left: 50%">7.5</span><span style="left: 66.67%">10</span><span style="left: 83.33%">12.5</span><span style="left: 100%">15</span></div>
-</div><div class="am-lim">
-<div class="am-lim-head"><span>黑盒 npm 依赖<span class="am-lim-note">源码复制进你的仓</span></span><span class="am-lim-val">1 / max 10 分</span></div>
-<div class="am-lim-track"><div class="am-lim-fill" style="width: 6.67%"></div><div class="am-lim-mark" style="left: 66.67%"></div></div>
-<div class="am-lim-ticks" aria-hidden="true"><span style="left: 0%">0</span><span style="left: 16.67%">2.5</span><span style="left: 33.33%">5</span><span style="left: 50%">7.5</span><span style="left: 66.67%">10</span><span style="left: 83.33%">12.5</span><span style="left: 100%">15</span></div>
-</div></div></div>
+<header class="am-panel-head"><span class="am-panel-id">B</span><h2>和普通 npm 组件库差在哪</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>关键语义是「源码进你的仓」，用 annot 标出来；不再画调用流水线。</p>
+</div>
+<div class="am-annot"><div class="am-annot-head"><span>复制而非安装</span></div><div class="am-annot-scroll"><div class="am-annot-line" style="--rows: 1">CLI 把组件源码 <span class="am-seg"><span class="am-seg-t">写进仓库</span><span class="am-seg-n" style="--row: 0">你可以改</span></span>，底座是 <span class="am-seg"><span class="am-seg-t">Radix + Tailwind</span><span class="am-seg-n" style="--row: 0">无障碍 + 原子样式</span></span>——不是黑盒包。</div></div><div class="am-annot-caption">做 App/仪表盘极快；英雄区光效仍交给 Magic UI</div></div></div>
 </section>
 <section class="am-panel" id="panel-C">
 <header class="am-panel-head"><span class="am-panel-id">C</span><h2>同栈怎么分工</h2></header>
@@ -61,32 +47,19 @@
 <td>类名</td>
 </tr>
 <tr>
-<td>同栈</td>
-<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>Radix+TW</span></td>
-<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>同栈</span></td>
-<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>底座</span></td>
-</tr>
-<tr>
 <td>用法</td>
-<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>一起：结构+特效</span></td>
+<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>结构 + 特效一起</span></td>
 <td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span></span></td>
-<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span></span></td>
+<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>底座</span></td>
 </tr>
 </tbody></table></div>
 </div></div>
 </section>
 <section class="am-panel" id="panel-D">
-<header class="am-panel-head"><span class="am-panel-id">D</span><h2>注意点与建议</h2></header>
-<div class="am-panel-body"><div class="am-callout am-callout--info" role="note"><div class="am-callout-title">复制而非安装</div><div class="am-callout-body am-md"><p>CLI 把组件源码写进仓库，你可以改变体、接 Motion、对齐自有设计系统——不是黑盒包。</p>
-</div></div>
-<div class="am-callout am-callout--ok" role="note"><div class="am-callout-title">组合建议</div><div class="am-callout-body am-md"><p>结构用 shadcn，英雄区用 Magic UI，原子用 Tailwind。</p>
-</div></div></div>
-</section>
-<section class="am-panel" id="panel-E">
-<header class="am-panel-head"><span class="am-panel-id">E</span><h2>场景与用法</h2></header>
+<header class="am-panel-head"><span class="am-panel-id">D</span><h2>用法</h2></header>
 <div class="am-panel-body"><div class="am-md"><p>用 CLI 按需添加 Button、Dialog、Card 等组件到项目。做 App/仪表盘时极快出成品；做酷站可改变体、接 Framer Motion，再与自有设计系统对齐。</p>
 </div>
-<div class="am-callout am-callout--ok" role="note"><div class="am-callout-title">记住这句</div><div class="am-callout-body am-md"><p>产品 UI 骨架 → shadcn；营销动效 → Magic UI；样式原子 → Tailwind。</p>
+<div class="am-callout am-callout--ok" role="note"><div class="am-callout-title">组合</div><div class="am-callout-body am-md"><p>结构用 shadcn，英雄区用 Magic UI，原子用 Tailwind。</p>
 </div></div>
 <div class="am-md"><h3>入口</h3>
 <ul>

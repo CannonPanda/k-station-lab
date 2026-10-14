@@ -9,30 +9,28 @@
 </head>
 <body>
 <main class="am-doc">
-<header class="am-head"><h1>skills</h1><p class="am-sub">Skill / Agent · K站介绍</p><div class="am-intro am-md"><div class="am-callout am-callout--info" role="note"><div class="am-callout-title">一句话定位</div><div class="am-callout-body am-md"><p><strong>skills</strong>（Skill / Agent 工作流）：Anthropic 官方 Agent Skills 合集；内含 frontend-design 等可安装技能，教 Agent 按规范完成前端美学与专项任务。</p>
+<header class="am-head"><h1>skills</h1><p class="am-sub">官方 Skills 合集</p><div class="am-intro am-md"><div class="am-callout am-callout--info" role="note"><div class="am-callout-title">一句话</div><div class="am-callout-body am-md"><p><strong>skills</strong>：Anthropic 官方 Agent Skills 合集；内含 frontend-design 等可安装技能，教 Agent 按规范完成前端美学与专项任务。</p>
 </div></div></div></header>
 <div class="am-doc-layout">
-<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 元信息</a><a href="#panel-B">B · 一次调用怎么走</a><a href="#panel-C">C · 仓内结构</a><a href="#panel-D">D · 和同站条目怎么选</a><a href="#panel-E">E · 用法要点</a></nav><div class="am-doc-body">
+<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 坐标</a><a href="#panel-B">B · 仓里该怎么理解</a><a href="#panel-C">C · 和同站前端条目怎么选</a><a href="#panel-D">D · 用法</a></nav><div class="am-doc-body">
 <section class="am-panel" id="panel-A">
-<header class="am-panel-head"><span class="am-panel-id">A</span><h2>元信息</h2></header>
-<div class="am-panel-body"><dl class="am-kv" style="--kv-cols: 1"><div class="am-kv-cell"><dt>元信息</dt><dd>2025-09-22，★ 180,849</dd></div><div class="am-kv-cell"><dt>分类</dt><dd>Skill / Agent 工作流</dd></div><div class="am-kv-cell"><dt>仓库</dt><dd><a href="https://github.com/anthropics/skills">anthropics/skills</a></dd></div><div class="am-kv-cell"><dt>分类说明</dt><dd>教 AI 怎么做事的说明书与流水线</dd></div></dl></div>
+<header class="am-panel-head"><span class="am-panel-id">A</span><h2>坐标</h2></header>
+<div class="am-panel-body"><dl class="am-kv" style="--kv-cols: 1"><div class="am-kv-cell"><dt>元信息</dt><dd>2025-09-22，★ 180,849</dd></div><div class="am-kv-cell"><dt>分类</dt><dd>Skill / Agent 工作流</dd></div><div class="am-kv-cell"><dt>仓库</dt><dd><a href="https://github.com/anthropics/skills">anthropics/skills</a></dd></div></dl></div>
 </section>
 <section class="am-panel" id="panel-B">
-<header class="am-panel-head"><span class="am-panel-id">B</span><h2>一次调用怎么走</h2></header>
-<div class="am-panel-body"><figure class="am-diagram am-seq"><svg viewBox="0 0 522 278" width="522" height="278" role="img" aria-label="时序图：你、Agent、skills 仓" xmlns="http://www.w3.org/2000/svg"><defs><marker id="am1-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="am-arrow" d="M0,0 L10,5 L0,10 z"/></marker></defs><line class="am-lifeline" x1="54" y1="42" x2="54" y2="274"/><g data-key="你"><rect class="am-actor" x="12" y="8" width="84" height="34" rx="2"/><text x="54" y="25" text-anchor="middle" dominant-baseline="central" font-weight="600">你</text></g><line class="am-lifeline" x1="306.6" y1="42" x2="306.6" y2="274"/><g data-key="Agent"><rect class="am-actor" x="264.6" y="8" width="84" height="34" rx="2"/><text x="306.6" y="25" text-anchor="middle" dominant-baseline="central" font-weight="600">Agent</text></g><line class="am-lifeline" x1="467.6" y1="42" x2="467.6" y2="274"/><g data-key="skills 仓"><rect class="am-actor" x="425.6" y="8" width="84" height="34" rx="2"/><text x="467.6" y="25" text-anchor="middle" dominant-baseline="central" font-weight="600">skills 仓</text></g><g data-step="0"><text x="180.3" y="70" text-anchor="middle">需要某专项能力（如 frontend-design）</text><path class="am-edge" d="M54,80 L304.6,80" marker-end="url(#am1-arrow)"/></g><g data-step="1"><text x="387.1" y="110" text-anchor="middle">按子目录安装 skill</text><path class="am-edge" d="M306.6,120 L465.6,120" marker-end="url(#am1-arrow)"/></g><g data-step="2"><text x="387.1" y="150" text-anchor="middle">SKILL.md + 脚本/资源</text><path class="am-edge am-edge--dashed" d="M467.6,160 L308.6,160" marker-end="url(#am1-arrow)"/></g><g data-step="3"><text x="346.6" y="188" dominant-baseline="central">按规范执行任务</text><path class="am-edge" d="M306.6,184 H336.6 V204 H308.6" marker-end="url(#am1-arrow)"/></g><g data-step="4"><text x="180.3" y="238" text-anchor="middle">去模板化的前端或专项产出</text><path class="am-edge am-edge--dashed" d="M306.6,248 L56,248" marker-end="url(#am1-arrow)"/></g></svg></figure></div>
+<header class="am-panel-head"><span class="am-panel-id">B</span><h2>仓里该怎么理解</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>信息形状是目录层级：「不要整仓当单一 skill」。</p>
+</div>
+<div class="am-tree"><div class="am-tree-root am-tree-root--solo"><div class="am-tree-box am-tree-box--root" data-key="anthropics/skills" data-step="0">anthropics/skills<small>官方 mega-repo</small></div></div><ul class="am-tree-list"><li data-key="skills/" data-step="1"><span class="am-tree-label">skills/</span><ul><li data-key="frontend-design" data-step="2"><span class="am-tree-label">frontend-design</span><span class="am-tree-sub">Web UI 美学与去模板化</span></li><li data-key="其他专项 skill…" data-step="3"><span class="am-tree-label">其他专项 skill…</span></li></ul></li><li class="am-tree-hi" data-key="用法" data-step="4"><span class="am-tree-label">用法</span><span class="am-tree-sub">按子目录按需安装，不要整仓当一个 skill</span></li></ul></div></div>
 </section>
 <section class="am-panel" id="panel-C">
-<header class="am-panel-head"><span class="am-panel-id">C</span><h2>仓内结构</h2></header>
-<div class="am-panel-body"><div class="am-tree"><div class="am-tree-root am-tree-root--solo"><div class="am-tree-box am-tree-box--root" data-key="anthropics/skills" data-step="0">anthropics/skills<small>官方 mega-repo</small></div></div><ul class="am-tree-list"><li data-key="skills/" data-step="1"><span class="am-tree-label">skills/</span><ul><li data-key="frontend-design" data-step="2"><span class="am-tree-label">frontend-design</span><span class="am-tree-sub">Web UI 美学与去模板化</span></li><li data-key="其他专项 skill…" data-step="3"><span class="am-tree-label">其他专项 skill…</span></li></ul></li><li data-key="不要整仓当单一 skill" data-step="4"><span class="am-tree-label">不要整仓当单一 skill</span><span class="am-tree-sub">按需引入子目录</span></li></ul></div></div>
-</section>
-<section class="am-panel" id="panel-D">
-<header class="am-panel-head"><span class="am-panel-id">D</span><h2>和同站条目怎么选</h2></header>
+<header class="am-panel-head"><span class="am-panel-id">C</span><h2>和同站前端条目怎么选</h2></header>
 <div class="am-panel-body"><div class="am-md"><div class="am-table-wrap"><table>
 <thead>
 <tr>
 <th>条目</th>
 <th>本仓</th>
-<th>sam/am</th>
+<th>sam / am</th>
 <th>toolkit / ui-agents</th>
 </tr>
 </thead>
@@ -40,7 +38,7 @@
 <td>性质</td>
 <td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>官方合集</span></td>
 <td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>讲义生成</span></td>
-<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>前端清单/提示</span></td>
+<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>前端清单 / 提示</span></td>
 </tr>
 <tr>
 <td>用法</td>
@@ -57,13 +55,10 @@
 </tbody></table></div>
 </div></div>
 </section>
-<section class="am-panel" id="panel-E">
-<header class="am-panel-head"><span class="am-panel-id">E</span><h2>用法要点</h2></header>
-<div class="am-panel-body"><div class="am-md"><p>优先安装 skills/frontend-design 做 Web UI 美学与去模板化。整仓按需引入。</p>
-</div>
-<div class="am-callout am-callout--ok" role="note"><div class="am-callout-title">记住这句</div><div class="am-callout-body am-md"><p>官方 skill 合集入口 → 本仓；讲义页 → 优先 sam（轻）或 am（全功能）；前端提示精选 → toolkit/ui-agents。</p>
-</div></div>
-<div class="am-md"><h3>入口</h3>
+<section class="am-panel" id="panel-D">
+<header class="am-panel-head"><span class="am-panel-id">D</span><h2>用法</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>优先安装子目录 skills/frontend-design，用于 Web UI 美学设计与去模板化改版。整仓是 mega-repo，按需引入具体 skill，不要整仓当单一技能用。</p>
+<h3>入口</h3>
 <ul>
 <li>GitHub：<a href="https://github.com/anthropics/skills">skills</a></li>
 <li>暂无单独主页，以 GitHub 仓库为准。</li>

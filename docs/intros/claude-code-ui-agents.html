@@ -9,24 +9,22 @@
 </head>
 <body>
 <main class="am-doc">
-<header class="am-head"><h1>claude-code-ui-agents</h1><p class="am-sub">Skill / Agent · K站介绍</p><div class="am-intro am-md"><div class="am-callout am-callout--info" role="note"><div class="am-callout-title">一句话定位</div><div class="am-callout-body am-md"><p><strong>claude-code-ui-agents</strong>（Skill / Agent 工作流）：面向 UI/UX 与前端任务的 Claude Agent 提示词精选集，专攻界面、组件与用户体验设计。</p>
+<header class="am-head"><h1>claude-code-ui-agents</h1><p class="am-sub">UI/UX Agent 提示集</p><div class="am-intro am-md"><div class="am-callout am-callout--info" role="note"><div class="am-callout-title">一句话</div><div class="am-callout-body am-md"><p><strong>claude-code-ui-agents</strong>：面向 UI/UX 与前端任务的 Claude Agent 提示词精选集，专攻界面、组件与用户体验设计。</p>
 </div></div></div></header>
 <div class="am-doc-layout">
-<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 元信息</a><a href="#panel-B">B · 一次调用怎么走</a><a href="#panel-C">C · 管线鸟瞰</a><a href="#panel-D">D · 和同站条目怎么选</a><a href="#panel-E">E · 用法要点</a></nav><div class="am-doc-body">
+<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 坐标</a><a href="#panel-B">B · 专项任务怎么走到专用 agent</a><a href="#panel-C">C · 和 toolkit / 官方仓</a><a href="#panel-D">D · 用法</a></nav><div class="am-doc-body">
 <section class="am-panel" id="panel-A">
-<header class="am-panel-head"><span class="am-panel-id">A</span><h2>元信息</h2></header>
-<div class="am-panel-body"><dl class="am-kv" style="--kv-cols: 1"><div class="am-kv-cell"><dt>元信息</dt><dd>2025-08-08，★ 773</dd></div><div class="am-kv-cell"><dt>分类</dt><dd>Skill / Agent 工作流</dd></div><div class="am-kv-cell"><dt>仓库</dt><dd><a href="https://github.com/mustafakendiguzel/claude-code-ui-agents">mustafakendiguzel/claude-code-ui-agents</a></dd></div><div class="am-kv-cell"><dt>分类说明</dt><dd>教 AI 怎么做事的说明书与流水线</dd></div></dl></div>
+<header class="am-panel-head"><span class="am-panel-id">A</span><h2>坐标</h2></header>
+<div class="am-panel-body"><dl class="am-kv" style="--kv-cols: 1"><div class="am-kv-cell"><dt>元信息</dt><dd>2025-08-08，★ 773</dd></div><div class="am-kv-cell"><dt>分类</dt><dd>Skill / Agent 工作流</dd></div><div class="am-kv-cell"><dt>仓库</dt><dd><a href="https://github.com/mustafakendiguzel/claude-code-ui-agents">mustafakendiguzel/claude-code-ui-agents</a></dd></div></dl></div>
 </section>
 <section class="am-panel" id="panel-B">
-<header class="am-panel-head"><span class="am-panel-id">B</span><h2>一次调用怎么走</h2></header>
-<div class="am-panel-body"><figure class="am-diagram am-seq"><svg viewBox="0 0 672 278" width="672" height="278" role="img" aria-label="时序图：你、Claude Code、UI Agent" xmlns="http://www.w3.org/2000/svg"><defs><marker id="am1-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="am-arrow" d="M0,0 L10,5 L0,10 z"/></marker></defs><line class="am-lifeline" x1="54" y1="42" x2="54" y2="274"/><g data-key="你"><rect class="am-actor" x="12" y="8" width="84" height="34" rx="2"/><text x="54" y="25" text-anchor="middle" dominant-baseline="central" font-weight="600">你</text></g><line class="am-lifeline" x1="274.2" y1="42" x2="274.2" y2="274"/><g data-key="Claude Code"><rect class="am-actor" x="221.8" y="8" width="104.7" height="34" rx="2"/><text x="274.2" y="25" text-anchor="middle" dominant-baseline="central" font-weight="600">Claude Code</text></g><line class="am-lifeline" x1="432.4" y1="42" x2="432.4" y2="274"/><g data-key="UI Agent"><rect class="am-actor" x="390.4" y="8" width="84" height="34" rx="2"/><text x="432.4" y="25" text-anchor="middle" dominant-baseline="central" font-weight="600">UI Agent</text></g><g data-step="0"><text x="164.1" y="70" text-anchor="middle">界面重构 / 组件设计 / 体验打磨</text><path class="am-edge" d="M54,80 L272.2,80" marker-end="url(#am1-arrow)"/><text class="am-step" x="60" y="74" text-anchor="start">1</text></g><g data-step="1"><text x="353.3" y="110" text-anchor="middle">加载专用 prompt</text><path class="am-edge" d="M274.2,120 L430.4,120" marker-end="url(#am1-arrow)"/><text class="am-step" x="280.2" y="114" text-anchor="start">2</text></g><g data-step="2"><text x="472.4" y="148" dominant-baseline="central">按 UI/UX 规范推理</text><path class="am-edge" d="M432.4,144 H462.4 V164 H434.4" marker-end="url(#am1-arrow)"/><text class="am-step" x="438.4" y="154" text-anchor="start">3</text></g><g data-step="3"><text x="353.3" y="198" text-anchor="middle">设计与实现建议/补丁</text><path class="am-edge am-edge--dashed" d="M432.4,208 L276.2,208" marker-end="url(#am1-arrow)"/><text class="am-step" x="426.4" y="202" text-anchor="end">4</text></g><g data-step="4"><text x="164.1" y="238" text-anchor="middle">专项任务产出</text><path class="am-edge am-edge--dashed" d="M274.2,248 L56,248" marker-end="url(#am1-arrow)"/><text class="am-step" x="268.2" y="242" text-anchor="end">5</text></g></svg></figure></div>
+<header class="am-panel-head"><span class="am-panel-id">B</span><h2>专项任务怎么走到专用 agent</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>人 ↔ Claude Code ↔ UI Agent 的消息序是核心，用 sequence。</p>
+</div>
+<figure class="am-diagram am-seq"><svg viewBox="0 0 672 278" width="672" height="278" role="img" aria-label="时序图：你、Claude Code、UI Agent" xmlns="http://www.w3.org/2000/svg"><defs><marker id="am1-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="am-arrow" d="M0,0 L10,5 L0,10 z"/></marker></defs><line class="am-lifeline" x1="54" y1="42" x2="54" y2="274"/><g data-key="你"><rect class="am-actor" x="12" y="8" width="84" height="34" rx="2"/><text x="54" y="25" text-anchor="middle" dominant-baseline="central" font-weight="600">你</text></g><line class="am-lifeline" x1="274.2" y1="42" x2="274.2" y2="274"/><g data-key="Claude Code"><rect class="am-actor" x="221.8" y="8" width="104.7" height="34" rx="2"/><text x="274.2" y="25" text-anchor="middle" dominant-baseline="central" font-weight="600">Claude Code</text></g><line class="am-lifeline" x1="432.4" y1="42" x2="432.4" y2="274"/><g data-key="UI Agent"><rect class="am-actor" x="390.4" y="8" width="84" height="34" rx="2"/><text x="432.4" y="25" text-anchor="middle" dominant-baseline="central" font-weight="600">UI Agent</text></g><g data-step="0"><text x="164.1" y="70" text-anchor="middle">界面重构 / 组件设计 / 体验打磨</text><path class="am-edge" d="M54,80 L272.2,80" marker-end="url(#am1-arrow)"/><text class="am-step" x="60" y="74" text-anchor="start">1</text></g><g data-step="1"><text x="353.3" y="110" text-anchor="middle">加载专用 prompt</text><path class="am-edge" d="M274.2,120 L430.4,120" marker-end="url(#am1-arrow)"/><text class="am-step" x="280.2" y="114" text-anchor="start">2</text></g><g data-step="2"><text x="472.4" y="148" dominant-baseline="central">按 UI/UX 规范推理</text><path class="am-edge" d="M432.4,144 H462.4 V164 H434.4" marker-end="url(#am1-arrow)"/><text class="am-step" x="438.4" y="154" text-anchor="start">3</text></g><g data-step="3"><text x="353.3" y="198" text-anchor="middle">设计与实现建议/补丁</text><path class="am-edge am-edge--dashed" d="M432.4,208 L276.2,208" marker-end="url(#am1-arrow)"/><text class="am-step" x="426.4" y="202" text-anchor="end">4</text></g><g data-step="4"><text x="164.1" y="238" text-anchor="middle">专项任务产出</text><path class="am-edge am-edge--dashed" d="M274.2,248 L56,248" marker-end="url(#am1-arrow)"/><text class="am-step" x="268.2" y="242" text-anchor="end">5</text></g></svg></figure></div>
 </section>
 <section class="am-panel" id="panel-C">
-<header class="am-panel-head"><span class="am-panel-id">C</span><h2>管线鸟瞰</h2></header>
-<div class="am-panel-body"><figure class="am-diagram am-flow"><svg viewBox="0 0 681 134" width="681" height="134" role="img" aria-label="流程图：通用聊天、UI/UX 专项?、ui-agents 提示集、专用 agent、通用对话" xmlns="http://www.w3.org/2000/svg"><defs><marker id="am2-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="am-arrow" d="M0,0 L10,5 L0,10 z"/></marker></defs><g></g><g><g data-step="0"><path class="am-edge" d="M106,67 L117.5,67 Q129,67 140.5,67 L152,67" marker-end="url(#am2-arrow)"/></g><g data-step="1"><path class="am-edge" d="M272.5,79.4 L312.7,90.9 Q353,102.5 376.1,102.5 L399.2,102.5" marker-end="url(#am2-arrow)"/></g><g data-step="2"><path class="am-edge" d="M529.4,102.5 L540.9,102.5 Q552.4,102.5 563.9,102.5 L575.4,102.5" marker-end="url(#am2-arrow)"/></g><g data-step="3"><path class="am-edge am-edge--dashed" d="M272.5,54.6 L312.7,43.1 Q353,31.5 388.6,31.5 L424.3,31.5" marker-end="url(#am2-arrow)"/><g class="am-edge-label"><rect x="330.7" y="22.5" width="44.5" height="18" rx="3"/><text x="353" y="31.5" text-anchor="middle" dominant-baseline="central">不够稳</text></g></g></g><g><g class="am-node am-node--round" data-key="通用聊天" data-step="0"><rect class="am-node-shape" x="14" y="49.5" width="92" height="35" rx="17.5"/><text x="60" y="67" text-anchor="middle" dominant-baseline="central">通用聊天</text></g><g class="am-node am-node--diamond" data-key="UI/UX 专项?" data-step="0"><polygon class="am-node-shape" points="229.4,39 306.7,67 229.4,95 152,67"/><text x="229.4" y="67" text-anchor="middle" dominant-baseline="central">UI/UX 专项?</text></g><g class="am-node am-node--rect" data-key="ui-agents 提示集" data-step="1"><rect class="am-node-shape" x="399.2" y="85" width="130.2" height="35" rx="3"/><text x="464.3" y="102.5" text-anchor="middle" dominant-baseline="central">ui-agents 提示集</text></g><g class="am-node am-node--rect am-node--hi" data-key="专用 agent" data-step="2"><rect class="am-node-shape" x="575.4" y="85" width="91.2" height="35" rx="3"/><text x="621" y="102.5" text-anchor="middle" dominant-baseline="central">专用 agent</text></g><g class="am-node am-node--rect" data-key="通用对话" data-step="3"><rect class="am-node-shape" x="424.3" y="14" width="80" height="35" rx="3"/><text x="464.3" y="31.5" text-anchor="middle" dominant-baseline="central">通用对话</text></g></g></svg></figure></div>
-</section>
-<section class="am-panel" id="panel-D">
-<header class="am-panel-head"><span class="am-panel-id">D</span><h2>和同站条目怎么选</h2></header>
+<header class="am-panel-head"><span class="am-panel-id">C</span><h2>和 toolkit / 官方仓</h2></header>
 <div class="am-panel-body"><div class="am-md"><div class="am-table-wrap"><table>
 <thead>
 <tr>
@@ -38,7 +36,7 @@
 </thead>
 <tbody><tr>
 <td>交付</td>
-<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>提示/agent</span></td>
+<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>提示 / agent</span></td>
 <td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>安装清单</span></td>
 <td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>官方 skill</span></td>
 </tr>
@@ -48,20 +46,14 @@
 <td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>工程约定</span></td>
 <td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>技能规范</span></td>
 </tr>
-<tr>
-<td>组合</td>
-<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span>+toolkit+官方</span></td>
-<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span></span></td>
-<td><span class="am-status am-status--ok"><span class="am-status-icon" aria-hidden="true">✓</span></span></td>
-</tr>
 </tbody></table></div>
 </div></div>
 </section>
-<section class="am-panel" id="panel-E">
-<header class="am-panel-head"><span class="am-panel-id">E</span><h2>用法要点</h2></header>
-<div class="am-panel-body"><div class="am-md"><p>把对应 UI/组件/体验类 prompt 接入 Claude Code 或 Agent 工作流；专项任务调用专用 agent。</p>
+<section class="am-panel" id="panel-D">
+<header class="am-panel-head"><span class="am-panel-id">D</span><h2>用法</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>把对应 UI/组件/体验类 prompt 接入 Claude Code 或 Agent 工作流；界面重构、组件设计、体验打磨时调用专用 agent，发挥最大设计与实现能力。</p>
 </div>
-<div class="am-callout am-callout--ok" role="note"><div class="am-callout-title">记住这句</div><div class="am-callout-body am-md"><p>UI/UX agent 提示 → 本仓；安装与 CLAUDE.md → toolkit；官方底座 → anthropics/skills。</p>
+<div class="am-callout am-callout--ok" role="note"><div class="am-callout-title">何时调用</div><div class="am-callout-body am-md"><p>界面重构、组件设计、体验打磨 → 专用 agent，而不是泛泛聊天。</p>
 </div></div>
 <div class="am-md"><h3>入口</h3>
 <ul>
