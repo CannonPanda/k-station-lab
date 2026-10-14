@@ -65,8 +65,8 @@
       "url": "https://github.com/CannonPanda/sam",
       "created": "2026-10-14",
       "stars": 0,
-      "summary": "Simple answer me with html：自用纸张主题精简讲义 skill，无工具栏/运行时，适合 iframe 与备课页。",
-      "usage": "讲义、原理说明、K站 intro 优先用 sam（paper-only、轻页）。需要多主题/视频/页内回复标注时仍用上游 answer-me-with-html。CLI：`sam render` 或 `node skills/sam/scripts/sam.mjs`；可用 `--css-href` 外置 paper.css。",
+      "summary": "Simple answer me with html：纸张精简讲义 skill；写作前强制组件规划（MUST），kv 容器查询自适应，无工具栏/运行时。",
+      "usage": "讲义、原理、K站 intro 优先用 sam（paper-only、轻页）。Agent 须先按信息形状选 flow/sequence/tree/timeline 再写草稿，禁止用 kv/callout 顶替过程图；kv 1–6 项随容器宽自动排布。CLI：`sam render` / `--css-href`；`npm run check`、`test:kv`、`test:agent-cases`。需要多主题/视频/页内回复标注时仍用上游 answer-me-with-html。",
       "category": "skill",
       "added": "2026-10-14"
     },

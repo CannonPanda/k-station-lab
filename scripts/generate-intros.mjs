@@ -616,28 +616,31 @@ ${entry(p)}
 `;
   },
 
-  // ── sam：外置 CSS + 渲染轻页步骤（过程）→ 必须 sequence；对比 am 用表 ──
+  // ── sam：写作前强制规划（过程）→ 必须 flow；对比 am 用表；kv 自适应与 CLI check 写进用法 ──
   sam(p, cat) {
-    return `${fm(p, "纸张精简讲义")}
+    return `${fm(p, "纸张精简讲义 · MUST 规划")}
 
 \`\`\`callout info
 **${p.name}**：${p.summary}
 \`\`\`
 
 ## 坐标
-${kvBlock(p, cat)}
+${kvBlock(p, cat, [
+  "CHECK: npm run check / test:kv / test:agent-cases",
+  "KV: 1–6 项 @container 自适应（宽 3 列 / 中 2+1 / 窄堆叠）",
+])}
 
-## 出一页轻讲义要几步
-出页步骤（过程）→ 必须 sequence；内部 parse/dagre 细节能文字就文字，不硬画第二张 flow。
+## 写作前强制规划怎么走
+Agent 出页前的规划步骤（过程）→ 必须 flow；禁止先写长文再贴装饰组件。
 
-\`\`\`sequence num
-participants: 作者, sam CLI, 浏览器/iframe
-作者 -> sam CLI: sam css -o theme.css
-作者 -> sam CLI: sam render 草稿 --css-href
-sam CLI --> 作者: ✓ paper HTML（无工具栏/运行时）
-作者 -> 浏览器/iframe: 嵌入轻页
-note 作者, sam CLI: 要视频/多主题则回上游 am
+\`\`\`flow LR
+(识别面板问题) -> 判断信息形状
+判断信息形状 -> 必选 MUST 组件
+必选 MUST 组件 -> 写草稿并渲染
+写草稿并渲染 -> *自检：有无用 kv/callout 顶替流程
 \`\`\`
+
+形状映射：多方消息 → sequence；有序步骤/调用路径 → flow；层级 → tree；时间演进 → timeline。对比用表；纯元数据才用 kv。
 
 ## 和上游 am 差在哪
 
@@ -645,10 +648,12 @@ note 作者, sam CLI: 要视频/多主题则回上游 am
 |---|---|---|
 | 主题 | ok 强制 paper | ok 多主题 |
 | 工具栏 / 运行时 | no 无 | ok 有 |
+| MUST 组件规划 | ok 写作前强制 | warn 按上游 skill |
+| kv 布局 | ok 容器自适应 | warn 视版本 |
 | 视频 / 页内回复 | no | ok |
 | iframe / 备课 | ok 轻 | warn 偏重 |
 
-组件仍是 flow / sequence / tree / timeline / limits / annot / kv / callout 等同系；规则（强制）：步骤链/调用/多角色交互必须 flow 或 sequence；一页最多 1–2 个重点可视化。
+渲染：\`sam css\` + \`sam render --css-href\`（theme 外链）；页无工具栏/colophon。一页 1–2 重点可视化。
 
 ## 用法
 ${p.usage}
