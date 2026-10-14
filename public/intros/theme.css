@@ -396,3 +396,27 @@ html[data-theme="paper"] .am-head h1 { font-weight: 600; letter-spacing: 0; }
 html[data-theme="paper"] .am-md p, html[data-theme="paper"] .am-md li, html[data-theme="paper"] .am-md blockquote, html[data-theme="paper"] .am-intro { font-size: 15.5px; line-height: 1.75; }
 html[data-theme="paper"] .am-md p { margin-bottom: 12px; }
 html[data-theme="paper"] .am-md table { font-family: var(--font-sans); }
+
+/* ── K站 Lab intro overrides ───────────────── */
+html[data-k-lab-lite] .am-head {
+  text-align: center;
+}
+html[data-k-lab-lite] .am-head h1 {
+  text-align: center;
+}
+html[data-k-lab-lite] .am-sub {
+  text-align: center;
+}
+html[data-k-lab-lite] .am-intro {
+  max-width: none;
+  width: 100%;
+  margin-inline: 0;
+  text-align: center;
+}
+html[data-k-lab-lite] .am-intro .am-callout {
+  text-align: center;
+}
+html[data-k-lab-lite] .am-intro .am-callout-body,
+html[data-k-lab-lite] .am-intro .am-callout-body p {
+  text-align: center;
+}

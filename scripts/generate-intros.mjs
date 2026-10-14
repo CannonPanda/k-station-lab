@@ -92,7 +92,7 @@ const DRAFTS = {
   astro(p, cat) {
     return `${fm(p, "岛屿架构 · 内容站默认推荐")}
 
-\`\`\`callout info 一句话
+\`\`\`callout info
 **${p.name}**：${p.summary}
 \`\`\`
 
@@ -139,7 +139,7 @@ ${entry(p)}
   hugo(p, cat) {
     return `${fm(p, "Go 极速静态站")}
 
-\`\`\`callout info 一句话
+\`\`\`callout info
 **${p.name}**：${p.summary}
 \`\`\`
 
@@ -178,7 +178,7 @@ ${entry(p)}
   vitepress(p, cat) {
     return `${fm(p, "文档站默认体验")}
 
-\`\`\`callout info 一句话
+\`\`\`callout info
 **${p.name}**：${p.summary}
 \`\`\`
 
@@ -217,7 +217,7 @@ ${entry(p)}
   eleventy(p, cat) {
     return `${fm(p, "干净 HTML · 模板自由")}
 
-\`\`\`callout info 一句话
+\`\`\`callout info
 **${p.name}**：${p.summary}
 \`\`\`
 
@@ -261,7 +261,7 @@ ${entry(p)}
   tailwindcss(p, cat) {
     return `${fm(p, "Utility-first 样式底座")}
 
-\`\`\`callout info 一句话
+\`\`\`callout info
 **${p.name}**：${p.summary}
 \`\`\`
 
@@ -302,7 +302,7 @@ ${entry(p)}
   "shadcn-ui"(p, cat) {
     return `${fm(p, "可复制的无障碍组件")}
 
-\`\`\`callout info 一句话
+\`\`\`callout info
 **${p.name}**：${p.summary}
 \`\`\`
 
@@ -344,7 +344,7 @@ ${entry(p)}
   magicui(p, cat) {
     return `${fm(p, "落地页预制特效")}
 
-\`\`\`callout info 一句话
+\`\`\`callout info
 **${p.name}**：${p.summary}
 \`\`\`
 
@@ -382,7 +382,7 @@ ${entry(p)}
   motion(p, cat) {
     return `${fm(p, "UI 动效引擎")}
 
-\`\`\`callout info 一句话
+\`\`\`callout info
 **${p.name}**：${p.summary}
 \`\`\`
 
@@ -422,7 +422,7 @@ ${entry(p)}
   threejs(p, cat) {
     return `${fm(p, "WebGL 三维事实标准")}
 
-\`\`\`callout info 一句话
+\`\`\`callout info
 **${p.name}**：${p.summary}
 \`\`\`
 
@@ -460,7 +460,7 @@ ${entry(p)}
   lenis(p, cat) {
     return `${fm(p, "整页丝滑滚动")}
 
-\`\`\`callout info 一句话
+\`\`\`callout info
 **${p.name}**：${p.summary}
 \`\`\`
 
@@ -494,7 +494,7 @@ ${entry(p)}
   mineru(p, cat) {
     return `${fm(p, "PDF/Office → LLM Markdown")}
 
-\`\`\`callout info 一句话
+\`\`\`callout info
 **${p.name}**：${p.summary}
 \`\`\`
 
@@ -538,7 +538,7 @@ ${entry(p)}
   markitdown(p, cat) {
     return `${fm(p, "多格式 → Markdown")}
 
-\`\`\`callout info 一句话
+\`\`\`callout info
 **${p.name}**：${p.summary}
 \`\`\`
 
@@ -577,7 +577,7 @@ ${entry(p)}
   "answer-me-with-html"(p, cat) {
     return `${fm(p, "全功能讲义 Skill")}
 
-\`\`\`callout info 一句话
+\`\`\`callout info
 **${p.name}**：${p.summary}
 \`\`\`
 
@@ -620,7 +620,7 @@ ${entry(p)}
   sam(p, cat) {
     return `${fm(p, "纸张精简讲义")}
 
-\`\`\`callout info 一句话
+\`\`\`callout info
 **${p.name}**：${p.summary}
 \`\`\`
 
@@ -661,7 +661,7 @@ ${entry(p)}
   "anthropics-skills"(p, cat) {
     return `${fm(p, "官方 Skills 合集")}
 
-\`\`\`callout info 一句话
+\`\`\`callout info
 **${p.name}**：${p.summary}
 \`\`\`
 
@@ -698,7 +698,7 @@ ${entry(p)}
   "claude-code-frontend-design-toolkit"(p, cat) {
     return `${fm(p, "前端观感上限清单")}
 
-\`\`\`callout info 一句话
+\`\`\`callout info
 **${p.name}**：${p.summary}
 \`\`\`
 
@@ -735,7 +735,7 @@ ${entry(p)}
   "claude-code-ui-agents"(p, cat) {
     return `${fm(p, "UI/UX Agent 提示集")}
 
-\`\`\`callout info 一句话
+\`\`\`callout info
 **${p.name}**：${p.summary}
 \`\`\`
 
@@ -776,7 +776,7 @@ ${entry(p)}
   simplefolio(p, cat) {
     return `${fm(p, "极简作品集模板")}
 
-\`\`\`callout info 一句话
+\`\`\`callout info
 **${p.name}**：${p.summary}
 \`\`\`
 
@@ -817,7 +817,7 @@ ${entry(p)}
   devportfolio(p, cat) {
     return `${fm(p, "Astro 作品集起点")}
 
-\`\`\`callout info 一句话
+\`\`\`callout info
 **${p.name}**：${p.summary}
 \`\`\`
 
@@ -867,7 +867,7 @@ ${entry(p)}
   "ke-rules"(p, cat) {
     return `${fm(p, "长期协作规矩")}
 
-\`\`\`callout info 一句话
+\`\`\`callout info
 **${p.name}**：${p.summary}
 \`\`\`
 
@@ -914,7 +914,7 @@ function draftFor(p) {
     // 无定制形状时：只给定位 + kv + 用法，不强行可视化
     return `${fm(p, "K站项目介绍")}
 
-\`\`\`callout info 一句话
+\`\`\`callout info
 **${p.name}**（${cat.name}）：${p.summary}
 \`\`\`
 
@@ -970,11 +970,43 @@ function runSam(args) {
   };
 }
 
+/* K站 Lab intro layout: center title + full-width summary callout (no title label). */
+const K_LAB_THEME_OVERRIDES = `
+/* ── K站 Lab intro overrides ───────────────── */
+html[data-k-lab-lite] .am-head {
+  text-align: center;
+}
+html[data-k-lab-lite] .am-head h1 {
+  text-align: center;
+}
+html[data-k-lab-lite] .am-sub {
+  text-align: center;
+}
+html[data-k-lab-lite] .am-intro {
+  max-width: none;
+  width: 100%;
+  margin-inline: 0;
+  text-align: center;
+}
+html[data-k-lab-lite] .am-intro .am-callout {
+  text-align: center;
+}
+html[data-k-lab-lite] .am-intro .am-callout-body,
+html[data-k-lab-lite] .am-intro .am-callout-body p {
+  text-align: center;
+}
+`.trim();
+
 function writeThemeCss() {
   const { code, out } = runSam(["css", "-o", THEME_CSS_PATH]);
   if (code !== 0 || !existsSync(THEME_CSS_PATH)) {
     console.error(`FAIL sam css:\n${out}`);
     process.exit(1);
+  }
+  let css = readFileSync(THEME_CSS_PATH, "utf8");
+  if (!css.includes("K站 Lab intro overrides")) {
+    css = `${css.trimEnd()}\n\n${K_LAB_THEME_OVERRIDES}\n`;
+    writeFileSync(THEME_CSS_PATH, css);
   }
   console.log(`theme.css → ${THEME_CSS_PATH} (${readFileSync(THEME_CSS_PATH).length} bytes)`);
 }
