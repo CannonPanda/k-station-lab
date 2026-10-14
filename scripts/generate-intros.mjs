@@ -2,9 +2,11 @@
 /**
  * Generate K站 Lab project intro HTML via sam (paper-only).
  *
- * 组件选用：先看信息形状再选。有明确步骤/调用链/多角色交互 → 优先 flow/sequence；
- * ≥3 步或多角色传数据时优先画图。禁止用 callout+kv 把流程写成文字墙。
- * tree/timeline/limits/annot/对比表/kv 按形状选用。一页最多 1–2 个重点可视化；能文字别硬画。
+ * 组件选用（强制，对齐 sam SKILL.md）：
+ * - 步骤链/调用/请求路径/多角色交互 → 必须 flow 或 sequence，禁止只用文字段
+ * - ≥3 有序步骤或多方传递 → 优先画图
+ * - 面板含「怎么变成/如何走到/流程/步骤/调用/发布/生成」等过程词 → 必须配 flow/sequence
+ * - tree/timeline/limits/callout/annot/表/kv 按形状选用；能文字别硬画；一页 1–2 重点图；一图一问题；不为用而用
  *
  * Usage: node scripts/generate-intros.mjs
  */
@@ -86,7 +88,7 @@ ${lines.join("\n")}
  * 不共享 draftFramework / draftTool 之类按类型套版函数。
  */
 const DRAFTS = {
-  // ── Astro：核心是岛屿构建路径（步骤/调用）→ 一个 flow；选型用表 ──
+  // ── Astro：岛屿构建路径（过程）→ 必须 flow；选型用表 ──
   astro(p, cat) {
     return `${fm(p, "岛屿架构 · 内容站默认推荐")}
 
@@ -98,7 +100,7 @@ const DRAFTS = {
 ${kvBlock(p, cat)}
 
 ## 内容怎样变成可部署页
-要讲清的是「默认零 JS → 交互块按需 hydrate」这条路径，用 flow 比长文快。
+「默认零 JS → 交互块按需 hydrate」是构建路径（过程）→ 必须 flow，禁止只用文字段。
 
 \`\`\`flow LR
 (Markdown/MDX) -> Astro 构建
@@ -133,7 +135,7 @@ ${entry(p)}
 `;
   },
 
-  // ── Hugo：要讲清的是「快从哪来」（句内强调）→ annot；选型用表；不画第二张构建图 ──
+  // ── Hugo：构建路径（过程）→ 必须 flow；选型用表 ──
   hugo(p, cat) {
     return `${fm(p, "Go 极速静态站")}
 
@@ -144,14 +146,17 @@ ${entry(p)}
 ## 坐标
 ${kvBlock(p, cat, ["定位: 海量页秒级重建的静态引擎"])}
 
-## 速度从哪来
-这里要强调的是「Go 单二进制 + 构建期展开」，用 annot 标关键短语比再画一张流水线图更贴切。
+## 内容怎样变成静态页
+构建路径（≥3 步）是过程性内容 → 必须 flow，禁止只用文字/annot 代替。
 
-\`\`\`annot
-# 为什么海量页仍能秒级
-Hugo 用 [Go 单二进制]{无 Node 依赖树} 扫内容；[shortcodes]{可复用内容块} 与主题 partials 在构建期展开，输出纯静态。
-> 现代组件岛要另想办法；要岛屿请看 Astro
+\`\`\`flow LR
+(内容 / shortcodes) -> Hugo Go 单二进制
+Hugo Go 单二进制 -> *构建期展开 partials
+构建期展开 partials -> [(纯静态 HTML)]
+group 极速核心: Hugo Go 单二进制, 构建期展开 partials
 \`\`\`
+
+无 Node 依赖树；现代组件岛请看 Astro。
 
 ## 什么时候选它，什么时候别选
 
@@ -169,7 +174,7 @@ ${entry(p)}
 `;
   },
 
-  // ── VitePress：文档发布路径（≥3 步）→ flow；选型用表；甜点区用文字 ──
+  // ── VitePress：文档发布路径（过程 ≥3 步）→ 必须 flow；选型用表 ──
   vitepress(p, cat) {
     return `${fm(p, "文档站默认体验")}
 
@@ -181,7 +186,7 @@ ${entry(p)}
 ${kvBlock(p, cat)}
 
 ## 文档怎样发布上线
-要讲清的是「写 → 构建 → 部署」这条发布链（≥3 步），优先 flow，不用长段落代替。
+「写 → 构建 → 部署」是发布链（过程 ≥3 步）→ 必须 flow，禁止只用文字段。
 
 \`\`\`flow LR
 (Markdown + Vue) -> VitePress 构建
@@ -293,7 +298,7 @@ ${entry(p)}
 `;
   },
 
-  // ── shadcn：核心概念「复制而非安装」→ annot；分工用表 ──
+  // ── shadcn：CLI 写入仓的调用路径（过程）→ 必须 flow；分工用表 ──
   "shadcn-ui"(p, cat) {
     return `${fm(p, "可复制的无障碍组件")}
 
@@ -304,14 +309,17 @@ ${entry(p)}
 ## 坐标
 ${kvBlock(p, cat)}
 
-## 和普通 npm 组件库差在哪
-关键语义是「源码进你的仓」，用 annot 标出来；不再画调用流水线。
+## 组件怎样进你的仓
+「复制而非安装」是调用/写入路径 → 必须 flow，禁止只用 annot/文字代替。
 
-\`\`\`annot
-# 复制而非安装
-CLI 把组件源码 [写进仓库]{你可以改}，底座是 [Radix + Tailwind]{无障碍 + 原子样式}——不是黑盒包。
-> 做 App/仪表盘极快；英雄区光效仍交给 Magic UI
+\`\`\`flow LR
+(CLI add) -> 源码写入仓库
+源码写入仓库 -> Radix + Tailwind 底座
+Radix + Tailwind 底座 -> *你可直接改组件
+group 复制而非安装: 源码写入仓库, 你可直接改组件
 \`\`\`
+
+做 App/仪表盘极快；英雄区光效仍交给 Magic UI。
 
 ## 同栈怎么分工
 
@@ -482,7 +490,7 @@ ${entry(p)}
 `;
   },
 
-  // ── am：人↔Agent↔CLI 消息序 → 一个 sequence；和 sam 用表 ──
+  // ── am：人↔Agent↔CLI 消息序（多角色）→ 必须 sequence；和 sam 用表 ──
   "answer-me-with-html"(p, cat) {
     return `${fm(p, "全功能讲义 Skill")}
 
@@ -494,7 +502,7 @@ ${entry(p)}
 ${kvBlock(p, cat)}
 
 ## 一次提问怎么变成讲义页
-要讲清的是参与者之间的消息序，用 sequence；不再叠一张同构 flow。
+人 ↔ Agent ↔ CLI 消息序（多角色过程）→ 必须 sequence，禁止只用文字段。
 
 \`\`\`sequence num
 participants: 你, Agent, am CLI
@@ -525,7 +533,7 @@ ${entry(p)}
 `;
   },
 
-  // ── sam：外置 CSS + 渲染轻页的步骤序 → sequence；对比 am 用表 ──
+  // ── sam：外置 CSS + 渲染轻页步骤（过程）→ 必须 sequence；对比 am 用表 ──
   sam(p, cat) {
     return `${fm(p, "纸张精简讲义")}
 
@@ -537,7 +545,7 @@ ${entry(p)}
 ${kvBlock(p, cat)}
 
 ## 出一页轻讲义要几步
-参与者步骤清晰 → sequence；内部 parse/dagre 细节能文字就文字，不硬画第二张 flow。
+出页步骤（过程）→ 必须 sequence；内部 parse/dagre 细节能文字就文字，不硬画第二张 flow。
 
 \`\`\`sequence num
 participants: 作者, sam CLI, 浏览器/iframe
@@ -557,7 +565,7 @@ note 作者, sam CLI: 要视频/多主题则回上游 am
 | 视频 / 页内回复 | no | ok |
 | iframe / 备课 | ok 轻 | warn 偏重 |
 
-组件仍是 flow / sequence / tree / timeline / limits / annot / kv / callout 等同系；规则：先看信息形状；有步骤/调用链/多角色交互优先 flow 或 sequence；一页最多 1–2 个重点可视化。
+组件仍是 flow / sequence / tree / timeline / limits / annot / kv / callout 等同系；规则（强制）：步骤链/调用/多角色交互必须 flow 或 sequence；一页最多 1–2 个重点可视化。
 
 ## 用法
 ${p.usage}
@@ -603,7 +611,7 @@ ${entry(p)}
 `;
   },
 
-  // ── toolkit：从「模板感」到约定的决策路径 → 一个 flow ──
+  // ── toolkit：从「模板感」到约定的决策路径（过程）→ 必须 flow ──
   "claude-code-frontend-design-toolkit"(p, cat) {
     return `${fm(p, "前端观感上限清单")}
 
@@ -615,7 +623,7 @@ ${entry(p)}
 ${kvBlock(p, cat)}
 
 ## 什么时候该打开这份清单
-决策路径（是否模板感过重 → 装什么 → 写入约定），用一张 flow 即可。
+决策路径（是否模板感过重 → 装什么 → 写入约定）是过程 → 必须 flow。
 
 \`\`\`flow TB
 (Claude Code 默认前端) -> {模板感过重?}
@@ -640,7 +648,7 @@ ${entry(p)}
 `;
   },
 
-  // ── ui-agents：加载专用 prompt 的消息序 → sequence ──
+  // ── ui-agents：加载专用 prompt 的消息序（多角色）→ 必须 sequence ──
   "claude-code-ui-agents"(p, cat) {
     return `${fm(p, "UI/UX Agent 提示集")}
 
@@ -652,7 +660,7 @@ ${entry(p)}
 ${kvBlock(p, cat)}
 
 ## 专项任务怎么走到专用 agent
-人 ↔ Claude Code ↔ UI Agent 的消息序是核心，用 sequence。
+人 ↔ Claude Code ↔ UI Agent 消息序（多角色过程）→ 必须 sequence。
 
 \`\`\`sequence num
 participants: 你, Claude Code, UI Agent
@@ -681,7 +689,7 @@ ${entry(p)}
 `;
   },
 
-  // ── Simplefolio：模板上线步骤（≥3 步）→ flow；对比用表 ──
+  // ── Simplefolio：模板上线步骤（过程 ≥3 步）→ 必须 flow；对比用表 ──
   simplefolio(p, cat) {
     return `${fm(p, "极简作品集模板")}
 
@@ -693,7 +701,7 @@ ${entry(p)}
 ${kvBlock(p, cat)}
 
 ## 从上线到可选迁移
-模板上线是明确多步路径 → flow；目录细节用一段话即可，不硬画 tree。
+模板上线是明确多步路径（过程）→ 必须 flow；目录细节用一段话即可，不硬画 tree。
 
 \`\`\`flow TB
 (Fork 仓库) -> 改 src/data 与样式变量
@@ -722,7 +730,7 @@ ${entry(p)}
 `;
   },
 
-  // ── devportfolio：骨架里什么可留/可换 → tree（与 simplefolio 的 timeline 刻意不同）──
+  // ── devportfolio：上线步骤（过程）→ 必须 flow；保留/替换层级 → tree（合计 2）──
   devportfolio(p, cat) {
     return `${fm(p, "Astro 作品集起点")}
 
@@ -733,8 +741,17 @@ ${entry(p)}
 ## 坐标
 ${kvBlock(p, cat)}
 
+## 从 clone 到可展示
+上线步骤（≥3 步）是过程性内容 → 必须 flow。
+
+\`\`\`flow TB
+(Clone 仓库) -> 改配置与内容入口
+改配置与内容入口 -> 换色板 / 项目卡片
+换色板 / 项目卡片 -> *部署 Pages / CDN
+\`\`\`
+
 ## 酷站升级时动哪里
-信息形状是「保留骨架 / 替换表层」的层级，用 tree；不再复用 Simplefolio 那种阶段 timeline。
+「保留骨架 / 替换表层」是层级 → tree（与 flow 合计 2 个重点可视化）。
 
 \`\`\`tree list
 devportfolio | Astro + Tailwind
@@ -763,7 +780,7 @@ ${entry(p)}
 `;
   },
 
-  // ── ke-rules：规矩树 + 职责边界 → tree + limits（两个不同形状，允许）──
+  // ── ke-rules：规矩树 → tree；新规矩落地步骤（过程）→ 必须 flow ──
   "ke-rules"(p, cat) {
     return `${fm(p, "长期协作规矩")}
 
@@ -783,23 +800,23 @@ ke-rules | 人读 README / RULES.md
   分类 schema | library / skill / docs / …
   介绍格式 | YYYY-MM-DD，★ N
   讲义优先级 | 轻页 sam → 全功能 am
-  *维护方式 | 用户说新规矩就改并推 k
+  *出页工具 | 讲义用 sam/am，本仓不替代生成器
 \`\`\`
 
-## 它可靠在哪、不负责什么
+## 新规矩怎么落到仓里
+维护步骤（过程）→ 必须 flow，禁止只用文字说明「改完再推」。
 
-\`\`\`limits
-口头约定可靠度 | 2 / 10 | 分 | 易漂移
-RULES.md 可版本管理 | 9 / 10 | 分 | 改完再推
-介绍日期星标格式 | 10 / 10 | 分 | YYYY-MM-DD，★ N
-替代讲义生成器 | 0 / 10 | 分 | 出页仍用 sam/am
+\`\`\`flow LR
+(用户立新规矩) -> 改 RULES.md
+改 RULES.md -> 提交并推 GitHub
+提交并推 GitHub -> *可选：推双 K站条目
 \`\`\`
 
 ## 用法
 ${p.usage}
 
 \`\`\`callout ok 边界
-协作与双站规矩 → ke-rules；生成讲义页 → 优先 sam，全功能用 am。
+协作与双站规矩 → ke-rules；生成讲义页 → 优先 sam，全功能用 am。口头约定易漂移，以 RULES.md 为准。
 \`\`\`
 
 ${entry(p)}
@@ -920,6 +937,27 @@ for (const p of data.projects) {
   if (viz.length > 2) {
     console.warn(`WARN ${p.id}: focus viz count ${viz.length} > 2 (${viz.join(",")})`);
   }
+
+  // 过程词面板标题必须有 flow/sequence（强制；只扫 ## 标题，避免「生成器」等元数据误报）
+  const PROCESS_RE =
+    /怎么变成|如何走到|流程|步骤|调用|发布|生成|上线|构建路径|怎样变成|怎样发布|怎样进|怎么走|怎么落到|从 clone|消息序|决策路径/i;
+  const panelTitles = [...md.matchAll(/^##\s+(.+)$/gm)].map((m) => m[1]);
+  const processTitles = panelTitles.filter((t) => PROCESS_RE.test(t));
+  const hasFlowOrSeq = fences.includes("flow") || fences.includes("sequence");
+  if (processTitles.length && !hasFlowOrSeq) {
+    console.error(
+      `VIOLATION ${p.id}: process panel title(s) [${processTitles.join("; ")}] without flow/sequence`,
+    );
+    results.push({
+      id: p.id,
+      name: p.name,
+      ok: false,
+      out: `process panel without flow/sequence: ${processTitles.join("; ")}`,
+    });
+    continue;
+  }
+  componentReport[p.id].processTitles = processTitles;
+  componentReport[p.id].processOk = !processTitles.length || hasFlowOrSeq;
 
   if (existsSync(outPath)) unlinkSync(outPath);
   const { code, out } = renderOnce(draftPath, outPath);

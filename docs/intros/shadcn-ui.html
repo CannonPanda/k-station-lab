@@ -12,16 +12,18 @@
 <header class="am-head"><h1>shadcn/ui</h1><p class="am-sub">可复制的无障碍组件</p><div class="am-intro am-md"><div class="am-callout am-callout--info" role="note"><div class="am-callout-title">一句话</div><div class="am-callout-body am-md"><p><strong>shadcn/ui</strong>：可复制粘贴的高质量无障碍组件集，基于 Radix + Tailwind，源码归你掌控。</p>
 </div></div></div></header>
 <div class="am-doc-layout">
-<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 坐标</a><a href="#panel-B">B · 和普通 npm 组件库差在哪</a><a href="#panel-C">C · 同栈怎么分工</a><a href="#panel-D">D · 用法</a></nav><div class="am-doc-body">
+<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 坐标</a><a href="#panel-B">B · 组件怎样进你的仓</a><a href="#panel-C">C · 同栈怎么分工</a><a href="#panel-D">D · 用法</a></nav><div class="am-doc-body">
 <section class="am-panel" id="panel-A">
 <header class="am-panel-head"><span class="am-panel-id">A</span><h2>坐标</h2></header>
 <div class="am-panel-body"><dl class="am-kv" style="--kv-cols: 1"><div class="am-kv-cell"><dt>元信息</dt><dd>2023-01-04，★ 125,490</dd></div><div class="am-kv-cell"><dt>分类</dt><dd>代码库 / 引擎</dd></div><div class="am-kv-cell"><dt>仓库</dt><dd><a href="https://github.com/shadcn-ui/ui">shadcn-ui/ui</a></dd></div><div class="am-kv-cell"><dt>主页</dt><dd><a href="https://ui.shadcn.com">ui.shadcn.com</a></dd></div></dl></div>
 </section>
 <section class="am-panel" id="panel-B">
-<header class="am-panel-head"><span class="am-panel-id">B</span><h2>和普通 npm 组件库差在哪</h2></header>
-<div class="am-panel-body"><div class="am-md"><p>关键语义是「源码进你的仓」，用 annot 标出来；不再画调用流水线。</p>
+<header class="am-panel-head"><span class="am-panel-id">B</span><h2>组件怎样进你的仓</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>「复制而非安装」是调用/写入路径 → 必须 flow，禁止只用 annot/文字代替。</p>
 </div>
-<div class="am-annot"><div class="am-annot-head"><span>复制而非安装</span></div><div class="am-annot-scroll"><div class="am-annot-line" style="--rows: 1">CLI 把组件源码 <span class="am-seg"><span class="am-seg-t">写进仓库</span><span class="am-seg-n" style="--row: 0">你可以改</span></span>，底座是 <span class="am-seg"><span class="am-seg-t">Radix + Tailwind</span><span class="am-seg-n" style="--row: 0">无障碍 + 原子样式</span></span>——不是黑盒包。</div></div><div class="am-annot-caption">做 App/仪表盘极快；英雄区光效仍交给 Magic UI</div></div></div>
+<figure class="am-diagram am-flow"><svg viewBox="0 0 687 206" width="687" height="206" role="img" aria-label="流程图：CLI add、源码写入仓库、Radix + Tailwind 底座、你可直接改组件" xmlns="http://www.w3.org/2000/svg"><defs><marker id="am1-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="am-arrow" d="M0,0 L10,5 L0,10 z"/></marker></defs><g><rect class="am-cluster" x="147.6" y="89" width="525.2" height="91" rx="4"/><text class="am-cluster-label" x="155.6" y="103">复制而非安装</text></g><g><g data-step="0"><path class="am-edge" d="M101.6,134.5 L113.1,134.5 Q124.6,134.5 136.1,134.5 Q147.6,134.5 159.1,134.5 L170.6,134.5" marker-end="url(#am1-arrow)"/></g><g data-step="1"><path class="am-edge" d="M276.6,134.5 L288.1,134.5 Q299.6,134.5 341.6,97.8 L383.6,61" marker-end="url(#am1-arrow)"/></g><g data-step="2"><path class="am-edge" d="M423.7,61 L465.7,97.8 Q507.7,134.5 519.2,134.5 L530.7,134.5" marker-end="url(#am1-arrow)"/></g></g><g><g class="am-node am-node--round" data-key="CLI add" data-step="0"><rect class="am-node-shape" x="14" y="117" width="87.6" height="35" rx="17.5"/><text x="57.8" y="134.5" text-anchor="middle" dominant-baseline="central">CLI add</text></g><g class="am-node am-node--rect" data-key="源码写入仓库" data-step="0"><rect class="am-node-shape" x="170.6" y="117" width="106" height="35" rx="3"/><text x="223.6" y="134.5" text-anchor="middle" dominant-baseline="central">源码写入仓库</text></g><g class="am-node am-node--rect" data-key="Radix + Tailwind 底座" data-step="1"><rect class="am-node-shape" x="322.6" y="26" width="162.2" height="35" rx="3"/><text x="403.7" y="43.5" text-anchor="middle" dominant-baseline="central">Radix + Tailwind 底座</text></g><g class="am-node am-node--rect am-node--hi" data-key="你可直接改组件" data-step="2"><rect class="am-node-shape" x="530.7" y="117" width="119" height="35" rx="3"/><text x="590.2" y="134.5" text-anchor="middle" dominant-baseline="central">你可直接改组件</text></g></g></svg></figure>
+<div class="am-md"><p>做 App/仪表盘极快；英雄区光效仍交给 Magic UI。</p>
+</div></div>
 </section>
 <section class="am-panel" id="panel-C">
 <header class="am-panel-head"><span class="am-panel-id">C</span><h2>同栈怎么分工</h2></header>

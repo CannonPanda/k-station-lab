@@ -19,7 +19,7 @@
 </section>
 <section class="am-panel" id="panel-B">
 <header class="am-panel-head"><span class="am-panel-id">B</span><h2>出一页轻讲义要几步</h2></header>
-<div class="am-panel-body"><div class="am-md"><p>参与者步骤清晰 → sequence；内部 parse/dagre 细节能文字就文字，不硬画第二张 flow。</p>
+<div class="am-panel-body"><div class="am-md"><p>出页步骤（过程）→ 必须 sequence；内部 parse/dagre 细节能文字就文字，不硬画第二张 flow。</p>
 </div>
 <figure class="am-diagram am-seq"><svg viewBox="0 0 493 274" width="493" height="274" role="img" aria-label="时序图：作者、sam CLI、浏览器/iframe" xmlns="http://www.w3.org/2000/svg"><defs><marker id="am1-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="am-arrow" d="M0,0 L10,5 L0,10 z"/></marker></defs><line class="am-lifeline" x1="54" y1="42" x2="54" y2="270"/><g data-key="作者"><rect class="am-actor" x="12" y="8" width="84" height="34" rx="2"/><text x="54" y="25" text-anchor="middle" dominant-baseline="central" font-weight="600">作者</text></g><line class="am-lifeline" x1="298.3" y1="42" x2="298.3" y2="270"/><g data-key="sam CLI"><rect class="am-actor" x="256.3" y="8" width="84" height="34" rx="2"/><text x="298.3" y="25" text-anchor="middle" dominant-baseline="central" font-weight="600">sam CLI</text></g><line class="am-lifeline" x1="424.6" y1="42" x2="424.6" y2="270"/><g data-key="浏览器/iframe"><rect class="am-actor" x="368.3" y="8" width="112.5" height="34" rx="2"/><text x="424.6" y="25" text-anchor="middle" dominant-baseline="central" font-weight="600">浏览器/iframe</text></g><g data-step="0"><text x="176.2" y="70" text-anchor="middle">sam css -o theme.css</text><path class="am-edge" d="M54,80 L296.3,80" marker-end="url(#am1-arrow)"/><text class="am-step" x="60" y="74" text-anchor="start">1</text></g><g data-step="1"><text x="176.2" y="110" text-anchor="middle">sam render 草稿 --css-href</text><path class="am-edge" d="M54,120 L296.3,120" marker-end="url(#am1-arrow)"/><text class="am-step" x="60" y="114" text-anchor="start">2</text></g><g data-step="2"><text x="176.2" y="150" text-anchor="middle">✓ paper HTML（无工具栏/运行时）</text><path class="am-edge am-edge--dashed" d="M298.3,160 L56,160" marker-end="url(#am1-arrow)"/><text class="am-step" x="292.3" y="154" text-anchor="end">3</text></g><g data-step="3"><text x="239.3" y="190" text-anchor="middle">嵌入轻页</text><path class="am-edge" d="M54,200 L422.6,200" marker-end="url(#am1-arrow)"/><text class="am-step" x="60" y="194" text-anchor="start">4</text></g><g data-step="4"><rect class="am-note" x="34" y="224" width="284.3" height="28" rx="2"/><text x="176.2" y="238" text-anchor="middle" dominant-baseline="central" font-size="12">要视频/多主题则回上游 am</text></g></svg></figure></div>
 </section>
@@ -54,7 +54,7 @@
 <td><span class="am-status am-status--warn"><span class="am-status-icon" aria-hidden="true">!</span>偏重</span></td>
 </tr>
 </tbody></table></div>
-<p>组件仍是 flow / sequence / tree / timeline / limits / annot / kv / callout 等同系；规则：先看信息形状；有步骤/调用链/多角色交互优先 flow 或 sequence；一页最多 1–2 个重点可视化。</p>
+<p>组件仍是 flow / sequence / tree / timeline / limits / annot / kv / callout 等同系；规则（强制）：步骤链/调用/多角色交互必须 flow 或 sequence；一页最多 1–2 个重点可视化。</p>
 </div></div>
 </section>
 <section class="am-panel" id="panel-D">
