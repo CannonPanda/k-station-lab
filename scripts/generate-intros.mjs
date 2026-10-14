@@ -231,7 +231,8 @@ ${p.homepage ? `- 主页：[打开](${p.homepage})` : "- 暂无单独主页，�
  *   - drop full am runtime JS (reply/remark/theme/justify) — CSS grid is enough
  *   - keep only paper theme tokens; drop blueprint/shadcn CSS
  *   - drop unused chrome CSS (toolbar, reply, annot, lightbox)
- * Measured: ~98KB → ~30KB, cold iframe open ~900ms → ~60ms (4× CPU throttle).
+ *   - extract shared CSS to public/intros/theme.css (link, not inline)
+ * Measured: ~98KB → ~5KB HTML + shared theme.css; cold open much faster with CSS cache.
  */
 function lightenIntroCss(css) {
   const drop = ["blueprint", "shadcn"];
@@ -272,6 +273,10 @@ function lightenIntroCss(css) {
   return css.trim() + "\n";
 }
 
+const THEME_CSS_HREF = "/k-station-lab/intros/theme.css";
+const THEME_CSS_PATH = join(OUT_DIR, "theme.css");
+let themeCssWritten = false;
+
 function postprocessStripAmChrome(htmlPath) {
   let html = readFileSync(htmlPath, "utf8");
 
@@ -291,6 +296,7 @@ function postprocessStripAmChrome(htmlPath) {
   // read-only in an iframe; CSS defaults cover layout without the 50KB+ parse.
   html = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>\s*/gi, "");
 
+  // Shared paper theme CSS → external file (one cache hit for all intros).
   html = html.replace(/<style([^>]*)>([\s\S]*?)<\/style>/gi, (full, attrs, body) => {
     if (
       String(attrs).includes("k-lab-strip-am-chrome") ||
@@ -298,7 +304,13 @@ function postprocessStripAmChrome(htmlPath) {
     ) {
       return "";
     }
-    return `<style${attrs}>\n${lightenIntroCss(body)}</style>`;
+    const light = lightenIntroCss(body);
+    if (!themeCssWritten) {
+      writeFileSync(THEME_CSS_PATH, light);
+      themeCssWritten = true;
+      console.log(`theme.css → ${THEME_CSS_PATH}`);
+    }
+    return `<link rel="stylesheet" href="${THEME_CSS_HREF}">`;
   });
 
   if (!/\sdata-k-lab-lite=/.test(html)) {
