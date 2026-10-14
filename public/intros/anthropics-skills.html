@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN" data-theme="paper" data-mode="auto" data-style="80">
+<html lang="zh-CN" data-theme="paper" data-mode="auto" data-style="off">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -751,41 +751,53 @@ html[data-theme="paper"] .am-md p, html[data-theme="paper"] .am-md li, html[data
 html[data-theme="paper"] .am-md p { margin-bottom: 12px; }
 html[data-theme="paper"] .am-md table { font-family: var(--font-sans); }
 </style>
+<style id="k-lab-strip-am-chrome">
+.am-toolbar,.am-colophon,.am-pick,button[data-am="reply"],button[data-am="remark"],button[data-am="copy"],.am-btn--reply,.am-btn--remark{display:none!important}
+</style>
 </head>
 <body>
-<div class="am-toolbar" data-am-root-lang="zh-CN" data-am-root-theme="paper" data-am-root-mode="auto" data-am-root-style="80">
-<label class="am-pick">主题<select data-am="theme"><option value="blueprint">图纸</option><option value="shadcn">卡片</option><option value="paper" selected>纸张</option></select></label>
-<label class="am-pick">明暗<select data-am="mode"><option value="auto" selected>跟随系统</option><option value="light">亮</option><option value="dark">暗</option></select></label>
-<button class="am-btn am-btn--reply" type="button" data-am="reply" data-ui="{&quot;button&quot;:&quot;回复&quot;,&quot;comment&quot;:&quot;评论&quot;,&quot;commentHint&quot;:&quot;对这个面板的意见&quot;,&quot;title&quot;:&quot;你的回复&quot;,&quot;hint&quot;:&quot;复制后粘贴到对话里。&quot;,&quot;copy&quot;:&quot;复制回复&quot;,&quot;close&quot;:&quot;关闭&quot;,&quot;suggested&quot;:&quot;建议&quot;,&quot;empty&quot;:&quot;先选择选项，或在面板上写评论。&quot;,&quot;decisions&quot;:&quot;决定&quot;,&quot;comments&quot;:&quot;评论&quot;,&quot;confirmed&quot;:&quot;确认了建议&quot;,&quot;untouched&quot;:&quot;未作答，保留建议&quot;,&quot;was&quot;:&quot;原为&quot;,&quot;typed&quot;:&quot;以 \&quot;&gt;\&quot; 开头的行是读者输入的文字。&quot;,&quot;done&quot;:&quot;已复制 ✓&quot;,&quot;remarks&quot;:&quot;标注&quot;,&quot;kinds&quot;:{&quot;suggestion&quot;:&quot;建议&quot;,&quot;keep&quot;:&quot;保留&quot;,&quot;question&quot;:&quot;疑问&quot;,&quot;concern&quot;:&quot;关注&quot;}}">回复</button>
-<button class="am-btn am-btn--remark" type="button" data-am="remark" data-ui="{&quot;button&quot;:&quot;标注&quot;,&quot;hint&quot;:&quot;批注（可选）&quot;,&quot;save&quot;:&quot;保存&quot;,&quot;remove&quot;:&quot;删除&quot;,&quot;section&quot;:&quot;标注&quot;,&quot;kinds&quot;:{&quot;suggestion&quot;:&quot;建议&quot;,&quot;keep&quot;:&quot;保留&quot;,&quot;question&quot;:&quot;疑问&quot;,&quot;concern&quot;:&quot;关注&quot;}}">标注</button>
-<button class="am-btn" type="button" data-am="copy" data-done="已复制 ✓">复制源稿</button>
-</div>
 <main class="am-doc">
-<header class="am-head"><h1>skills</h1><p class="am-sub">K站项目介绍</p><div class="am-intro am-md"><div class="am-callout am-callout--info" role="note"><div class="am-callout-title">一句话</div><div class="am-callout-body am-md"><p>Anthropic 官方 Agent Skills 合集；内含 frontend-design 等可安装技能，教 Agent 按规范完成前端美学与专项任务。</p>
+<header class="am-head"><h1>skills</h1><p class="am-sub">K站项目介绍</p><div class="am-intro am-md"><div class="am-callout am-callout--info" role="note"><div class="am-callout-title">一句话定位</div><div class="am-callout-body am-md"><p><strong>skills</strong>（Skill / Agent 工作流）：Anthropic 官方 Agent Skills 合集；内含 frontend-design 等可安装技能，教 Agent 按规范完成前端美学与专项任务。</p>
 </div></div></div></header>
 <div class="am-doc-layout">
-<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 它是什么</a><a href="#panel-B">B · 何时用 / 怎么用好</a><a href="#panel-C">C · 关键信息</a><a href="#panel-D">D · 快速入口</a></nav><div class="am-doc-body">
+<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 它是什么</a><a href="#panel-B">B · 元信息</a><a href="#panel-C">C · 解决什么问题 / 适用场景</a><a href="#panel-D">D · 怎么用好</a><a href="#panel-E">E · 和同类怎么选 / 注意点</a><a href="#panel-F">F · 快速结论</a></nav><div class="am-doc-body">
 <section class="am-panel" id="panel-A">
 <header class="am-panel-head"><span class="am-panel-id">A</span><h2>它是什么</h2></header>
 <div class="am-panel-body"><div class="am-md"><p>Anthropic 官方 Agent Skills 合集；内含 frontend-design 等可安装技能，教 Agent 按规范完成前端美学与专项任务。</p>
-<p>所属分类：<strong>Skill / Agent 工作流</strong>（教 AI 怎么做事的说明书与流水线）。</p>
+<p>所属分类：<strong>Skill / Agent 工作流</strong>——教 AI 怎么做事的说明书与流水线。</p>
 </div></div>
 </section>
 <section class="am-panel" id="panel-B">
-<header class="am-panel-head"><span class="am-panel-id">B</span><h2>何时用 / 怎么用好</h2></header>
-<div class="am-panel-body"><div class="am-md"><p>优先安装子目录 skills/frontend-design，用于 Web UI 美学设计与去模板化改版。整仓是 mega-repo，按需引入具体 skill，不要整仓当单一技能用。</p>
-</div></div>
+<header class="am-panel-head"><span class="am-panel-id">B</span><h2>元信息</h2></header>
+<div class="am-panel-body"><dl class="am-kv" style="--kv-cols: 1"><div class="am-kv-cell"><dt>元信息</dt><dd>2025-09-22，★ 180,849</dd></div><div class="am-kv-cell"><dt>分类</dt><dd>Skill / Agent 工作流</dd></div><div class="am-kv-cell"><dt>仓库</dt><dd><a href="https://github.com/anthropics/skills">anthropics/skills</a></dd></div><div class="am-kv-cell"><dt>分类说明</dt><dd>教 AI 怎么做事的说明书与流水线</dd></div></dl></div>
 </section>
 <section class="am-panel" id="panel-C">
-<header class="am-panel-head"><span class="am-panel-id">C</span><h2>关键信息</h2></header>
-<div class="am-panel-body"><dl class="am-kv" style="--kv-cols: 1"><div class="am-kv-cell"><dt>GitHub 信息</dt><dd>2025-09-22，★ 180,849</dd></div><div class="am-kv-cell"><dt>分类</dt><dd>Skill / Agent 工作流</dd></div><div class="am-kv-cell"><dt>仓库</dt><dd><a href="https://github.com/anthropics/skills">anthropics/skills</a></dd></div><div class="am-kv-cell"><dt>分类说明</dt><dd>教 AI 怎么做事的说明书与流水线</dd></div></dl></div>
+<header class="am-panel-head"><span class="am-panel-id">C</span><h2>解决什么问题 / 适用场景</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>Agent 需要可安装的专项技能说明书，而不是一次性长提示。</p>
+<p>结合本站摘要，典型场景还包括：
+优先安装子目录 skills/frontend-design，用于 Web UI 美学设计与去模板化改版。整仓是 mega-repo，按需引入具体 skill，不要整仓当单一技能用。</p>
+</div></div>
 </section>
 <section class="am-panel" id="panel-D">
-<header class="am-panel-head"><span class="am-panel-id">D</span><h2>快速入口</h2></header>
-<div class="am-panel-body"><div class="am-md"><ul>
-<li>打开 GitHub：<a href="https://github.com/anthropics/skills">skills</a></li>
-<li>本项目暂无单独主页，以 GitHub 仓库为准。</li>
-<li>在 K站 Lab 抽屉里可继续查看简介与用法。</li>
+<header class="am-panel-head"><span class="am-panel-id">D</span><h2>怎么用好</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>优先安装子目录 skills/frontend-design，用于 Web UI 美学设计与去模板化改版。整仓是 mega-repo，按需引入具体 skill，不要整仓当单一技能用。</p>
+<p>补充：
+优先安装 skills/frontend-design 做 Web UI 美学与去模板化。整仓按需引入。</p>
+</div></div>
+</section>
+<section class="am-panel" id="panel-E">
+<header class="am-panel-head"><span class="am-panel-id">E</span><h2>和同类怎么选 / 注意点</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>同站：answer-me-with-html 专做讲义页；Frontend-Design-Toolkit / ui-agents 聚焦 Claude Code 前端观感。本仓是 Anthropic 官方 mega-repo，按子目录按需装（如 frontend-design），不要整仓当单一 skill。</p>
+</div></div>
+</section>
+<section class="am-panel" id="panel-F">
+<header class="am-panel-head"><span class="am-panel-id">F</span><h2>快速结论</h2></header>
+<div class="am-panel-body"><div class="am-callout am-callout--info" role="note"><div class="am-callout-title">tip 记住这句</div><div class="am-callout-body am-md"><p>官方 skill 合集入口 → 本仓；讲义页 → answer-me-with-html；前端提示精选 → 另两个 toolkit/agents。</p>
+</div></div>
+<div class="am-md"><h3>入口</h3>
+<ul>
+<li>GitHub：<a href="https://github.com/anthropics/skills">skills</a></li>
+<li>暂无单独主页，以 GitHub 仓库为准。</li>
 </ul>
 </div></div>
 </section>
@@ -797,33 +809,50 @@ title: skills
 lang: zh
 template: doc
 theme: paper
+style: off
 subtitle: K站项目介绍
 ---
 
-```callout info 一句话
-Anthropic 官方 Agent Skills 合集；内含 frontend-design 等可安装技能，教 Agent 按规范完成前端美学与专项任务。
+```callout info 一句话定位
+**skills**（Skill / Agent 工作流）：Anthropic 官方 Agent Skills 合集；内含 frontend-design 等可安装技能，教 Agent 按规范完成前端美学与专项任务。
 ```
 
 ## 它是什么
 Anthropic 官方 Agent Skills 合集；内含 frontend-design 等可安装技能，教 Agent 按规范完成前端美学与专项任务。
 
-所属分类：**Skill / Agent 工作流**（教 AI 怎么做事的说明书与流水线）。
+所属分类：**Skill / Agent 工作流**——教 AI 怎么做事的说明书与流水线。
 
-## 何时用 / 怎么用好
-优先安装子目录 skills/frontend-design，用于 Web UI 美学设计与去模板化改版。整仓是 mega-repo，按需引入具体 skill，不要整仓当单一技能用。
-
-## 关键信息
+## 元信息
 ```kv cols=1
-GitHub 信息: 2025-09-22，★ 180,849
+元信息: 2025-09-22，★ 180,849
 分类: Skill / Agent 工作流
 仓库: [anthropics/skills](https://github.com/anthropics/skills)
 分类说明: 教 AI 怎么做事的说明书与流水线
 ```
 
-## 快速入口
-- 打开 GitHub：[skills](https://github.com/anthropics/skills)
-- 本项目暂无单独主页，以 GitHub 仓库为准。
-- 在 K站 Lab 抽屉里可继续查看简介与用法。
+## 解决什么问题 / 适用场景
+Agent 需要可安装的专项技能说明书，而不是一次性长提示。
+
+结合本站摘要，典型场景还包括：
+优先安装子目录 skills/frontend-design，用于 Web UI 美学设计与去模板化改版。整仓是 mega-repo，按需引入具体 skill，不要整仓当单一技能用。
+
+## 怎么用好
+优先安装子目录 skills/frontend-design，用于 Web UI 美学设计与去模板化改版。整仓是 mega-repo，按需引入具体 skill，不要整仓当单一技能用。
+
+补充：
+优先安装 skills/frontend-design 做 Web UI 美学与去模板化。整仓按需引入。
+
+## 和同类怎么选 / 注意点
+同站：answer-me-with-html 专做讲义页；Frontend-Design-Toolkit / ui-agents 聚焦 Claude Code 前端观感。本仓是 Anthropic 官方 mega-repo，按子目录按需装（如 frontend-design），不要整仓当单一 skill。
+
+## 快速结论
+```callout tip 记住这句
+官方 skill 合集入口 → 本仓；讲义页 → answer-me-with-html；前端提示精选 → 另两个 toolkit/agents。
+```
+
+### 入口
+- GitHub：[skills](https://github.com/anthropics/skills)
+- 暂无单独主页，以 GitHub 仓库为准。
 </textarea>
 <script>
 (() => {

@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import type { Category, Project } from "@/lib/types";
 import { FilterBar } from "./FilterBar";
 import { ProjectGrid } from "./ProjectGrid";
-import { ProjectDrawer } from "./ProjectDrawer";
+import { IntroModal } from "./IntroModal";
 import { CommandPalette } from "./CommandPalette";
 import { ThemeToggle } from "./ThemeToggle";
 
@@ -187,11 +187,7 @@ export function StationApp({ projects, categories, updated }: Props) {
 
       </div>
 
-      <ProjectDrawer
-        project={selected}
-        category={selected ? categoryMap[selected.category] : undefined}
-        onClose={onClose}
-      />
+      <IntroModal project={selected} onClose={onClose} />
       <CommandPalette
         open={cmdOpen}
         onOpenChange={setCmdOpen}

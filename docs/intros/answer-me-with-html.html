@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN" data-theme="paper" data-mode="auto" data-style="80">
+<html lang="zh-CN" data-theme="paper" data-mode="auto" data-style="off">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -751,41 +751,53 @@ html[data-theme="paper"] .am-md p, html[data-theme="paper"] .am-md li, html[data
 html[data-theme="paper"] .am-md p { margin-bottom: 12px; }
 html[data-theme="paper"] .am-md table { font-family: var(--font-sans); }
 </style>
+<style id="k-lab-strip-am-chrome">
+.am-toolbar,.am-colophon,.am-pick,button[data-am="reply"],button[data-am="remark"],button[data-am="copy"],.am-btn--reply,.am-btn--remark{display:none!important}
+</style>
 </head>
 <body>
-<div class="am-toolbar" data-am-root-lang="zh-CN" data-am-root-theme="paper" data-am-root-mode="auto" data-am-root-style="80">
-<label class="am-pick">主题<select data-am="theme"><option value="blueprint">图纸</option><option value="shadcn">卡片</option><option value="paper" selected>纸张</option></select></label>
-<label class="am-pick">明暗<select data-am="mode"><option value="auto" selected>跟随系统</option><option value="light">亮</option><option value="dark">暗</option></select></label>
-<button class="am-btn am-btn--reply" type="button" data-am="reply" data-ui="{&quot;button&quot;:&quot;回复&quot;,&quot;comment&quot;:&quot;评论&quot;,&quot;commentHint&quot;:&quot;对这个面板的意见&quot;,&quot;title&quot;:&quot;你的回复&quot;,&quot;hint&quot;:&quot;复制后粘贴到对话里。&quot;,&quot;copy&quot;:&quot;复制回复&quot;,&quot;close&quot;:&quot;关闭&quot;,&quot;suggested&quot;:&quot;建议&quot;,&quot;empty&quot;:&quot;先选择选项，或在面板上写评论。&quot;,&quot;decisions&quot;:&quot;决定&quot;,&quot;comments&quot;:&quot;评论&quot;,&quot;confirmed&quot;:&quot;确认了建议&quot;,&quot;untouched&quot;:&quot;未作答，保留建议&quot;,&quot;was&quot;:&quot;原为&quot;,&quot;typed&quot;:&quot;以 \&quot;&gt;\&quot; 开头的行是读者输入的文字。&quot;,&quot;done&quot;:&quot;已复制 ✓&quot;,&quot;remarks&quot;:&quot;标注&quot;,&quot;kinds&quot;:{&quot;suggestion&quot;:&quot;建议&quot;,&quot;keep&quot;:&quot;保留&quot;,&quot;question&quot;:&quot;疑问&quot;,&quot;concern&quot;:&quot;关注&quot;}}">回复</button>
-<button class="am-btn am-btn--remark" type="button" data-am="remark" data-ui="{&quot;button&quot;:&quot;标注&quot;,&quot;hint&quot;:&quot;批注（可选）&quot;,&quot;save&quot;:&quot;保存&quot;,&quot;remove&quot;:&quot;删除&quot;,&quot;section&quot;:&quot;标注&quot;,&quot;kinds&quot;:{&quot;suggestion&quot;:&quot;建议&quot;,&quot;keep&quot;:&quot;保留&quot;,&quot;question&quot;:&quot;疑问&quot;,&quot;concern&quot;:&quot;关注&quot;}}">标注</button>
-<button class="am-btn" type="button" data-am="copy" data-done="已复制 ✓">复制源稿</button>
-</div>
 <main class="am-doc">
-<header class="am-head"><h1>answer-me-with-html</h1><p class="am-sub">K站项目介绍</p><div class="am-intro am-md"><div class="am-callout am-callout--info" role="note"><div class="am-callout-title">一句话</div><div class="am-callout-body am-md"><p>Agent Skill：把复杂问题答成一页可读 HTML（图文、公式、离线单文件），而不是终端里的文字墙。</p>
+<header class="am-head"><h1>answer-me-with-html</h1><p class="am-sub">K站项目介绍</p><div class="am-intro am-md"><div class="am-callout am-callout--info" role="note"><div class="am-callout-title">一句话定位</div><div class="am-callout-body am-md"><p><strong>answer-me-with-html</strong>（Skill / Agent 工作流）：Agent Skill：把复杂问题答成一页可读 HTML（图文、公式、离线单文件），而不是终端里的文字墙。</p>
 </div></div></div></header>
 <div class="am-doc-layout">
-<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 它是什么</a><a href="#panel-B">B · 何时用 / 怎么用好</a><a href="#panel-C">C · 关键信息</a><a href="#panel-D">D · 快速入口</a></nav><div class="am-doc-body">
+<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 它是什么</a><a href="#panel-B">B · 元信息</a><a href="#panel-C">C · 解决什么问题 / 适用场景</a><a href="#panel-D">D · 怎么用好</a><a href="#panel-E">E · 和同类怎么选 / 注意点</a><a href="#panel-F">F · 快速结论</a></nav><div class="am-doc-body">
 <section class="am-panel" id="panel-A">
 <header class="am-panel-head"><span class="am-panel-id">A</span><h2>它是什么</h2></header>
 <div class="am-panel-body"><div class="am-md"><p>Agent Skill：把复杂问题答成一页可读 HTML（图文、公式、离线单文件），而不是终端里的文字墙。</p>
-<p>所属分类：<strong>Skill / Agent 工作流</strong>（教 AI 怎么做事的说明书与流水线）。</p>
+<p>所属分类：<strong>Skill / Agent 工作流</strong>——教 AI 怎么做事的说明书与流水线。</p>
 </div></div>
 </section>
 <section class="am-panel" id="panel-B">
-<header class="am-panel-head"><span class="am-panel-id">B</span><h2>何时用 / 怎么用好</h2></header>
-<div class="am-panel-body"><div class="am-md"><p>装成 skill 后直接提问（如「讲清 TCP 三次握手」）。需要讲义页时明确说用 answer-me-with-html；面板标题避免塞公式，正文可用 KaTeX/Temml。适合备课、考点讲解、技术概念可视化。</p>
-</div></div>
+<header class="am-panel-head"><span class="am-panel-id">B</span><h2>元信息</h2></header>
+<div class="am-panel-body"><dl class="am-kv" style="--kv-cols: 1"><div class="am-kv-cell"><dt>元信息</dt><dd>2026-10-02，★ 3,263</dd></div><div class="am-kv-cell"><dt>分类</dt><dd>Skill / Agent 工作流</dd></div><div class="am-kv-cell"><dt>仓库</dt><dd><a href="https://github.com/QingYunA/answer-me-with-html">QingYunA/answer-me-with-html</a></dd></div><div class="am-kv-cell"><dt>主页</dt><dd><a href="https://answer-me-with-html.com/">answer-me-with-html.com/</a></dd></div><div class="am-kv-cell"><dt>分类说明</dt><dd>教 AI 怎么做事的说明书与流水线</dd></div></dl></div>
 </section>
 <section class="am-panel" id="panel-C">
-<header class="am-panel-head"><span class="am-panel-id">C</span><h2>关键信息</h2></header>
-<div class="am-panel-body"><dl class="am-kv" style="--kv-cols: 1"><div class="am-kv-cell"><dt>GitHub 信息</dt><dd>2026-10-02，★ 3,263</dd></div><div class="am-kv-cell"><dt>分类</dt><dd>Skill / Agent 工作流</dd></div><div class="am-kv-cell"><dt>仓库</dt><dd><a href="https://github.com/QingYunA/answer-me-with-html">QingYunA/answer-me-with-html</a></dd></div><div class="am-kv-cell"><dt>主页</dt><dd><a href="https://answer-me-with-html.com/">answer-me-with-html.com/</a></dd></div><div class="am-kv-cell"><dt>分类说明</dt><dd>教 AI 怎么做事的说明书与流水线</dd></div></dl></div>
+<header class="am-panel-head"><span class="am-panel-id">C</span><h2>解决什么问题 / 适用场景</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>复杂概念在终端里常变成文字墙：难扫读、难对照、难带走。备课、考点讲解、技术原理需要一页可离线打开的讲义。</p>
+<p>结合本站摘要，典型场景还包括：
+装成 skill 后直接提问（如「讲清 TCP 三次握手」）。需要讲义页时明确说用 answer-me-with-html；面板标题避免塞公式，正文可用 KaTeX/Temml。适合备课、考点讲解、技术概念可视化。</p>
+</div></div>
 </section>
 <section class="am-panel" id="panel-D">
-<header class="am-panel-head"><span class="am-panel-id">D</span><h2>快速入口</h2></header>
-<div class="am-panel-body"><div class="am-md"><ul>
-<li>打开 GitHub：<a href="https://github.com/QingYunA/answer-me-with-html">answer-me-with-html</a></li>
-<li>打开主页：<a href="https://answer-me-with-html.com/">主页</a></li>
-<li>在 K站 Lab 抽屉里可继续查看简介与用法。</li>
+<header class="am-panel-head"><span class="am-panel-id">D</span><h2>怎么用好</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>装成 skill 后直接提问（如「讲清 TCP 三次握手」）。需要讲义页时明确说用 answer-me-with-html；面板标题避免塞公式，正文可用 KaTeX/Temml。适合备课、考点讲解、技术概念可视化。</p>
+<p>补充：
+面板标题避免塞公式；正文可用 KaTeX/Temml。交付前对本站 intros 跑 generate-intros 后处理，去掉工具条与 colophon。</p>
+</div></div>
+</section>
+<section class="am-panel" id="panel-E">
+<header class="am-panel-head"><span class="am-panel-id">E</span><h2>和同类怎么选 / 注意点</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>同站 Skill 里，anthropics/skills 是官方合集（含 frontend-design）；Claude-Code-Frontend-Design-Toolkit 与 claude-code-ui-agents 偏前端美学与 UI agent 提示。answer-me-with-html 专做「答成一页 HTML」：图文、公式、单文件离线。需要讲义页时点名本 skill；做 UI 改版则看另外几个。</p>
+</div></div>
+</section>
+<section class="am-panel" id="panel-F">
+<header class="am-panel-head"><span class="am-panel-id">F</span><h2>快速结论</h2></header>
+<div class="am-panel-body"><div class="am-callout am-callout--info" role="note"><div class="am-callout-title">tip 记住这句</div><div class="am-callout-body am-md"><p>要「一页讲清」时用本 skill；要「前端更美」时用同站 frontend-design 相关 skill。</p>
+</div></div>
+<div class="am-md"><h3>入口</h3>
+<ul>
+<li>GitHub：<a href="https://github.com/QingYunA/answer-me-with-html">answer-me-with-html</a></li>
+<li>主页：<a href="https://answer-me-with-html.com/">打开</a></li>
 </ul>
 </div></div>
 </section>
@@ -797,34 +809,51 @@ title: answer-me-with-html
 lang: zh
 template: doc
 theme: paper
+style: off
 subtitle: K站项目介绍
 ---
 
-```callout info 一句话
-Agent Skill：把复杂问题答成一页可读 HTML（图文、公式、离线单文件），而不是终端里的文字墙。
+```callout info 一句话定位
+**answer-me-with-html**（Skill / Agent 工作流）：Agent Skill：把复杂问题答成一页可读 HTML（图文、公式、离线单文件），而不是终端里的文字墙。
 ```
 
 ## 它是什么
 Agent Skill：把复杂问题答成一页可读 HTML（图文、公式、离线单文件），而不是终端里的文字墙。
 
-所属分类：**Skill / Agent 工作流**（教 AI 怎么做事的说明书与流水线）。
+所属分类：**Skill / Agent 工作流**——教 AI 怎么做事的说明书与流水线。
 
-## 何时用 / 怎么用好
-装成 skill 后直接提问（如「讲清 TCP 三次握手」）。需要讲义页时明确说用 answer-me-with-html；面板标题避免塞公式，正文可用 KaTeX/Temml。适合备课、考点讲解、技术概念可视化。
-
-## 关键信息
+## 元信息
 ```kv cols=1
-GitHub 信息: 2026-10-02，★ 3,263
+元信息: 2026-10-02，★ 3,263
 分类: Skill / Agent 工作流
 仓库: [QingYunA/answer-me-with-html](https://github.com/QingYunA/answer-me-with-html)
 主页: [answer-me-with-html.com/](https://answer-me-with-html.com/)
 分类说明: 教 AI 怎么做事的说明书与流水线
 ```
 
-## 快速入口
-- 打开 GitHub：[answer-me-with-html](https://github.com/QingYunA/answer-me-with-html)
-- 打开主页：[主页](https://answer-me-with-html.com/)
-- 在 K站 Lab 抽屉里可继续查看简介与用法。
+## 解决什么问题 / 适用场景
+复杂概念在终端里常变成文字墙：难扫读、难对照、难带走。备课、考点讲解、技术原理需要一页可离线打开的讲义。
+
+结合本站摘要，典型场景还包括：
+装成 skill 后直接提问（如「讲清 TCP 三次握手」）。需要讲义页时明确说用 answer-me-with-html；面板标题避免塞公式，正文可用 KaTeX/Temml。适合备课、考点讲解、技术概念可视化。
+
+## 怎么用好
+装成 skill 后直接提问（如「讲清 TCP 三次握手」）。需要讲义页时明确说用 answer-me-with-html；面板标题避免塞公式，正文可用 KaTeX/Temml。适合备课、考点讲解、技术概念可视化。
+
+补充：
+面板标题避免塞公式；正文可用 KaTeX/Temml。交付前对本站 intros 跑 generate-intros 后处理，去掉工具条与 colophon。
+
+## 和同类怎么选 / 注意点
+同站 Skill 里，anthropics/skills 是官方合集（含 frontend-design）；Claude-Code-Frontend-Design-Toolkit 与 claude-code-ui-agents 偏前端美学与 UI agent 提示。answer-me-with-html 专做「答成一页 HTML」：图文、公式、单文件离线。需要讲义页时点名本 skill；做 UI 改版则看另外几个。
+
+## 快速结论
+```callout tip 记住这句
+要「一页讲清」时用本 skill；要「前端更美」时用同站 frontend-design 相关 skill。
+```
+
+### 入口
+- GitHub：[answer-me-with-html](https://github.com/QingYunA/answer-me-with-html)
+- 主页：[打开](https://answer-me-with-html.com/)
 </textarea>
 <script>
 (() => {

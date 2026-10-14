@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN" data-theme="paper" data-mode="auto" data-style="80">
+<html lang="zh-CN" data-theme="paper" data-mode="auto" data-style="off">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -751,41 +751,53 @@ html[data-theme="paper"] .am-md p, html[data-theme="paper"] .am-md li, html[data
 html[data-theme="paper"] .am-md p { margin-bottom: 12px; }
 html[data-theme="paper"] .am-md table { font-family: var(--font-sans); }
 </style>
+<style id="k-lab-strip-am-chrome">
+.am-toolbar,.am-colophon,.am-pick,button[data-am="reply"],button[data-am="remark"],button[data-am="copy"],.am-btn--reply,.am-btn--remark{display:none!important}
+</style>
 </head>
 <body>
-<div class="am-toolbar" data-am-root-lang="zh-CN" data-am-root-theme="paper" data-am-root-mode="auto" data-am-root-style="80">
-<label class="am-pick">主题<select data-am="theme"><option value="blueprint">图纸</option><option value="shadcn">卡片</option><option value="paper" selected>纸张</option></select></label>
-<label class="am-pick">明暗<select data-am="mode"><option value="auto" selected>跟随系统</option><option value="light">亮</option><option value="dark">暗</option></select></label>
-<button class="am-btn am-btn--reply" type="button" data-am="reply" data-ui="{&quot;button&quot;:&quot;回复&quot;,&quot;comment&quot;:&quot;评论&quot;,&quot;commentHint&quot;:&quot;对这个面板的意见&quot;,&quot;title&quot;:&quot;你的回复&quot;,&quot;hint&quot;:&quot;复制后粘贴到对话里。&quot;,&quot;copy&quot;:&quot;复制回复&quot;,&quot;close&quot;:&quot;关闭&quot;,&quot;suggested&quot;:&quot;建议&quot;,&quot;empty&quot;:&quot;先选择选项，或在面板上写评论。&quot;,&quot;decisions&quot;:&quot;决定&quot;,&quot;comments&quot;:&quot;评论&quot;,&quot;confirmed&quot;:&quot;确认了建议&quot;,&quot;untouched&quot;:&quot;未作答，保留建议&quot;,&quot;was&quot;:&quot;原为&quot;,&quot;typed&quot;:&quot;以 \&quot;&gt;\&quot; 开头的行是读者输入的文字。&quot;,&quot;done&quot;:&quot;已复制 ✓&quot;,&quot;remarks&quot;:&quot;标注&quot;,&quot;kinds&quot;:{&quot;suggestion&quot;:&quot;建议&quot;,&quot;keep&quot;:&quot;保留&quot;,&quot;question&quot;:&quot;疑问&quot;,&quot;concern&quot;:&quot;关注&quot;}}">回复</button>
-<button class="am-btn am-btn--remark" type="button" data-am="remark" data-ui="{&quot;button&quot;:&quot;标注&quot;,&quot;hint&quot;:&quot;批注（可选）&quot;,&quot;save&quot;:&quot;保存&quot;,&quot;remove&quot;:&quot;删除&quot;,&quot;section&quot;:&quot;标注&quot;,&quot;kinds&quot;:{&quot;suggestion&quot;:&quot;建议&quot;,&quot;keep&quot;:&quot;保留&quot;,&quot;question&quot;:&quot;疑问&quot;,&quot;concern&quot;:&quot;关注&quot;}}">标注</button>
-<button class="am-btn" type="button" data-am="copy" data-done="已复制 ✓">复制源稿</button>
-</div>
 <main class="am-doc">
-<header class="am-head"><h1>Lenis</h1><p class="am-sub">K站项目介绍</p><div class="am-intro am-md"><div class="am-callout am-callout--info" role="note"><div class="am-callout-title">一句话</div><div class="am-callout-body am-md"><p>丝滑平滑滚动库，让整页滚动质感接近高端作品集站点。</p>
+<header class="am-head"><h1>Lenis</h1><p class="am-sub">K站项目介绍</p><div class="am-intro am-md"><div class="am-callout am-callout--info" role="note"><div class="am-callout-title">一句话定位</div><div class="am-callout-body am-md"><p><strong>Lenis</strong>（代码库 / 引擎）：丝滑平滑滚动库，让整页滚动质感接近高端作品集站点。</p>
 </div></div></div></header>
 <div class="am-doc-layout">
-<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 它是什么</a><a href="#panel-B">B · 何时用 / 怎么用好</a><a href="#panel-C">C · 关键信息</a><a href="#panel-D">D · 快速入口</a></nav><div class="am-doc-body">
+<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 它是什么</a><a href="#panel-B">B · 元信息</a><a href="#panel-C">C · 解决什么问题 / 适用场景</a><a href="#panel-D">D · 怎么用好</a><a href="#panel-E">E · 和同类怎么选 / 注意点</a><a href="#panel-F">F · 快速结论</a></nav><div class="am-doc-body">
 <section class="am-panel" id="panel-A">
 <header class="am-panel-head"><span class="am-panel-id">A</span><h2>它是什么</h2></header>
 <div class="am-panel-body"><div class="am-md"><p>丝滑平滑滚动库，让整页滚动质感接近高端作品集站点。</p>
-<p>所属分类：<strong>代码库 / 引擎</strong>（给别人用的库、框架、工具）。</p>
+<p>所属分类：<strong>代码库 / 引擎</strong>——给别人用的库、框架、工具。</p>
 </div></div>
 </section>
 <section class="am-panel" id="panel-B">
-<header class="am-panel-head"><span class="am-panel-id">B</span><h2>何时用 / 怎么用好</h2></header>
-<div class="am-panel-body"><div class="am-md"><p>在布局里初始化 Lenis，并与 ScrollTrigger / Motion 的滚动监听同步。适合长落地页与作品集；记得尊重 <code>prefers-reduced-motion</code>。</p>
-</div></div>
+<header class="am-panel-head"><span class="am-panel-id">B</span><h2>元信息</h2></header>
+<div class="am-panel-body"><dl class="am-kv" style="--kv-cols: 1"><div class="am-kv-cell"><dt>元信息</dt><dd>2022-02-21，★ 16,500</dd></div><div class="am-kv-cell"><dt>分类</dt><dd>代码库 / 引擎</dd></div><div class="am-kv-cell"><dt>仓库</dt><dd><a href="https://github.com/darkroomengineering/lenis">darkroomengineering/lenis</a></dd></div><div class="am-kv-cell"><dt>主页</dt><dd><a href="https://lenis.dev">lenis.dev</a></dd></div><div class="am-kv-cell"><dt>分类说明</dt><dd>给别人用的库、框架、工具</dd></div></dl></div>
 </section>
 <section class="am-panel" id="panel-C">
-<header class="am-panel-head"><span class="am-panel-id">C</span><h2>关键信息</h2></header>
-<div class="am-panel-body"><dl class="am-kv" style="--kv-cols: 1"><div class="am-kv-cell"><dt>GitHub 信息</dt><dd>2022-02-21，★ 16,500</dd></div><div class="am-kv-cell"><dt>分类</dt><dd>代码库 / 引擎</dd></div><div class="am-kv-cell"><dt>仓库</dt><dd><a href="https://github.com/darkroomengineering/lenis">darkroomengineering/lenis</a></dd></div><div class="am-kv-cell"><dt>主页</dt><dd><a href="https://lenis.dev">lenis.dev</a></dd></div><div class="am-kv-cell"><dt>分类说明</dt><dd>给别人用的库、框架、工具</dd></div></dl></div>
+<header class="am-panel-head"><span class="am-panel-id">C</span><h2>解决什么问题 / 适用场景</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>默认滚动偏「网页感」，高端作品集需要更丝滑的整页滚动质感。</p>
+<p>结合本站摘要，典型场景还包括：
+在布局里初始化 Lenis，并与 ScrollTrigger / Motion 的滚动监听同步。适合长落地页与作品集；记得尊重 <code>prefers-reduced-motion</code>。</p>
+</div></div>
 </section>
 <section class="am-panel" id="panel-D">
-<header class="am-panel-head"><span class="am-panel-id">D</span><h2>快速入口</h2></header>
-<div class="am-panel-body"><div class="am-md"><ul>
-<li>打开 GitHub：<a href="https://github.com/darkroomengineering/lenis">Lenis</a></li>
-<li>打开主页：<a href="https://lenis.dev">主页</a></li>
-<li>在 K站 Lab 抽屉里可继续查看简介与用法。</li>
+<header class="am-panel-head"><span class="am-panel-id">D</span><h2>怎么用好</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>在布局里初始化 Lenis，并与 ScrollTrigger / Motion 的滚动监听同步。适合长落地页与作品集；记得尊重 <code>prefers-reduced-motion</code>。</p>
+<p>补充：
+在布局里初始化 Lenis，并与 Motion 的滚动监听同步。适合长落地页与作品集。</p>
+</div></div>
+</section>
+<section class="am-panel" id="panel-E">
+<header class="am-panel-head"><span class="am-panel-id">E</span><h2>和同类怎么选 / 注意点</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>相对 Motion：Lenis 管滚动插值；Motion 管元素。长落地页与作品集常两者一起，并与 ScrollTrigger 等同步。务必尊重 prefers-reduced-motion。</p>
+</div></div>
+</section>
+<section class="am-panel" id="panel-F">
+<header class="am-panel-head"><span class="am-panel-id">F</span><h2>快速结论</h2></header>
+<div class="am-panel-body"><div class="am-callout am-callout--info" role="note"><div class="am-callout-title">tip 记住这句</div><div class="am-callout-body am-md"><p>要丝滑滚动 → Lenis；要元素动画 → Motion；不要只为「酷」忽略无障碍。</p>
+</div></div>
+<div class="am-md"><h3>入口</h3>
+<ul>
+<li>GitHub：<a href="https://github.com/darkroomengineering/lenis">Lenis</a></li>
+<li>主页：<a href="https://lenis.dev">打开</a></li>
 </ul>
 </div></div>
 </section>
@@ -797,34 +809,51 @@ title: Lenis
 lang: zh
 template: doc
 theme: paper
+style: off
 subtitle: K站项目介绍
 ---
 
-```callout info 一句话
-丝滑平滑滚动库，让整页滚动质感接近高端作品集站点。
+```callout info 一句话定位
+**Lenis**（代码库 / 引擎）：丝滑平滑滚动库，让整页滚动质感接近高端作品集站点。
 ```
 
 ## 它是什么
 丝滑平滑滚动库，让整页滚动质感接近高端作品集站点。
 
-所属分类：**代码库 / 引擎**（给别人用的库、框架、工具）。
+所属分类：**代码库 / 引擎**——给别人用的库、框架、工具。
 
-## 何时用 / 怎么用好
-在布局里初始化 Lenis，并与 ScrollTrigger / Motion 的滚动监听同步。适合长落地页与作品集；记得尊重 `prefers-reduced-motion`。
-
-## 关键信息
+## 元信息
 ```kv cols=1
-GitHub 信息: 2022-02-21，★ 16,500
+元信息: 2022-02-21，★ 16,500
 分类: 代码库 / 引擎
 仓库: [darkroomengineering/lenis](https://github.com/darkroomengineering/lenis)
 主页: [lenis.dev](https://lenis.dev)
 分类说明: 给别人用的库、框架、工具
 ```
 
-## 快速入口
-- 打开 GitHub：[Lenis](https://github.com/darkroomengineering/lenis)
-- 打开主页：[主页](https://lenis.dev)
-- 在 K站 Lab 抽屉里可继续查看简介与用法。
+## 解决什么问题 / 适用场景
+默认滚动偏「网页感」，高端作品集需要更丝滑的整页滚动质感。
+
+结合本站摘要，典型场景还包括：
+在布局里初始化 Lenis，并与 ScrollTrigger / Motion 的滚动监听同步。适合长落地页与作品集；记得尊重 `prefers-reduced-motion`。
+
+## 怎么用好
+在布局里初始化 Lenis，并与 ScrollTrigger / Motion 的滚动监听同步。适合长落地页与作品集；记得尊重 `prefers-reduced-motion`。
+
+补充：
+在布局里初始化 Lenis，并与 Motion 的滚动监听同步。适合长落地页与作品集。
+
+## 和同类怎么选 / 注意点
+相对 Motion：Lenis 管滚动插值；Motion 管元素。长落地页与作品集常两者一起，并与 ScrollTrigger 等同步。务必尊重 prefers-reduced-motion。
+
+## 快速结论
+```callout tip 记住这句
+要丝滑滚动 → Lenis；要元素动画 → Motion；不要只为「酷」忽略无障碍。
+```
+
+### 入口
+- GitHub：[Lenis](https://github.com/darkroomengineering/lenis)
+- 主页：[打开](https://lenis.dev)
 </textarea>
 <script>
 (() => {
