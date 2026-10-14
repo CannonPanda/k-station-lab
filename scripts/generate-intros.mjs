@@ -2,9 +2,9 @@
 /**
  * Generate K站 Lab project intro HTML via sam (paper-only).
  *
- * 组件选用：先看每个项目要讲清的信息形状，再选 flow/sequence/tree/timeline/
- * 对比表/limits/callout/annot/kv。禁止按 category 套统一面板，禁止全站 A–F。
- * 一页最多 1–2 个重点可视化；能文字别硬画。
+ * 组件选用：先看信息形状再选。有明确步骤/调用链/多角色交互 → 优先 flow/sequence；
+ * ≥3 步或多角色传数据时优先画图。禁止用 callout+kv 把流程写成文字墙。
+ * tree/timeline/limits/annot/对比表/kv 按形状选用。一页最多 1–2 个重点可视化；能文字别硬画。
  *
  * Usage: node scripts/generate-intros.mjs
  */
@@ -169,7 +169,7 @@ ${entry(p)}
 `;
   },
 
-  // ── VitePress：要讲清「文档默认体验」→ annot；选型用表 ──
+  // ── VitePress：文档发布路径（≥3 步）→ flow；选型用表；甜点区用文字 ──
   vitepress(p, cat) {
     return `${fm(p, "文档站默认体验")}
 
@@ -180,14 +180,17 @@ ${entry(p)}
 ## 坐标
 ${kvBlock(p, cat)}
 
-## 为什么文档站爱它
-关键是「开箱主题 + 正文可嵌 Vue」，不是又一条通用 SSG 流水线——用 annot，不硬画 flow。
+## 文档怎样发布上线
+要讲清的是「写 → 构建 → 部署」这条发布链（≥3 步），优先 flow，不用长段落代替。
 
-\`\`\`annot
-# 文档站甜点区
-[默认主题]{侧栏、搜索、首页 hero 开箱} 省掉主题从零；正文可嵌 [Vue 组件]{交互 demo}，与 Vite 热更新一体。
-> 通用营销站/作品集更偏 Astro；纯速度大站偏 Hugo
+\`\`\`flow LR
+(Markdown + Vue) -> VitePress 构建
+VitePress 构建 -> *静态 HTML/资源
+静态 HTML/资源 -> [(GitHub Pages / CDN)]
+group 文档发布: VitePress 构建, 静态 HTML/资源
 \`\`\`
+
+默认主题（侧栏、搜索、首页 hero）开箱；正文可嵌 Vue 做交互 demo。通用营销站更偏 Astro；极速大站偏 Hugo。
 
 ## 和同类怎么分工
 
@@ -554,7 +557,7 @@ note 作者, sam CLI: 要视频/多主题则回上游 am
 | 视频 / 页内回复 | no | ok |
 | iframe / 备课 | ok 轻 | warn 偏重 |
 
-组件仍是 flow / sequence / tree / timeline / limits / annot / kv / callout 等同系展示组件；规则：先看信息形状再选，一页最多 1–2 个重点可视化。
+组件仍是 flow / sequence / tree / timeline / limits / annot / kv / callout 等同系；规则：先看信息形状；有步骤/调用链/多角色交互优先 flow 或 sequence；一页最多 1–2 个重点可视化。
 
 ## 用法
 ${p.usage}
@@ -678,7 +681,7 @@ ${entry(p)}
 `;
   },
 
-  // ── Simplefolio：上手阶段先后 → timeline；对比用表 ──
+  // ── Simplefolio：模板上线步骤（≥3 步）→ flow；对比用表 ──
   simplefolio(p, cat) {
     return `${fm(p, "极简作品集模板")}
 
@@ -690,15 +693,16 @@ ${entry(p)}
 ${kvBlock(p, cat)}
 
 ## 从上线到可选迁移
-时间先后是主问题 → timeline；目录细节用一段话即可，不硬画 tree。
+模板上线是明确多步路径 → flow；目录细节用一段话即可，不硬画 tree。
 
-\`\`\`timeline
-1 | Fork 仓库
-2 | 改 src/data 与样式变量（姓名、项目、社交）
-3 | 换项目截图与链接
-4 | 部署 Netlify / Pages
-*可选 | 迁到 Astro/Tailwind，保留 Hero / Projects / Contact 分区节奏
+\`\`\`flow TB
+(Fork 仓库) -> 改 src/data 与样式变量
+改 src/data 与样式变量 -> 换项目截图与链接
+换项目截图与链接 -> *部署 Netlify / Pages
+部署 Netlify / Pages --> 可选迁 Astro/Tailwind: 保留分区节奏
 \`\`\`
+
+Hero / Projects / Contact 分区节奏可保留；要现代栈时再迁 Astro + Tailwind。
 
 ## 和 devportfolio
 
