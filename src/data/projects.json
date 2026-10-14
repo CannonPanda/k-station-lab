@@ -2,7 +2,7 @@
   "site": {
     "name": "K站",
     "tagline": "KE 的 GitHub 项目收集站",
-    "updated": "2026-10-13"
+    "updated": "2026-10-14"
   },
   "categories": [
     {
@@ -58,6 +58,17 @@
       "usage": "装成 skill 后直接提问（如「讲清 TCP 三次握手」）。需要讲义页时明确说用 answer-me-with-html；面板标题避免塞公式，正文可用 KaTeX/Temml。适合备课、考点讲解、技术概念可视化。",
       "category": "skill",
       "added": "2026-10-13"
+    },
+    {
+      "id": "sam",
+      "name": "sam",
+      "url": "https://github.com/CannonPanda/sam",
+      "created": "2026-10-14",
+      "stars": 0,
+      "summary": "Simple answer me with html：自用纸张主题精简讲义 skill，无工具栏/运行时，适合 iframe 与备课页。",
+      "usage": "讲义、原理说明、K站 intro 优先用 sam（paper-only、轻页）。需要多主题/视频/页内回复标注时仍用上游 answer-me-with-html。CLI：`sam render` 或 `node skills/sam/scripts/sam.mjs`；可用 `--css-href` 外置 paper.css。",
+      "category": "skill",
+      "added": "2026-10-14"
     },
     {
       "id": "astro",

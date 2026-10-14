@@ -31,6 +31,14 @@ function formatStars(n) {
 
 /** Extra depth: compare / caveats keyed by project id. Grounded in station peers. */
 const DEPTH = {
+  sam: {
+    problem:
+      "完整 am 页带工具栏与运行时，iframe 讲义偏重；只想要干净纸张页时还要手工 strip。",
+    compare:
+      "同站：answer-me-with-html 是功能全量上游（多主题、视频、回复标注）。sam 是自用精简 fork：强制 paper、无工具栏/运行时/ask/视频，适合 K站 intro 与备课页。要轻页用 sam；要全功能用 am。",
+    tips: "CLI：`sam render` 或 skill 内 `scripts/sam.mjs`。可用 `sam css` + `--css-href` 外置 paper.css 做 iframe 缓存。面板规则仍是 3–8、一问一板、STE。",
+    verdict: "讲义/iframe 优先 sam；需要主题切换或视频时用 answer-me-with-html。",
+  },
   "answer-me-with-html": {
     problem:
       "复杂概念在终端里常变成文字墙：难扫读、难对照、难带走。备课、考点讲解、技术原理需要一页可离线打开的讲义。",
@@ -148,9 +156,9 @@ const DEPTH = {
   "ke-rules": {
     problem: "长期协作需要可版本管理的规矩：双 K站、分类、介绍格式、am 用法，避免口头约定漂移。",
     compare:
-      "这是本站配置类条目：人读 README/RULES.md；助手开工前对照。与讲义 skill 不同——它规范「怎么维护 K站与介绍」，不生成讲义页本身。介绍页生成仍走 answer-me-with-html + 本脚本后处理。",
+      "这是本站配置类条目：人读 README/RULES.md；助手开工前对照。与讲义 skill 不同——它规范「怎么维护 K站与介绍」，不生成讲义页本身。介绍页生成可用 sam（更轻）或 am + 本脚本后处理。",
     tips: "助手开工前对照；用户说新规矩就改 RULES.md 再推到 k。表达格式：YYYY-MM-DD，★ N。",
-    verdict: "协作与双站规矩 → ke-rules；生成讲义 → answer-me-with-html。",
+    verdict: "协作与双站规矩 → ke-rules；生成讲义 → 优先 sam，全功能用 am。",
   },
 };
 
