@@ -118,15 +118,6 @@ export function StationApp({ projects, categories, updated }: Props) {
               </svg>
             </button>
             <ThemeToggle />
-            {/* KE规矩：指向已部署的可编辑规矩站 */}
-            <a
-              href="https://ke-rules.vercel.app/edit"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-md border border-[var(--color-line)] bg-[var(--color-card)] px-3 py-1.5 text-xs font-medium text-[var(--color-muted)] transition hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
-            >
-              KE规矩
-            </a>
             <a
               href="https://cannonpanda.github.io/k-station/"
               className="hidden rounded-md border border-[var(--color-line)] bg-[var(--color-card)] px-3 py-1.5 text-xs font-medium text-[var(--color-muted)] transition hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] md:inline-flex"
@@ -183,15 +174,6 @@ export function StationApp({ projects, categories, updated }: Props) {
       <footer className="relative border-t border-[var(--color-line)] py-10 text-center">
         <p className="text-xs text-[var(--color-muted)]">与经典站同源数据 · 墨与霓虹纸</p>
         <p className="mt-1.5 font-mono text-[10px] text-[var(--color-faint)]">
-          <a
-            href="https://ke-rules.vercel.app/edit"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline-offset-2 hover:text-[var(--color-accent)] hover:underline"
-          >
-            KE规矩
-          </a>
-          <span className="mx-2">·</span>
           <a
             href="https://cannonpanda.github.io/k-station/"
             className="underline-offset-2 hover:text-[var(--color-accent)] hover:underline"

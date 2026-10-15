@@ -269,17 +269,6 @@
       "usage": "把对应 UI/组件/体验类 prompt 接入 Claude Code 或 Agent 工作流；界面重构、组件设计、体验打磨时调用专用 agent，发挥最大设计与实现能力。",
       "category": "skill",
       "added": "2026-10-13"
-    },
-    {
-      "id": "ke-rules",
-      "name": "ke-rules",
-      "url": "https://github.com/CannonPanda/ke-rules",
-      "created": "2026-10-13",
-      "stars": 0,
-      "summary": "KE 的长期协作规矩：双 K站推送、分类、介绍格式、高星参考、answer-me-with-html 等。",
-      "usage": "助手开工前对照；用户说新规矩就改 RULES.md 再推到 k。人读 README/RULES.md。",
-      "category": "config",
-      "added": "2026-10-13"
     }
   ]
 }

@@ -864,47 +864,6 @@ ${p.usage}
 ${entry(p)}
 `;
   },
-
-  // ── ke-rules：规矩树 + 落地步骤 ──
-  "ke-rules"(p, cat) {
-    return `${fm(p, "长期协作规矩")}
-
-\`\`\`callout info
-**${p.name}**：${p.summary}
-\`\`\`
-
-## 速览
-${kvBlock(p, cat)}
-
-## 规矩覆盖哪些面
-
-\`\`\`tree list
-ke-rules | 人读 README / RULES.md
-  双 K站推送 | 经典站 + Lab 互不覆盖
-  分类 schema | library / skill / docs / …
-  介绍格式 | YYYY-MM-DD，★ N
-  讲义优先级 | 轻页 sam → 全功能 am
-  *出页工具 | 讲义用 sam/am，本仓不替代生成器
-\`\`\`
-
-## 新规矩怎么落到仓里
-
-\`\`\`flow LR
-(用户立新规矩) -> 改 RULES.md
-改 RULES.md -> 提交并推 GitHub
-提交并推 GitHub -> *可选：推双 K站条目
-\`\`\`
-
-## 用法
-${p.usage}
-
-\`\`\`callout ok 边界
-协作与双站规矩 → ke-rules；生成讲义页 → 优先 sam，全功能用 am。口头约定易漂移，以 RULES.md 为准。
-\`\`\`
-
-${entry(p)}
-`;
-  },
 };
 
 function draftFor(p) {
